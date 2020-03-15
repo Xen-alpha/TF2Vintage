@@ -1,0 +1,47 @@
+//-----------------------------------------------------------------------------
+//	VPHYSICS.VPC
+//
+//	Project Script
+//-----------------------------------------------------------------------------
+
+$macro SRCDIR		".."
+$Macro OUTBINDIR	"$SRCDIR\..\game\bin"
+
+$include "$SRCDIR\vpc_scripts\source_dll_win32_base.vpc"	[$WIN32||$LINUX]
+$include "$SRCDIR\vpc_scripts\source_dll_x360_base.vpc"		[$X360]
+
+$Linux
+{
+	$BuildForLinux 1
+}
+$Configuration
+{
+	$Compiler
+	{
+		$PreprocessorDefinitions	"$BASE;VPHYSICS_EXPORTS;PROTECTED_THINGS_ENABLE;strncpy=use_Q_strncpy_instead;_snprintf=use_Q_snprintf_instead;fopen=dont_use_fopen"
+		$Create/UsePCHThroughFile	"StdAfx.h"
+	}
+}
+
+$Project "vphysics"
+{
+	$Folder	"Source Files"
+	{
+		
+	}
+
+	$Folder	"Public Header Files"
+	{
+		
+	}
+
+	$Folder	"Header Files"
+	{
+		
+	}
+
+	$Folder	"Link Libraries" [$WIN32]
+	{
+		
+	}
+}
