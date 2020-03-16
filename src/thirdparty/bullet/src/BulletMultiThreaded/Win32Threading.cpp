@@ -143,7 +143,7 @@ class btWin32CriticalSection : public btICriticalSection {
 			DeleteCriticalSection(&m_critSection);
 		}
 
-		bool trylock() {
+		BOOL trylock() {
 			return TryEnterCriticalSection(&m_critSection);
 		}
 

@@ -4,7 +4,7 @@
 	#pragma once
 #endif
 
-#include "vphysics/softbodyV32.h"
+#include "vphysics/softbody.h"
 
 // Purpose: Dynamically deforming meshes (blankets, dents in objects, etc.)
 

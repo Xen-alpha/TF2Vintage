@@ -104,8 +104,8 @@ inline int btGetVersion()
 			#define btAssertMsg(x, str) assert(x)
 		#endif//_MSC_VER
 	#else
-		#define btAssert(x)
-		#define btAssertMsg(x, str)
+		#define btAssert(x) ((void)0)
+		#define btAssertMsg(x, str) ((void)0)
 	#endif
 
 	//btFullAssert is optional, slows down a lot

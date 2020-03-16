@@ -296,7 +296,7 @@ void btParallelConstraintSolver::solveSingleIterationParallel(int iteration, con
 		btSolverConstraint &constraint = m_tmpSolverNonContactConstraintPool[m_orderNonContactConstraintPool[i]];
 		if (iteration < constraint.m_overrideNumSolverIterations) {
 			btSolveConstraintTask *pTask = (btSolveConstraintTask *)allocateTask(sizeof(btSolveConstraintTask));
-			pTask = new(pTask) btSolveConstraintTask(this, 0, m_tmpSolverBodyPool[constraint.m_solverBodyIdA], m_tmpSolverBodyPool[constraint.m_solverBodyIdB], &constraint, infoGlobal.m_solverMode & SOLVER_SIMD);
+			pTask = new(pTask) btSolveConstraintTask(this, 0, m_tmpSolverBodyPool[constraint.m_solverBodyIdA], m_tmpSolverBodyPool[constraint.m_solverBodyIdB], &constraint, (infoGlobal.m_solverMode & SOLVER_SIMD) != 0);
 			m_pThreadPool->addTask(pTask);
 		}
 	}
@@ -309,7 +309,7 @@ void btParallelConstraintSolver::solveSingleIterationParallel(int iteration, con
 			btSolverConstraint &solveManifold = m_tmpSolverContactConstraintPool[m_orderTmpConstraintPool[i]];
 
 			btSolveConstraintTask *pTask = (btSolveConstraintTask *)allocateTask(sizeof(btSolveConstraintTask));
-			pTask = new(pTask)btSolveConstraintTask(this, 1, m_tmpSolverBodyPool[solveManifold.m_solverBodyIdA], m_tmpSolverBodyPool[solveManifold.m_solverBodyIdB], &solveManifold, infoGlobal.m_solverMode & SOLVER_SIMD);
+			pTask = new(pTask)btSolveConstraintTask(this, 1, m_tmpSolverBodyPool[solveManifold.m_solverBodyIdA], m_tmpSolverBodyPool[solveManifold.m_solverBodyIdB], &solveManifold, (infoGlobal.m_solverMode & SOLVER_SIMD) != 0);
 			m_pThreadPool->addTask(pTask);
 		}
 	}

@@ -514,7 +514,7 @@ void btAdjustInternalEdgeContacts(btManifoldPoint &cp, const btCollisionObjectWr
 			if (info->m_edgeAngles[bestedge] == btScalar(0)) {
 				numConcaveEdgeHits++;
 			} else {
-				bool isEdgeConvex = (info->m_flags & (1 << bestedge)); // lol hope these constants don't change
+				bool isEdgeConvex = (info->m_flags & (1 << bestedge)) != 0; // lol hope these constants don't change
 				btScalar swapFactor = isEdgeConvex ? btScalar(1) : btScalar(-1);
 #ifdef BT_INTERNAL_EDGE_DEBUG_DRAW
 				if (drawer)

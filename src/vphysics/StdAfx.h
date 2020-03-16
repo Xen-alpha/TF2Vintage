@@ -13,6 +13,13 @@
 
 #include <cmodel.h>
 
+#ifdef _WIN32
+// Silence certain warnings
+#pragma warning(disable : 4244)		// int or float down-conversion
+#pragma warning(disable : 4305)		// int or float data truncation
+#pragma warning(disable : 4201)		// nameless struct/union
+#endif
+
 #include <btBulletDynamicsCommon.h>
 #include <BulletSoftBody/btSoftRigidDynamicsWorld.h>
 #include <BulletCollision/CollisionShapes/btMaterial.h>
