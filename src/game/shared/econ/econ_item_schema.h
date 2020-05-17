@@ -310,6 +310,7 @@ typedef struct EconPerTeamVisuals
 		CLEAR_STR( custom_particlesystem );
 		CLEAR_STR( muzzle_flash );
 		CLEAR_STR( tracer_effect );
+		CLEAR_STR( material_override );
 		skin = -1;
 		use_per_class_bodygroups = 0;
 	}
