@@ -866,7 +866,7 @@ void CEconItemSchema::Precache( void )
 			// Precache sounds.
 			for ( int i = 0; i < NUM_SHOOT_SOUND_TYPES; i++ )
 			{
-				if ( pVisuals->aWeaponSounds[i][0] != '\0' )
+				if ( pVisuals->aWeaponSounds[i] && pVisuals->aWeaponSounds[i][0] != '\0' )
 					CBaseEntity::PrecacheScriptSound( pVisuals->aWeaponSounds[i] );
 			}
 
