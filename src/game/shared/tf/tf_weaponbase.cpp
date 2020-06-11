@@ -338,6 +338,7 @@ void CTFWeaponBase::Precache()
 		PrecacheParticleSystem( pTracerEffect );
 		PrecacheParticleSystem( pTracerEffectCrit );
 	}
+	
 }
 
 // -----------------------------------------------------------------------------
@@ -2030,9 +2031,6 @@ const char *CTFWeaponBase::GetTracerType( void )
 
 	}
 
-	if ( GetWeaponID() == TF_WEAPON_MINIGUN )
-		Q_snprintf(m_szTracerName, MAX_TRACER_NAME, "%s", "BrightTracer" );
-	
 	if ( GetWeaponID() == TF_WEAPON_SNIPERRIFLE_CLASSIC )
 		Q_snprintf(m_szTracerName, MAX_TRACER_NAME, "%s", "tfc_sniper_distortion_trail" );
 	
