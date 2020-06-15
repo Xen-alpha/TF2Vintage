@@ -2030,9 +2030,6 @@ const char *CTFWeaponBase::GetTracerType( void )
 		//}
 
 	}
-
-	if ( GetWeaponID() == TF_WEAPON_SNIPERRIFLE_CLASSIC )
-		Q_snprintf(m_szTracerName, MAX_TRACER_NAME, "%s", "tfc_sniper_distortion_trail" );
 	
 	// Override tracer effect, if we have a custom one.
 	CEconItemDefinition *pItemDef = GetItem()->GetStaticData();
@@ -2040,12 +2037,44 @@ const char *CTFWeaponBase::GetTracerType( void )
 	{
 		Q_snprintf(m_szTracerName, MAX_TRACER_NAME, "%s", pItemDef->GetVisuals()->tracer_effect );
 	}
+
 	// If we have team specific, check those too.			
 	PerTeamVisuals_t *pVisuals = pItemDef->GetVisuals( GetOwner()->GetTeamNumber() );
-	if ( pVisuals && pVisuals->tracer_effect[0] != '\0' )
+	if (pVisuals && pVisuals->tracer_effect[0] != '\0')
 	{
-		Q_snprintf(m_szTracerName, MAX_TRACER_NAME, "%s", pVisuals->tracer_effect );
+		Q_snprintf(m_szTracerName, MAX_TRACER_NAME, "%s", pVisuals->tracer_effect);
+
+		PerTeamVisuals_t *pVisuals = pItemDef->GetVisuals(TEAM_UNASSIGNED);
+		if (pVisuals && pVisuals->tracer_effect)
+		{
+			Q_snprintf(m_szTracerName, MAX_TRACER_NAME, "%s", pVisuals->tracer_effect);
+		}
+
+		if (GetOwner()->GetTeamNumber())
+		{
+			// If we have team specific, check those too.	
+			pVisuals = pItemDef->GetVisuals(GetOwner()->GetTeamNumber());
+			if (pVisuals && pVisuals->tracer_effect)
+			{
+				// Make these for the right team.
+				switch (GetOwner()->GetTeamNumber())
+				{
+				case TF_TEAM_RED:
+					Q_snprintf(m_szTracerName, MAX_TRACER_NAME, "%s_%s", pVisuals->tracer_effect, "red");
+					break;
+				case TF_TEAM_BLUE:
+					Q_snprintf(m_szTracerName, MAX_TRACER_NAME, "%s_%s", pVisuals->tracer_effect, "blue");
+					break;
+				default:
+					Q_snprintf(m_szTracerName, MAX_TRACER_NAME, "%s_%s", pVisuals->tracer_effect, "red");
+					break;
+				}
+			}
+		}
 	}
+	
+	if ( GetWeaponID() == TF_WEAPON_SNIPERRIFLE_CLASSIC )
+		Q_snprintf(m_szTracerName, MAX_TRACER_NAME, "%s", "tfc_sniper_distortion_trail" );
 	
 	int nSniperFiresTracer = 0;
 	CALL_ATTRIB_HOOK_INT(nSniperFiresTracer, sniper_fires_tracer);
