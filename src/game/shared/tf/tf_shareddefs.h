@@ -164,8 +164,8 @@ enum
 	TF_CLASS_RANDOM
 };
 
-extern const char *g_aPlayerClassNames[];				// localized class names
-extern const char *g_aPlayerClassNames_NonLocalized[];	// non-localized class names
+extern const char *g_aPlayerClassNames[TF_CLASS_MENU_BUTTONS];				// localized class names
+extern const char *g_aPlayerClassNames_NonLocalized[TF_CLASS_MENU_BUTTONS];	// non-localized class names
 
 bool IsPlayerClassName( const char *name );
 int GetClassIndexFromString( const char *name, int maxClass = TF_LAST_NORMAL_CLASS );
