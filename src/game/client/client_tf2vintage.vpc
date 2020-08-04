@@ -214,7 +214,8 @@ $Project "Client (TF)"
 			$File	"tf\c_tf_spymask.h"
 			$File   "tf\c_merasmus_dancer.cpp"
 			$File	"tf\c_merasmus_bomb_effect.cpp"
-			$File	"tf\c_merasmus_bomb_effect.h"	
+			$File	"tf\c_merasmus_bomb_effect.h"
+			$File	"tf\c_merasmus.cpp"			
 			
 			$Folder	"Unused"
 			{
