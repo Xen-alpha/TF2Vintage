@@ -22,9 +22,6 @@ BEGIN_NETWORK_TABLE_NOBASE( CAttributeManager, DT_AttributeManager )
 #endif
 END_NETWORK_TABLE();
 
-ConVar tf2v_attrib_mult( "tf2v_attrib_mult", "1" , FCVAR_NOTIFY | FCVAR_REPLICATED, "Amount to multiply on attribute values." );
-
-
 bool CAttributeIterator_ApplyAttributeFloat::OnIterateAttributeValue( CEconAttributeDefinition const *pDefinition, unsigned int value )
 {
 	string_t name = pDefinition->m_iAttributeClass;
@@ -43,7 +40,6 @@ bool CAttributeIterator_ApplyAttributeFloat::OnIterateAttributeValue( CEconAttri
 		}
 
 		ApplyAttribute( pDefinition, m_flOut, BitsToFloat( value ) );
-		*m_flOut *=	tf2v_attrib_mult.GetFloat();
 	}
 
 	return true;
