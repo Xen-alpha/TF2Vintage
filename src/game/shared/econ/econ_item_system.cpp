@@ -392,7 +392,7 @@ public:
 						// Generic item, assign a model for every class.
 						if ( !strcmp(pszClass, "basename") )
 						{
-							for ( int i = TF_FIRST_NORMAL_CLASS; i < TF_LAST_NORMAL_CLASS; i++ )
+							for ( int i = TF_FIRST_NORMAL_CLASS; i <= TF_LAST_NORMAL_CLASS; i++ )
 							{
 								// Add to the player model per class.
 								if (i != TF_CLASS_DEMOMAN)
