@@ -38,7 +38,7 @@ END_PREDICTION_DATA()
 LINK_ENTITY_TO_CLASS( tf_weapon_grenadelauncher, CTFGrenadeLauncher );
 PRECACHE_WEAPON_REGISTER( tf_weapon_grenadelauncher );
 
-CREATE_SIMPLE_WEAPON_TABLE( TFGrenadeLauncher_Cannon, tf_weapon_cannon );
+CREATE_SIMPLE_WEAPON_TABLE( TFGrenadeLauncher_Cannon, tf_weapon_cannon )
 
 //=============================================================================
 
