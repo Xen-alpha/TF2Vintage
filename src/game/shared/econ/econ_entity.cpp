@@ -165,7 +165,7 @@ void C_EconEntity::ViewModelAttachmentBlending( CStudioHdr *hdr, Vector pos[], Q
 //-----------------------------------------------------------------------------
 void C_EconEntity::UpdateAttachmentModels( void )
 {
-	m_attachments.Purge();
+	m_aAttachments.Purge();
 
 	if ( GetItem()->GetStaticData() && AttachmentModelsShouldBeVisible() )
 	{
