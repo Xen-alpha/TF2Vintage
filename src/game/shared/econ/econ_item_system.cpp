@@ -427,9 +427,9 @@ public:
 					for ( KeyValues *pClassData = pSubData->GetFirstSubKey(); pClassData != NULL; pClassData = pClassData->GetNextKey() )
 					{
 						const char *pszClass = pClassData->GetName();
-						
+
 						// Generic item, assign a model for every class.
-						if ( !strcmp(pszClass, "basename") )
+						if ( !V_stricmp(pszClass, "basename") )
 						{
 							for ( int i = TF_FIRST_NORMAL_CLASS; i <= TF_LAST_NORMAL_CLASS; i++ )
 							{
@@ -437,15 +437,18 @@ public:
 								if (i != TF_CLASS_DEMOMAN)
 									Q_snprintf(pItem->model_player_per_class[i], 128, pClassData->GetString(), g_aPlayerClassNames_NonLocalized[i]);
 								else	// Demoman gets called demo, so adjust the string.
-									Q_snprintf(pItem->model_player_per_class[i], 128, pClassData->GetString(), "Demo");
+									Q_snprintf(pItem->model_player_per_class[i], 128, pClassData->GetString(), "demo");
 							}	
 						}
-
-						int iClass = UTIL_StringFieldToInt( pszClass, g_aPlayerClassNames_NonLocalized, TF_CLASS_COUNT_ALL );
-
-						if ( iClass != -1 )
+						else
 						{
-							V_strncpy( pItem->model_player_per_class[iClass], pClassData->GetString(), 128 );
+							
+							int iClass = UTIL_StringFieldToInt( pszClass, g_aPlayerClassNames_NonLocalized, TF_CLASS_COUNT_ALL );
+
+							if ( iClass != -1 )
+							{
+								V_strncpy( pItem->model_player_per_class[iClass], pClassData->GetString(), 128 );
+							}
 						}
 
 					}
