@@ -39,7 +39,6 @@ public:
 	~CTFGrenadeLauncher();
 
 	virtual void	Spawn( void );
-	virtual void	Precache();
 	virtual int		GetWeaponID( void ) const			{ return TF_WEAPON_GRENADELAUNCHER; }
 	virtual void	SecondaryAttack();
 
@@ -106,6 +105,7 @@ public:
 	DECLARE_NETWORKCLASS();
 	DECLARE_PREDICTABLE();
 
+	virtual void	Precache(void);
 	virtual int GetWeaponID( void ) const { return TF_WEAPON_CANNON; }
 };
 

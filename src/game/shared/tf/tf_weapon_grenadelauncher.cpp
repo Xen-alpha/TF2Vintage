@@ -26,8 +26,6 @@ IMPLEMENT_NETWORKCLASS_ALIASED( TFGrenadeLauncher, DT_WeaponGrenadeLauncher )
 BEGIN_NETWORK_TABLE( CTFGrenadeLauncher, DT_WeaponGrenadeLauncher )
 END_NETWORK_TABLE()
 
-
-
 #ifdef CLIENT_DLL
 BEGIN_PREDICTION_DATA(CTFGrenadeLauncher)
 DEFINE_FIELD(m_flChargeBeginTime, FIELD_FLOAT)
@@ -39,6 +37,8 @@ END_PREDICTION_DATA()
 
 LINK_ENTITY_TO_CLASS( tf_weapon_grenadelauncher, CTFGrenadeLauncher );
 PRECACHE_WEAPON_REGISTER( tf_weapon_grenadelauncher );
+
+CREATE_SIMPLE_WEAPON_TABLE( TFGrenadeLauncher_Cannon, tf_weapon_cannon );
 
 //=============================================================================
 
@@ -88,14 +88,6 @@ void CTFGrenadeLauncher::Spawn( void )
 {
 	m_iAltFireHint = HINT_ALTFIRE_GRENADELAUNCHER;
 	BaseClass::Spawn();
-}
-
-//-----------------------------------------------------------------------------
-// Purpose:
-//-----------------------------------------------------------------------------
-void CTFGrenadeLauncher::Precache()
-{
-	PrecacheScriptSound("Weapon_LooseCannon.Charge");
 }
 
 //-----------------------------------------------------------------------------
@@ -429,7 +421,6 @@ int CTFGrenadeLauncher::MortarTime(void)
 	return (nMortarMode);
 }
 
-
 #ifdef CLIENT_DLL
 void CTFGrenadeLauncher::ToggleCannonFuse()
 {
@@ -444,3 +435,13 @@ void CTFGrenadeLauncher::ToggleCannonFuse()
 	}
 }
 #endif
+
+//-----------------------------------------------------------------------------
+// Purpose:
+//-----------------------------------------------------------------------------
+void CTFGrenadeLauncher_Cannon::Precache(void)
+{
+	PrecacheScriptSound("Weapon_LooseCannon.Charge");
+
+	BaseClass::Precache();
+}
