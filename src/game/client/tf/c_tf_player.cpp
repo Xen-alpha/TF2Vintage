@@ -4200,6 +4200,14 @@ bool C_TFPlayer::CreateMove( float flInputSampleTime, CUserCmd *pCmd )
 			{
 				pCmd->buttons |= IN_ATTACK2;
 			}
+			else
+			{
+				C_TFWeaponBase *pWeapon2 = Weapon_OwnsThisID(TF_WEAPON_PIPEBOMBLAUNCHER_BETA);
+				if (pWeapon2)
+				{
+					pCmd->buttons |= IN_ATTACK2;
+				}
+			}
 		}
 
 		VectorCopy( angMoveAngle, pCmd->viewangles );

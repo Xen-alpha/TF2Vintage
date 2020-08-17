@@ -84,23 +84,6 @@ public:
 
 #endif
 
-// Old School Rocket Launcher.
-
-#if defined CLIENT_DLL
-#define CTFRocketLauncher_Legacy C_TFRocketLauncher_Legacy
-#endif
-
-class CTFRocketLauncher_Legacy : public CTFRocketLauncher
-{
-public:
-
-	DECLARE_CLASS( CTFRocketLauncher_Legacy, CTFRocketLauncher )
-	DECLARE_NETWORKCLASS();
-	DECLARE_PREDICTABLE();
-
-	virtual int GetWeaponID( void ) const { return TF_WEAPON_ROCKETLAUNCHER_LEGACY; }
-};
-
 // Simple addon logic used for the Air Strike.
 #if defined CLIENT_DLL
 #define CTFRocketLauncher_Airstrike C_TFRocketLauncher_Airstrike

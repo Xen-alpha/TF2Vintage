@@ -99,55 +99,22 @@ public:
 	CTFPipebombLauncher( CTFPipebombLauncher const& );
 };
 
-// Old School Pipebomb/Sticky Launcher.
-
-#if defined CLIENT_DLL
-#define CTFPipebombLauncher_Legacy C_TFPipebombLauncher_Legacy
-#endif
-
-class CTFPipebombLauncher_Legacy : public CTFPipebombLauncher
-{
-public:
-
-	DECLARE_CLASS( CTFPipebombLauncher_Legacy, CTFPipebombLauncher )
-	DECLARE_NETWORKCLASS();
-	DECLARE_PREDICTABLE();
-
-	virtual int GetWeaponID( void ) const { return TF_WEAPON_PIPEBOMBLAUNCHER_LEGACY; }
-};
-
 // TF2 Beta Pipebomb launcher.
 
 #if defined CLIENT_DLL
-#define CTFPipebombLauncher_TF2Beta C_TFPipebombLauncher_TF2Beta
+#define CTFPipebombLauncher_Beta C_TFPipebombLauncher_Beta
 #endif
 
-class CTFPipebombLauncher_TF2Beta : public CTFPipebombLauncher
+	class CTFPipebombLauncher_Beta : public CTFPipebombLauncher
 {
 public:
 
-	DECLARE_CLASS( CTFPipebombLauncher_TF2Beta, CTFPipebombLauncher )
+	DECLARE_CLASS( CTFPipebombLauncher_Beta, CTFPipebombLauncher )
 	DECLARE_NETWORKCLASS();
 	DECLARE_PREDICTABLE();
 
-	virtual int GetWeaponID( void ) const { return TF_WEAPON_PIPEBOMBLAUNCHER_TF2BETA; }
+	virtual int GetWeaponID( void ) const { return TF_WEAPON_PIPEBOMBLAUNCHER_BETA; }
 };
 
-// TFC Esque Pipebomb launcher.
-
-#if defined CLIENT_DLL
-#define CTFPipebombLauncher_TFC C_TFPipebombLauncher_TFC
-#endif
-
-class CTFPipebombLauncher_TFC : public CTFPipebombLauncher
-{
-public:
-
-	DECLARE_CLASS( CTFPipebombLauncher_TFC, CTFPipebombLauncher )
-	DECLARE_NETWORKCLASS();
-	DECLARE_PREDICTABLE();
-
-	virtual int GetWeaponID( void ) const { return TF_WEAPON_PIPEBOMBLAUNCHER_TFC; }
-};
 
 #endif // TF_WEAPON_PIPEBOMBLAUNCHER_H

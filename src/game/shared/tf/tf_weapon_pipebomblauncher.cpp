@@ -67,10 +67,7 @@ BEGIN_DATADESC( CTFPipebombLauncher )
 END_DATADESC()
 #endif
 
-
-CREATE_SIMPLE_WEAPON_TABLE( TFPipebombLauncher_Legacy, tf_weapon_pipebomblauncher_legacy )
-CREATE_SIMPLE_WEAPON_TABLE( TFPipebombLauncher_TF2Beta, tf_weapon_pipebomblauncher_tf2beta )
-CREATE_SIMPLE_WEAPON_TABLE( TFPipebombLauncher_TFC, tf_weapon_pipebomblauncher_tfc )
+CREATE_SIMPLE_WEAPON_TABLE( TFPipebombLauncher_Beta, tf_weapon_pipebomblauncher_beta )
 
 //=============================================================================
 //

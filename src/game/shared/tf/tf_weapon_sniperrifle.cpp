@@ -83,7 +83,6 @@ LINK_ENTITY_TO_CLASS( tf_weapon_sniperrifle, CTFSniperRifle );
 PRECACHE_WEAPON_REGISTER( tf_weapon_sniperrifle );
 
 
-CREATE_SIMPLE_WEAPON_TABLE( TFSniperRifle_Real, tf_weapon_sniperrifle_real )
 CREATE_SIMPLE_WEAPON_TABLE( TFSniperRifle_Decap, tf_weapon_sniperrifle_decap )
 CREATE_SIMPLE_WEAPON_TABLE( TFSniperRifle_Classic, tf_weapon_sniperrifle_classic )
 
