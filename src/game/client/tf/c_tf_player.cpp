@@ -5423,6 +5423,43 @@ void C_TFPlayer::ValidateModelIndex( void )
 		if ( GetLocalPlayer() != this )
 			SetAbsAngles( vec3_angle );
 	}
+	else if ( m_Shared.InCond( TF_COND_DISGUISED ) && IsEnemyPlayer() )
+	{
+		TFPlayerClassData_t *pData = GetPlayerClassData( m_Shared.GetDisguiseClass() );
+		m_nModelIndex = modelinfo->GetModelIndex( pData->GetModelName() );
+
+		for (int i = 0; i < GetNumWearables(); i++)
+		{
+			C_TFWearable *pWearable = static_cast<C_TFWearable *>(GetWearable(i));
+
+			if (!pWearable)
+				continue;
+
+
+			pWearable->UpdateModelToClass();
+
+		}
+	}
+	else
+	{
+		C_TFPlayerClass *pClass = GetPlayerClass();
+		if ( pClass )
+		{
+			m_nModelIndex = modelinfo->GetModelIndex( pClass->GetModelName() );
+		}
+
+		for (int i = 0; i < GetNumWearables(); i++)
+		{
+			C_TFWearable *pWearable = static_cast<C_TFWearable *>(GetWearable(i));
+
+			if (!pWearable)
+				continue;
+
+
+			pWearable->UpdateModelToClass();
+
+		}
+	}
 	
 	// Don't need to set bodygroup anymore.
 	/*
