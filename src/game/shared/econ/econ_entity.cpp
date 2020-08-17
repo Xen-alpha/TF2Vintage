@@ -182,7 +182,7 @@ void C_EconEntity::ViewModelAttachmentBlending( CStudioHdr *hdr, Vector pos[], Q
 //-----------------------------------------------------------------------------
 void C_EconEntity::UpdateAttachmentModels( void )
 {
-	m_Attachments.Purge();
+	m_attachments.Purge();
 
 	if ( GetItem()->GetStaticData() && AttachmentModelsShouldBeVisible() )
 	{
@@ -201,7 +201,7 @@ void C_EconEntity::UpdateAttachmentModels( void )
 					attachmentData.model = modelinfo->GetModel( iMdlIndex );
 					attachmentData.modeltype = attachment.model_display_flags;
 
-					m_Attachments.AddToTail( attachmentData );
+					m_aAttachments.AddToTail( attachmentData );
 				}
 			}
 		}
@@ -450,16 +450,16 @@ void DrawEconEntityAttachedModels( C_BaseAnimating *pAnimating, C_EconEntity *pE
 {
 	if ( pAnimating && pEconEntity && pInfo )
 	{
-		for ( int i=0; i<pEconEntity->m_Attachments.Count(); ++i )
+		for ( int i=0; i<pEconEntity->m_aAttachments.Count(); ++i )
 		{
-			if ( pEconEntity->m_Attachments[i].model && ( pEconEntity->m_Attachments[i].modeltype & iModelType ) )
+			if ( pEconEntity->m_aAttachments[i].model && ( pEconEntity->m_aAttachments[i].modeltype & iModelType ) )
 			{
 				ClientModelRenderInfo_t newInfo;
 				V_memcpy( &newInfo, pInfo, sizeof( ClientModelRenderInfo_t ) );
 				newInfo.pRenderable = (IClientRenderable *)pAnimating;
 				newInfo.instance = MODEL_INSTANCE_INVALID;
 				newInfo.entity_index = pAnimating->entindex();
-				newInfo.pModel = pEconEntity->m_Attachments[i].model;
+				newInfo.pModel = pEconEntity->m_aAttachments[i].model;
 				newInfo.pModelToWorld = &newInfo.modelToWorld;
 
 				// Turns the origin + angles into a matrix
