@@ -4015,7 +4015,7 @@
 		}
 		"20"
 		{
-			"name"	"TF_weapon_stickybomb_launcher"
+			"name"	"TF_WEAPON_STICKYBOMB_LAUNCHER"
 			"prefab"	"weapon_stickybomb_launcher"
 			"item_quality" "normal"
 			"year"			"2007"
