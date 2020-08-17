@@ -188,12 +188,13 @@
 		"arm_tatoos"		"1"
 		"flair"				"1"
 		"head_skin"			"1"			
-		"earbuds_special"	"1"
+		"ears"				"1"
 		"left_shoulder"		"1"			
 		"belt_misc"	"1"					
 		"disconnected_floating_item"	"1"
 		"zombie_body"		"1"
 		"sleeves"			"1"
+		"right_shoulder"	"1"			
 
 		"shared"
 		{
