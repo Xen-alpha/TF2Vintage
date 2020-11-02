@@ -7,19 +7,21 @@
 $macro SRCDIR		".."
 $Macro OUTBINDIR	"$SRCDIR\..\game\bin"
 
-$include "$SRCDIR\vpc_scripts\source_dll_win32_base.vpc"	[$WIN32||$LINUX]
-$include "$SRCDIR\vpc_scripts\source_dll_x360_base.vpc"		[$X360]
+$include "$SRCDIR\vpc_scripts\source_dll_base.vpc"
 
-$Linux
-{
-	$BuildForLinux 1
-}
 $Configuration
 {
 	$Compiler
 	{
-		$PreprocessorDefinitions	"$BASE;VPHYSICS_EXPORTS;PROTECTED_THINGS_ENABLE;strncpy=use_Q_strncpy_instead;_snprintf=use_Q_snprintf_instead;fopen=dont_use_fopen"
-		$Create/UsePCHThroughFile	"StdAfx.h"
+		$AdditionalIncludeDirectories	"$BASE;$SRCDIR\thirdparty\bullet\src"
+		$PreprocessorDefinitions		"$BASE;VPHYSICS_EXPORTS;PROTECTED_THINGS_ENABLE"
+		$Create/UsePrecompiledHeader	"Use Precompiled Header (/Yu)"
+		$Create/UsePCHThroughFile		"cbase.h"
+		$PrecompiledHeaderFile			"$(IntDir)\vphysics.pch"
+	}
+	$Compiler [$WIN32]
+	{
+		$EnableEnhancedInstructionSet	"Streaming SIMD Extensions 2 (/arch:SSE2)"
 	}
 }
 
@@ -27,21 +29,95 @@ $Project "vphysics"
 {
 	$Folder	"Source Files"
 	{
-		
+		$File	"StdAfx.cpp"
+		{
+			$Configuration
+			{
+				$Compiler
+				{
+					$Create/UsePrecompiledHeader	"Create Precompiled Header (/Yc)"
+				}
+			}
+		}
+
+		$File	"DebugDrawer.cpp"
+		$File	"miscmath.cpp"
+		$File	"Physics.cpp"
+		$File	"Physics_Collision.cpp"
+		$File	"Physics_CollisionSet.cpp"
+		$File	"Physics_Constraint.cpp"
+		$File	"Physics_DragController.cpp"
+		$File	"Physics_Environment.cpp"
+		$File	"Physics_FluidController.cpp"
+		$File	"Physics_FrictionSnapshot.cpp"
+		$File	"Physics_KeyParser.cpp"
+		$File	"Physics_MotionController.cpp"
+		$File	"Physics_Object.cpp"
+		$File	"Physics_ObjectPairHash.cpp"
+		$File	"Physics_PlayerController.cpp"
+		$File	"Physics_ShadowController.cpp"
+		$File	"Physics_SoftBody.cpp"
+		$File	"Physics_SurfaceProps.cpp"
+		$File	"Physics_VehicleAirboat.cpp"
+		$File	"Physics_VehicleController.cpp"
+		$File	"Physics_VehicleControllerCustom.cpp"
 	}
 
 	$Folder	"Public Header Files"
 	{
-		
+		$File	"$SRCDIR\public\vphysics\collision_set.h"
+		$File	"$SRCDIR\public\vphysics\constraints.h"
+		$File	"$SRCDIR\public\vphysics\constraintsV32.h"
+		$File	"$SRCDIR\public\datamap.h"
+		$File	"$SRCDIR\public\filesystem_helpers.h"
+		$File	"$SRCDIR\public\vphysics\friction.h"
+		$File	"$SRCDIR\public\vphysics\object_hash.h"
+		$File	"$SRCDIR\public\vphysics\performance.h"
+		$File	"$SRCDIR\public\vphysics\player_controller.h"
+		$File	"$SRCDIR\public\vphysics\softbody.h"
+		$File	"$SRCDIR\public\vphysics\stats.h"
+		$File	"$SRCDIR\public\vcollide.h"
+		$File	"$SRCDIR\public\vcollide_parse.h"
+		$File	"$SRCDIR\public\vphysics\vehicles.h"
+		$File	"$SRCDIR\public\vphysics\vehiclesV32.h"
+		$File	"$SRCDIR\public\vphysics_interface.h"
+		$File	"$SRCDIR\public\vphysics_interfaceV30.h"
+		$File	"$SRCDIR\public\vphysics_interfaceV32.h"
 	}
 
 	$Folder	"Header Files"
 	{
-		
+		$File	"cbase.h"
+		$File	"convert.h"
+		$File	"DebugDrawer.h"
+		$File	"IController.h"
+		$File	"miscmath.h"
+		$File	"phydata.h"
+		$File	"Physics.h"
+		$File	"Physics_Collision.h"
+		$File	"Physics_CollisionSet.h"
+		$File	"Physics_Constraint.h"
+		$File	"Physics_DragController.h"
+		$File	"Physics_Environment.h"
+		$File	"Physics_FluidController.h"
+		$File	"Physics_FrictionSnapshot.h"
+		$File	"Physics_KeyParser.h"
+		$File	"Physics_MotionController.h"
+		$File	"Physics_Object.h"
+		$File	"Physics_ObjectPairHash.h"
+		$File	"Physics_PlayerController.h"
+		$File	"Physics_ShadowController.h"
+		$File	"Physics_SoftBody.h"
+		$File	"Physics_SurfaceProps.h"
+		$File	"Physics_VehicleAirboat.h"
+		$File	"Physics_VehicleController.h"
+		$File	"Physics_VehicleControllerCustom.h"
 	}
 
-	$Folder	"Link Libraries" [$WIN32]
+	$Folder	"Link Libraries"
 	{
-		
+		$Lib "$LIBCOMMON/bullet"
+		$Lib mathlib
+		$Lib tier2
 	}
 }

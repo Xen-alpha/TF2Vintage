@@ -101,6 +101,11 @@ $Project "vice"
 	"utils\vice\vice.vpc" [$WIN32]
 }
 
+$Project "vphysics"
+{
+	"vphysics\vphysics.vpc" [$WIN32||$POSIX]
+}
+
 $Project "vrad_dll"
 {
 	"utils\vrad\vrad_dll.vpc" [$WIN32]
