@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+#include "cbase.h"
 
 #include "Physics_Environment.h"
 #include "Physics_ShadowController.h"

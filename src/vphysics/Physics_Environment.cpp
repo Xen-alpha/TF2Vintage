@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+#include "cbase.h"
 
 #include <cmodel.h>
 
@@ -164,7 +164,7 @@ void SerializeWorld_f(const CCommand &args) {
 		return;
 	}
 
-	CPhysicsEnvironment *pEnv = (CPhysicsEnvironment *)g_Physics.GetActiveEnvironmentByIndex(atoi(args.Arg(2)));
+	CPhysicsEnvironment *pEnv = (CPhysicsEnvironment *)g_Physics->GetActiveEnvironmentByIndex(atoi(args.Arg(2)));
 	if (pEnv) {
 		btDiscreteDynamicsWorld *pWorld = (btDiscreteDynamicsWorld *)pEnv->GetBulletEnvironment();
 		Assert(pWorld);
@@ -509,10 +509,11 @@ static void vphysics_numthreads_Change(IConVar *var, const char *pOldValue, floa
 	int newVal = vphysics_numthreads.GetInt();
 	if (newVal <= 0 || newVal > 8) return;
 
+	Assert( dynamic_cast<IPhysics32 *>( g_Physics ) != NULL );
 	Msg("VPhysics: Resizing to %d threads\n", newVal);
 
-	for (int i = 0; i < g_Physics.GetActiveEnvironmentCount(); i++) {
-		((CPhysicsEnvironment *)g_Physics.GetActiveEnvironmentByIndex(i))->ChangeThreadCount(newVal);
+	for (int i = 0; i < ((IPhysics32 *)g_Physics)->GetActiveEnvironmentCount(); i++) {
+		((CPhysicsEnvironment *)g_Physics->GetActiveEnvironmentByIndex(i))->ChangeThreadCount(newVal);
 	}
 }
 #endif

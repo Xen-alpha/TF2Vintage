@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+#include "cbase.h"
 
 #include <LinearMath/btDebug.h>
 
@@ -118,6 +118,7 @@ void CPhysics::DestroyAllCollisionSets() {
 	m_colSetTable.RemoveAll();
 }
 
-CPhysics g_Physics;
-EXPOSE_SINGLE_INTERFACE_GLOBALVAR(CPhysics, IPhysics, VPHYSICS_INTERFACE_VERSION, g_Physics);
-EXPOSE_SINGLE_INTERFACE_GLOBALVAR(CPhysics, IPhysics32, "VPhysics032", g_Physics); // "Undocumented" way to determine if this is the newer vphysics or not.
+static CPhysics g_Interface;
+IPhysics *g_Physics = &g_Interface;
+EXPOSE_SINGLE_INTERFACE_GLOBALVAR(CPhysics, IPhysics, VPHYSICS_INTERFACE_VERSION, g_Interface);
+EXPOSE_SINGLE_INTERFACE_GLOBALVAR(CPhysics, IPhysics32, "VPhysics032", g_Interface); // "Undocumented" way to determine if this is the newer vphysics or not.

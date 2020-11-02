@@ -35,6 +35,6 @@ class CPhysics : public CTier1AppSystem<IPhysics32> {
 		CUtlHashtable<unsigned int, unsigned int> m_colSetTable;
 };
 
-extern CPhysics g_Physics;
+extern IPhysics *g_Physics;
 
 #endif

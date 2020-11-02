@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+#include "cbase.h"
 
 #include "miscmath.h"
 

@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+#include "cbase.h"
 #include "Physics_ObjectPairHash.h"
 
 // memdbgon must be the last include file in a .cpp file!!!

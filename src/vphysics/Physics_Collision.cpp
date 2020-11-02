@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+#include "cbase.h"
 
 #include <vphysics/virtualmesh.h>
 #include <cmodel.h>

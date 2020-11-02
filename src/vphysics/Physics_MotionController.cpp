@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+#include "cbase.h"
 
 #include "Physics_MotionController.h"
 #include "Physics_Object.h"
