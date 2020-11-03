@@ -23,6 +23,7 @@ $Group "game"
 	"tier1"
 	"vgui_controls"
 	"vphysics"
+	"bullet"
 }
 
 $Group "shaders"

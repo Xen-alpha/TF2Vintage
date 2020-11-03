@@ -1,0 +1,568 @@
+$macro SRCDIR		"..\..\.."
+$macro OUTLIBDIR	"$SRCDIR\lib\common"
+$macro BULLETDIR	"..\src"
+
+$include "$SRCDIR\vpc_scripts\source_lib_base.vpc"
+
+$Configuration
+{
+	$Compiler
+	{
+		$AdditionalIncludeDirectories	"$BASE;..\src"
+	}
+	$Compiler [$WIN32]
+	{
+		$EnableEnhancedInstructionSet	"Streaming SIMD Extensions 2 (/arch:SSE2)"
+	}
+}
+
+$Project "bullet"
+{
+	$Folder "BulletCollision"
+	{
+		$Folder "Header Files"
+		{
+			$File "$BULLETDIR\btBulletCollisionCommon.h"
+			$File "$BULLETDIR\btBulletDynamicsCommon.h"
+			$File "$BULLETDIR\Bullet-C-Api.h"
+
+			$Folder "BroadphaseCollision"
+			{
+				$File "$BULLETDIR\BulletCollision\BroadphaseCollision\btAxisSweep3.h"
+				$File "$BULLETDIR\BulletCollision\BroadphaseCollision\btBroadphaseInterface.h"
+				$File "$BULLETDIR\BulletCollision\BroadphaseCollision\btBroadphaseProxy.h"
+				$File "$BULLETDIR\BulletCollision\BroadphaseCollision\btCollisionAlgorithm.h"
+				$File "$BULLETDIR\BulletCollision\BroadphaseCollision\btDbvt.h"
+				$File "$BULLETDIR\BulletCollision\BroadphaseCollision\btDbvtBroadphase.h"
+				$File "$BULLETDIR\BulletCollision\BroadphaseCollision\btDispatcher.h"
+				$File "$BULLETDIR\BulletCollision\BroadphaseCollision\btMultiSapBroadphase.h"
+				$File "$BULLETDIR\BulletCollision\BroadphaseCollision\btOverlappingPairCache.h"
+				$File "$BULLETDIR\BulletCollision\BroadphaseCollision\btOverlappingPairCallback.h"
+				$File "$BULLETDIR\BulletCollision\BroadphaseCollision\btQuantizedBvh.h"
+				$File "$BULLETDIR\BulletCollision\BroadphaseCollision\btSimpleBroadphase.h"
+			}
+
+			$Folder "CollisionDispatch"
+			{
+				$File "$BULLETDIR\BulletCollision\CollisionDispatch\btActivatingCollisionAlgorithm.h"
+				$File "$BULLETDIR\BulletCollision\CollisionDispatch\btBox2dBox2dCollisionAlgorithm.h"
+				$File "$BULLETDIR\BulletCollision\CollisionDispatch\btBoxBoxCollisionAlgorithm.h"
+				$File "$BULLETDIR\BulletCollision\CollisionDispatch\btBoxBoxDetector.h"
+				$File "$BULLETDIR\BulletCollision\CollisionDispatch\btCollisionConfiguration.h"
+				$File "$BULLETDIR\BulletCollision\CollisionDispatch\btCollisionCreateFunc.h"
+				$File "$BULLETDIR\BulletCollision\CollisionDispatch\btCollisionDispatcher.h"
+				$File "$BULLETDIR\BulletCollision\CollisionDispatch\btCollisionObject.h"
+				$File "$BULLETDIR\BulletCollision\CollisionDispatch\btCollisionObjectWrapper.h"
+				$File "$BULLETDIR\BulletCollision\CollisionDispatch\btCollisionWorld.h"
+				$File "$BULLETDIR\BulletCollision\CollisionDispatch\btCompoundCollisionAlgorithm.h"
+				$File "$BULLETDIR\BulletCollision\CollisionDispatch\btCompoundCompoundCollisionAlgorithm.h"
+				$File "$BULLETDIR\BulletCollision\CollisionDispatch\btConvex2dConvex2dAlgorithm.h"
+				$File "$BULLETDIR\BulletCollision\CollisionDispatch\btConvexConcaveCollisionAlgorithm.h"
+				$File "$BULLETDIR\BulletCollision\CollisionDispatch\btConvexConvexAlgorithm.h"
+				$File "$BULLETDIR\BulletCollision\CollisionDispatch\btConvexPlaneCollisionAlgorithm.h"
+				$File "$BULLETDIR\BulletCollision\CollisionDispatch\btDefaultCollisionConfiguration.h"
+				$File "$BULLETDIR\BulletCollision\CollisionDispatch\btEmptyCollisionAlgorithm.h"
+				$File "$BULLETDIR\BulletCollision\CollisionDispatch\btGhostObject.h"
+				$File "$BULLETDIR\BulletCollision\CollisionDispatch\btHashedSimplePairCache.h"
+				$File "$BULLETDIR\BulletCollision\CollisionDispatch\btInternalEdgeUtility.h"
+				$File "$BULLETDIR\BulletCollision\CollisionDispatch\btManifoldResult.h"
+				$File "$BULLETDIR\BulletCollision\CollisionDispatch\btSimulationIslandManager.h"
+				$File "$BULLETDIR\BulletCollision\CollisionDispatch\btSphereBoxCollisionAlgorithm.h"
+				$File "$BULLETDIR\BulletCollision\CollisionDispatch\btSphereSphereCollisionAlgorithm.h"
+				$File "$BULLETDIR\BulletCollision\CollisionDispatch\btSphereTriangleCollisionAlgorithm.h"
+				$File "$BULLETDIR\BulletCollision\CollisionDispatch\btUnionFind.h"
+				$File "$BULLETDIR\BulletCollision\CollisionDispatch\SphereTriangleDetector.h"
+			}
+
+			$Folder "CollisionShapes"
+			{
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btBox2dShape.h"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btBoxShape.h"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btBvhTriangleMeshShape.h"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btCapsuleShape.h"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btCollisionMargin.h"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btCollisionShape.h"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btCompoundShape.h"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btConcaveShape.h"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btConeShape.h"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btConvex2dShape.h"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btConvexHullShape.h"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btConvexInternalShape.h"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btConvexPointCloudShape.h"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btConvexPolyhedron.h"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btConvexShape.h"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btConvexTriangleMeshShape.h"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btCylinderShape.h"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btEmptyShape.h"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btHeightfieldTerrainShape.h"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btMaterial.h"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btMinkowskiSumShape.h"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btMultimaterialTriangleMeshShape.h"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btMultiSphereShape.h"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btOptimizedBvh.h"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btPolyhedralConvexShape.h"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btScaledBvhTriangleMeshShape.h"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btShapeHull.h"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btSphereShape.h"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btStaticPlaneShape.h"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btStridingMeshInterface.h"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btTetrahedronShape.h"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btTriangleBuffer.h"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btTriangleCallback.h"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btTriangleIndexVertexArray.h"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btTriangleIndexVertexMaterialArray.h"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btTriangleInfoMap.h"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btTriangleMesh.h"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btTriangleMeshShape.h"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btTriangleShape.h"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btUniformScalingShape.h"
+			}
+
+			$Folder "Gimpact"
+			{
+				$File "$BULLETDIR\BulletCollision\Gimpact\btBoxCollision.h"
+				$File "$BULLETDIR\BulletCollision\Gimpact\btClipPolygon.h"
+				$File "$BULLETDIR\BulletCollision\Gimpact\btCompoundFromGimpact.h"
+				$File "$BULLETDIR\BulletCollision\Gimpact\btContactProcessing.h"
+				$File "$BULLETDIR\BulletCollision\Gimpact\btGenericPoolAllocator.h"
+				$File "$BULLETDIR\BulletCollision\Gimpact\btGeometryOperations.h"
+				$File "$BULLETDIR\BulletCollision\Gimpact\btGImpactBvh.h"
+				$File "$BULLETDIR\BulletCollision\Gimpact\btGImpactCollisionAlgorithm.h"
+				$File "$BULLETDIR\BulletCollision\Gimpact\btGImpactMassUtil.h"
+				$File "$BULLETDIR\BulletCollision\Gimpact\btGImpactQuantizedBvh.h"
+				$File "$BULLETDIR\BulletCollision\Gimpact\btGImpactShape.h"
+				$File "$BULLETDIR\BulletCollision\Gimpact\btQuantization.h"
+				$File "$BULLETDIR\BulletCollision\Gimpact\btTriangleShapeEx.h"
+				$File "$BULLETDIR\BulletCollision\Gimpact\gim_array.h"
+				$File "$BULLETDIR\BulletCollision\Gimpact\gim_basic_geometry_operations.h"
+				$File "$BULLETDIR\BulletCollision\Gimpact\gim_bitset.h"
+				$File "$BULLETDIR\BulletCollision\Gimpact\gim_box_collision.h"
+				$File "$BULLETDIR\BulletCollision\Gimpact\gim_box_set.h"
+				$File "$BULLETDIR\BulletCollision\Gimpact\gim_clip_polygon.h"
+				$File "$BULLETDIR\BulletCollision\Gimpact\gim_contact.h"
+				$File "$BULLETDIR\BulletCollision\Gimpact\gim_geom_types.h"
+				$File "$BULLETDIR\BulletCollision\Gimpact\gim_geometry.h"
+				$File "$BULLETDIR\BulletCollision\Gimpact\gim_hash_table.h"
+				$File "$BULLETDIR\BulletCollision\Gimpact\gim_linear_math.h"
+				$File "$BULLETDIR\BulletCollision\Gimpact\gim_math.h"
+				$File "$BULLETDIR\BulletCollision\Gimpact\gim_memory.h"
+				$File "$BULLETDIR\BulletCollision\Gimpact\gim_radixsort.h"
+				$File "$BULLETDIR\BulletCollision\Gimpact\gim_tri_collision.h"
+			}
+
+			$Folder "NarrowPhaseCollision"
+			{
+				$File "$BULLETDIR\BulletCollision\NarrowPhaseCollision\btContinuousConvexCollision.h"
+				$File "$BULLETDIR\BulletCollision\NarrowPhaseCollision\btConvexCast.h"
+				$File "$BULLETDIR\BulletCollision\NarrowPhaseCollision\btConvexPenetrationDepthSolver.h"
+				$File "$BULLETDIR\BulletCollision\NarrowPhaseCollision\btDiscreteCollisionDetectorInterface.h"
+				$File "$BULLETDIR\BulletCollision\NarrowPhaseCollision\btGjkConvexCast.h"
+				$File "$BULLETDIR\BulletCollision\NarrowPhaseCollision\btGjkEpa2.h"
+				$File "$BULLETDIR\BulletCollision\NarrowPhaseCollision\btGjkEpaPenetrationDepthSolver.h"
+				$File "$BULLETDIR\BulletCollision\NarrowPhaseCollision\btGjkPairDetector.h"
+				$File "$BULLETDIR\BulletCollision\NarrowPhaseCollision\btManifoldPoint.h"
+				$File "$BULLETDIR\BulletCollision\NarrowPhaseCollision\btMinkowskiPenetrationDepthSolver.h"
+				$File "$BULLETDIR\BulletCollision\NarrowPhaseCollision\btPersistentManifold.h"
+				$File "$BULLETDIR\BulletCollision\NarrowPhaseCollision\btPointCollector.h"
+				$File "$BULLETDIR\BulletCollision\NarrowPhaseCollision\btPolyhedralContactClipping.h"
+				$File "$BULLETDIR\BulletCollision\NarrowPhaseCollision\btRaycastCallback.h"
+				$File "$BULLETDIR\BulletCollision\NarrowPhaseCollision\btSimplexSolverInterface.h"
+				$File "$BULLETDIR\BulletCollision\NarrowPhaseCollision\btSubSimplexConvexCast.h"
+				$File "$BULLETDIR\BulletCollision\NarrowPhaseCollision\btVoronoiSimplexSolver.h"
+			}
+		}
+
+		$Folder "Source Files"
+		{
+			$Folder "BroadphaseCollision"
+			{
+				$File "$BULLETDIR\BulletCollision\BroadphaseCollision\btAxisSweep3.cpp"
+				$File "$BULLETDIR\BulletCollision\BroadphaseCollision\btBroadphaseProxy.cpp"
+				$File "$BULLETDIR\BulletCollision\BroadphaseCollision\btCollisionAlgorithm.cpp"
+				$File "$BULLETDIR\BulletCollision\BroadphaseCollision\btDbvt.cpp"
+				$File "$BULLETDIR\BulletCollision\BroadphaseCollision\btDbvtBroadphase.cpp"
+				$File "$BULLETDIR\BulletCollision\BroadphaseCollision\btDispatcher.cpp"
+				$File "$BULLETDIR\BulletCollision\BroadphaseCollision\btMultiSapBroadphase.cpp"
+				$File "$BULLETDIR\BulletCollision\BroadphaseCollision\btOverlappingPairCache.cpp"
+				$File "$BULLETDIR\BulletCollision\BroadphaseCollision\btQuantizedBvh.cpp"
+				$File "$BULLETDIR\BulletCollision\BroadphaseCollision\btSimpleBroadphase.cpp"
+			}
+
+			$Folder "CollisionDispatch"
+			{
+				$File "$BULLETDIR\BulletCollision\CollisionDispatch\btActivatingCollisionAlgorithm.cpp"
+				$File "$BULLETDIR\BulletCollision\CollisionDispatch\btBox2dBox2dCollisionAlgorithm.cpp"
+				$File "$BULLETDIR\BulletCollision\CollisionDispatch\btBoxBoxCollisionAlgorithm.cpp"
+				$File "$BULLETDIR\BulletCollision\CollisionDispatch\btBoxBoxDetector.cpp"
+				$File "$BULLETDIR\BulletCollision\CollisionDispatch\btCollisionDispatcher.cpp"
+				$File "$BULLETDIR\BulletCollision\CollisionDispatch\btCollisionObject.cpp"
+				$File "$BULLETDIR\BulletCollision\CollisionDispatch\btCollisionWorld.cpp"
+				$File "$BULLETDIR\BulletCollision\CollisionDispatch\btCompoundCollisionAlgorithm.cpp"
+				$File "$BULLETDIR\BulletCollision\CollisionDispatch\btCompoundCompoundCollisionAlgorithm.cpp"
+				$File "$BULLETDIR\BulletCollision\CollisionDispatch\btConvex2dConvex2dAlgorithm.cpp"
+				$File "$BULLETDIR\BulletCollision\CollisionDispatch\btConvexConcaveCollisionAlgorithm.cpp"
+				$File "$BULLETDIR\BulletCollision\CollisionDispatch\btConvexConvexAlgorithm.cpp"
+				$File "$BULLETDIR\BulletCollision\CollisionDispatch\btConvexPlaneCollisionAlgorithm.cpp"
+				$File "$BULLETDIR\BulletCollision\CollisionDispatch\btDefaultCollisionConfiguration.cpp"
+				$File "$BULLETDIR\BulletCollision\CollisionDispatch\btEmptyCollisionAlgorithm.cpp"
+				$File "$BULLETDIR\BulletCollision\CollisionDispatch\btGhostObject.cpp"
+				$File "$BULLETDIR\BulletCollision\CollisionDispatch\btHashedSimplePairCache.cpp"
+				$File "$BULLETDIR\BulletCollision\CollisionDispatch\btInternalEdgeUtility.cpp"
+				$File "$BULLETDIR\BulletCollision\CollisionDispatch\btManifoldResult.cpp"
+				$File "$BULLETDIR\BulletCollision\CollisionDispatch\btSimulationIslandManager.cpp"
+				$File "$BULLETDIR\BulletCollision\CollisionDispatch\btSphereBoxCollisionAlgorithm.cpp"
+				$File "$BULLETDIR\BulletCollision\CollisionDispatch\btSphereSphereCollisionAlgorithm.cpp"
+				$File "$BULLETDIR\BulletCollision\CollisionDispatch\btSphereTriangleCollisionAlgorithm.cpp"
+				$File "$BULLETDIR\BulletCollision\CollisionDispatch\btUnionFind.cpp"
+				$File "$BULLETDIR\BulletCollision\CollisionDispatch\SphereTriangleDetector.cpp"
+			}
+
+			$Folder "CollisionShapes"
+			{
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btBox2dShape.cpp"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btBoxShape.cpp"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btBvhTriangleMeshShape.cpp"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btCapsuleShape.cpp"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btCollisionShape.cpp"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btCompoundShape.cpp"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btConcaveShape.cpp"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btConeShape.cpp"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btConvex2dShape.cpp"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btConvexHullShape.cpp"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btConvexInternalShape.cpp"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btConvexPointCloudShape.cpp"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btConvexPolyhedron.cpp"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btConvexShape.cpp"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btConvexTriangleMeshShape.cpp"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btCylinderShape.cpp"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btEmptyShape.cpp"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btHeightfieldTerrainShape.cpp"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btMinkowskiSumShape.cpp"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btMultimaterialTriangleMeshShape.cpp"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btMultiSphereShape.cpp"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btOptimizedBvh.cpp"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btPolyhedralConvexShape.cpp"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btScaledBvhTriangleMeshShape.cpp"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btShapeHull.cpp"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btSphereShape.cpp"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btStaticPlaneShape.cpp"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btStridingMeshInterface.cpp"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btTetrahedronShape.cpp"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btTriangleBuffer.cpp"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btTriangleCallback.cpp"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btTriangleIndexVertexArray.cpp"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btTriangleIndexVertexMaterialArray.cpp"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btTriangleMesh.cpp"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btTriangleMeshShape.cpp"
+				$File "$BULLETDIR\BulletCollision\CollisionShapes\btUniformScalingShape.cpp"
+			}
+
+			$Folder "Gimpact"
+			{
+				$File "$BULLETDIR\BulletCollision\Gimpact\btContactProcessing.cpp"
+				$File "$BULLETDIR\BulletCollision\Gimpact\btGenericPoolAllocator.cpp"
+				$File "$BULLETDIR\BulletCollision\Gimpact\btGImpactBvh.cpp"
+				$File "$BULLETDIR\BulletCollision\Gimpact\btGImpactCollisionAlgorithm.cpp"
+				$File "$BULLETDIR\BulletCollision\Gimpact\btGImpactQuantizedBvh.cpp"
+				$File "$BULLETDIR\BulletCollision\Gimpact\btGImpactShape.cpp"
+				$File "$BULLETDIR\BulletCollision\Gimpact\btTriangleShapeEx.cpp"
+				$File "$BULLETDIR\BulletCollision\Gimpact\gim_box_set.cpp"
+				$File "$BULLETDIR\BulletCollision\Gimpact\gim_contact.cpp"
+				$File "$BULLETDIR\BulletCollision\Gimpact\gim_memory.cpp"
+				$File "$BULLETDIR\BulletCollision\Gimpact\gim_tri_collision.cpp"
+			}
+
+			$Folder "NarrowPhaseCollision"
+			{
+				$File "$BULLETDIR\BulletCollision\NarrowPhaseCollision\btContinuousConvexCollision.cpp"
+				$File "$BULLETDIR\BulletCollision\NarrowPhaseCollision\btConvexCast.cpp"
+				$File "$BULLETDIR\BulletCollision\NarrowPhaseCollision\btGjkConvexCast.cpp"
+				$File "$BULLETDIR\BulletCollision\NarrowPhaseCollision\btGjkEpa2.cpp"
+				$File "$BULLETDIR\BulletCollision\NarrowPhaseCollision\btGjkEpaPenetrationDepthSolver.cpp"
+				$File "$BULLETDIR\BulletCollision\NarrowPhaseCollision\btGjkPairDetector.cpp"
+				$File "$BULLETDIR\BulletCollision\NarrowPhaseCollision\btMinkowskiPenetrationDepthSolver.cpp"
+				$File "$BULLETDIR\BulletCollision\NarrowPhaseCollision\btPersistentManifold.cpp"
+				$File "$BULLETDIR\BulletCollision\NarrowPhaseCollision\btPolyhedralContactClipping.cpp"
+				$File "$BULLETDIR\BulletCollision\NarrowPhaseCollision\btRaycastCallback.cpp"
+				$File "$BULLETDIR\BulletCollision\NarrowPhaseCollision\btSubSimplexConvexCast.cpp"
+				$File "$BULLETDIR\BulletCollision\NarrowPhaseCollision\btVoronoiSimplexSolver.cpp"
+			}
+		}
+	}
+
+	$Folder "BulletDynamics"
+	{
+		$Folder "Header Files"
+		{
+			$File "$BULLETDIR\btBulletCollisionCommon.h"
+			$File "$BULLETDIR\btBulletDynamicsCommon.h"
+			$File "$BULLETDIR\Bullet-C-Api.h"
+
+			$Folder "Character"
+			{
+				$File "$BULLETDIR\BulletDynamics\Character\btCharacterControllerInterface.h"
+				$File "$BULLETDIR\BulletDynamics\Character\btKinematicCharacterController.h"
+			}
+
+			$Folder "ConstraintSolver"
+			{
+				$File "$BULLETDIR\BulletDynamics\ConstraintSolver\btConeTwistConstraint.h"
+				$File "$BULLETDIR\BulletDynamics\ConstraintSolver\btConstraintSolver.h"
+				$File "$BULLETDIR\BulletDynamics\ConstraintSolver\btContactConstraint.h"
+				$File "$BULLETDIR\BulletDynamics\ConstraintSolver\btContactSolverInfo.h"
+				$File "$BULLETDIR\BulletDynamics\ConstraintSolver\btFixedConstraint.h"
+				$File "$BULLETDIR\BulletDynamics\ConstraintSolver\btGearConstraint.h"
+				$File "$BULLETDIR\BulletDynamics\ConstraintSolver\btGeneric6DofConstraint.h"
+				$File "$BULLETDIR\BulletDynamics\ConstraintSolver\btGeneric6DofSpringConstraint.h"
+				$File "$BULLETDIR\BulletDynamics\ConstraintSolver\btHinge2Constraint.h"
+				$File "$BULLETDIR\BulletDynamics\ConstraintSolver\btHingeConstraint.h"
+				$File "$BULLETDIR\BulletDynamics\ConstraintSolver\btJacobianEntry.h"
+				$File "$BULLETDIR\BulletDynamics\ConstraintSolver\btNNCGConstraintSolver.h"
+				$File "$BULLETDIR\BulletDynamics\ConstraintSolver\btPoint2PointConstraint.h"
+				$File "$BULLETDIR\BulletDynamics\ConstraintSolver\btSequentialImpulseConstraintSolver.h"
+				$File "$BULLETDIR\BulletDynamics\ConstraintSolver\btSliderConstraint.h"
+				$File "$BULLETDIR\BulletDynamics\ConstraintSolver\btSolve2LinearConstraint.h"
+				$File "$BULLETDIR\BulletDynamics\ConstraintSolver\btSolverBody.h"
+				$File "$BULLETDIR\BulletDynamics\ConstraintSolver\btSolverConstraint.h"
+				$File "$BULLETDIR\BulletDynamics\ConstraintSolver\btTypedConstraint.h"
+				$File "$BULLETDIR\BulletDynamics\ConstraintSolver\btUniversalConstraint.h"
+			}
+
+			$Folder "Dynamics"
+			{
+				$File "$BULLETDIR\BulletDynamics\Dynamics\btSimpleDynamicsWorld.h"
+				$File "$BULLETDIR\BulletDynamics\Dynamics\btActionInterface.h"
+				$File "$BULLETDIR\BulletDynamics\Dynamics\btDiscreteDynamicsWorld.h"
+				$File "$BULLETDIR\BulletDynamics\Dynamics\btDynamicsWorld.h"
+				$File "$BULLETDIR\BulletDynamics\Dynamics\btRigidBody.h"
+			}
+
+			$Folder "Featherstone"
+			{
+				$File "$BULLETDIR\BulletDynamics\Featherstone\btMultiBody.h"
+				$File "$BULLETDIR\BulletDynamics\Featherstone\btMultiBodyConstraint.h"
+				$File "$BULLETDIR\BulletDynamics\Featherstone\btMultiBodyConstraintSolver.h"
+				$File "$BULLETDIR\BulletDynamics\Featherstone\btMultiBodyDynamicsWorld.h"
+				$File "$BULLETDIR\BulletDynamics\Featherstone\btMultiBodyJointLimitConstraint.h"
+				$File "$BULLETDIR\BulletDynamics\Featherstone\btMultiBodyJointMotor.h"
+				$File "$BULLETDIR\BulletDynamics\Featherstone\btMultiBodyLink.h"
+				$File "$BULLETDIR\BulletDynamics\Featherstone\btMultiBodyLinkCollider.h"
+				$File "$BULLETDIR\BulletDynamics\Featherstone\btMultiBodyPoint2Point.h"
+				$File "$BULLETDIR\BulletDynamics\Featherstone\btMultiBodySolverConstraint.h"
+			}
+
+			$Folder "MLCPSolvers"
+			{
+				$File "$BULLETDIR\BulletDynamics\MLCPSolvers\btLemkeAlgorithm.h"
+				$File "$BULLETDIR\BulletDynamics\MLCPSolvers\btLemkeSolver.h"
+				$File "$BULLETDIR\BulletDynamics\MLCPSolvers\btMLCPSolver.h"
+				$File "$BULLETDIR\BulletDynamics\MLCPSolvers\btMLCPSolverInterface.h"
+				$File "$BULLETDIR\BulletDynamics\MLCPSolvers\btPATHSolver.h"
+				$File "$BULLETDIR\BulletDynamics\MLCPSolvers\btSolveProjectedGaussSeidel.h"
+				$File "$BULLETDIR\BulletDynamics\MLCPSolvers\btDantzigLCP.h"
+				$File "$BULLETDIR\BulletDynamics\MLCPSolvers\btDantzigSolver.h"
+			}
+
+			$Folder "Vehicle"
+			{
+				$File "$BULLETDIR\BulletDynamics\Vehicle\btWheelInfo.h"
+				$File "$BULLETDIR\BulletDynamics\Vehicle\btRaycastVehicle.h"
+				$File "$BULLETDIR\BulletDynamics\Vehicle\btVehicleRaycaster.h"
+				$File "$BULLETDIR\BulletDynamics\Vehicle\btWheeledVehicle.h"
+			}
+		}
+
+		$Folder "Source Files"
+		{
+			$Folder "Character"
+			{
+				$File "$BULLETDIR\BulletDynamics\Character\btKinematicCharacterController.cpp"
+			}
+
+			$Folder "ConstraintSolver"
+			{
+				$File "$BULLETDIR\BulletDynamics\ConstraintSolver\btConeTwistConstraint.cpp"
+				$File "$BULLETDIR\BulletDynamics\ConstraintSolver\btContactConstraint.cpp"
+				$File "$BULLETDIR\BulletDynamics\ConstraintSolver\btFixedConstraint.cpp"
+				$File "$BULLETDIR\BulletDynamics\ConstraintSolver\btGearConstraint.cpp"
+				$File "$BULLETDIR\BulletDynamics\ConstraintSolver\btGeneric6DofConstraint.cpp"
+				$File "$BULLETDIR\BulletDynamics\ConstraintSolver\btGeneric6DofSpringConstraint.cpp"
+				$File "$BULLETDIR\BulletDynamics\ConstraintSolver\btHinge2Constraint.cpp"
+				$File "$BULLETDIR\BulletDynamics\ConstraintSolver\btHingeConstraint.cpp"
+				$File "$BULLETDIR\BulletDynamics\ConstraintSolver\btNNCGConstraintSolver.cpp"
+				$File "$BULLETDIR\BulletDynamics\ConstraintSolver\btPoint2PointConstraint.cpp"
+				$File "$BULLETDIR\BulletDynamics\ConstraintSolver\btSequentialImpulseConstraintSolver.cpp"
+				$File "$BULLETDIR\BulletDynamics\ConstraintSolver\btSliderConstraint.cpp"
+				$File "$BULLETDIR\BulletDynamics\ConstraintSolver\btSolve2LinearConstraint.cpp"
+				$File "$BULLETDIR\BulletDynamics\ConstraintSolver\btTypedConstraint.cpp"
+				$File "$BULLETDIR\BulletDynamics\ConstraintSolver\btUniversalConstraint.cpp"
+			}
+
+			$Folder "Dynamics"
+			{
+				$File "$BULLETDIR\BulletDynamics\Dynamics\btDiscreteDynamicsWorld.cpp"
+				$File "$BULLETDIR\BulletDynamics\Dynamics\btRigidBody.cpp"
+				$File "$BULLETDIR\BulletDynamics\Dynamics\btSimpleDynamicsWorld.cpp"
+				$File "$BULLETDIR\BulletDynamics\Dynamics\Bullet-C-API.cpp"
+			}
+
+			$Folder "Featherstone"
+			{
+				$File "$BULLETDIR\BulletDynamics\Featherstone\btMultiBody.cpp"
+				$File "$BULLETDIR\BulletDynamics\Featherstone\btMultiBodyConstraint.cpp"
+				$File "$BULLETDIR\BulletDynamics\Featherstone\btMultiBodyConstraintSolver.cpp"
+				$File "$BULLETDIR\BulletDynamics\Featherstone\btMultiBodyDynamicsWorld.cpp"
+				$File "$BULLETDIR\BulletDynamics\Featherstone\btMultiBodyJointLimitConstraint.cpp"
+				$File "$BULLETDIR\BulletDynamics\Featherstone\btMultiBodyJointMotor.cpp"
+				$File "$BULLETDIR\BulletDynamics\Featherstone\btMultiBodyPoint2Point.cpp"
+			}
+
+			$Folder "MLCPSolvers"
+			{
+				$File "$BULLETDIR\BulletDynamics\MLCPSolvers\btDantzigLCP.cpp"
+				$File "$BULLETDIR\BulletDynamics\MLCPSolvers\btLemkeAlgorithm.cpp"
+				$File "$BULLETDIR\BulletDynamics\MLCPSolvers\btMLCPSolver.cpp"
+			}
+
+			$Folder "Vehicle"
+			{
+				$File "$BULLETDIR\BulletDynamics\Vehicle\btRaycastVehicle.cpp"
+				$File "$BULLETDIR\BulletDynamics\Vehicle\btWheeledVehicle.cpp"
+				$File "$BULLETDIR\BulletDynamics\Vehicle\btWheelInfo.cpp"
+			}
+		}
+	}
+
+	$Folder "BulletMath"
+	{
+		$Folder "Header Files"
+		{
+			$File "$BULLETDIR\btBulletCollisionCommon.h"
+			$File "$BULLETDIR\btBulletDynamicsCommon.h"
+			$File "$BULLETDIR\Bullet-C-Api.h"
+			$File "$BULLETDIR\LinearMath\btAabbUtil2.h"
+			$File "$BULLETDIR\LinearMath\btAlignedAllocator.h"
+			$File "$BULLETDIR\LinearMath\btAlignedObjectArray.h"
+			$File "$BULLETDIR\LinearMath\btConvexHull.h"
+			$File "$BULLETDIR\LinearMath\btConvexHullComputer.h"
+			$File "$BULLETDIR\LinearMath\btDebug.h"
+			$File "$BULLETDIR\LinearMath\btDefaultMotionState.h"
+			$File "$BULLETDIR\LinearMath\btDefines.h"
+			$File "$BULLETDIR\LinearMath\btGeometryUtil.h"
+			$File "$BULLETDIR\LinearMath\btGrahamScan2dConvexHull.h"
+			$File "$BULLETDIR\LinearMath\btHashMap.h"
+			$File "$BULLETDIR\LinearMath\btIDebugDraw.h"
+			$File "$BULLETDIR\LinearMath\btList.h"
+			$File "$BULLETDIR\LinearMath\btMatrix3x3.h"
+			$File "$BULLETDIR\LinearMath\btMatrixX.h"
+			$File "$BULLETDIR\LinearMath\btMinMax.h"
+			$File "$BULLETDIR\LinearMath\btMotionState.h"
+			$File "$BULLETDIR\LinearMath\btPolarDecomposition.h"
+			$File "$BULLETDIR\LinearMath\btPoolAllocator.h"
+			$File "$BULLETDIR\LinearMath\btQuadWord.h"
+			$File "$BULLETDIR\LinearMath\btQuaternion.h"
+			$File "$BULLETDIR\LinearMath\btQuickprof.h"
+			$File "$BULLETDIR\LinearMath\btRandom.h"
+			$File "$BULLETDIR\LinearMath\btScalar.h"
+			$File "$BULLETDIR\LinearMath\btSerializer.h"
+			$File "$BULLETDIR\LinearMath\btStackAlloc.h"
+			$File "$BULLETDIR\LinearMath\btTransform.h"
+			$File "$BULLETDIR\LinearMath\btTransformUtil.h"
+			$File "$BULLETDIR\LinearMath\btVector3.h"
+			$File "$BULLETDIR\vectormath\vmInclude.h"
+			$File "$BULLETDIR\vectormath\sse\boolInVec.h"
+			$File "$BULLETDIR\vectormath\sse\floatInVec.h"
+			$File "$BULLETDIR\vectormath\sse\mat_aos.h"
+			$File "$BULLETDIR\vectormath\sse\quat_aos.h"
+			$File "$BULLETDIR\vectormath\sse\vec_aos.h"
+			$File "$BULLETDIR\vectormath\sse\vectormath_aos.h"
+		}
+
+		$Folder "Source Files"
+		{
+			$File "$BULLETDIR\LinearMath\btAlignedAllocator.cpp"
+			$File "$BULLETDIR\LinearMath\btConvexHull.cpp"
+			$File "$BULLETDIR\LinearMath\btConvexHullComputer.cpp"
+			$File "$BULLETDIR\LinearMath\btDebug.cpp"
+			$File "$BULLETDIR\LinearMath\btGeometryUtil.cpp"
+			$File "$BULLETDIR\LinearMath\btPolarDecomposition.cpp"
+			$File "$BULLETDIR\LinearMath\btQuickprof.cpp"
+			$File "$BULLETDIR\LinearMath\btSerializer.cpp"
+			$File "$BULLETDIR\LinearMath\btVector3.cpp"
+		}
+	}
+
+	$Folder "BulletMultiThreaded"
+	{
+		$Folder "Header Files"
+		{
+			$File "$BULLETDIR\btBulletCollisionCommon.h"
+			$File "$BULLETDIR\btBulletDynamicsCommon.h"
+			$File "$BULLETDIR\Bullet-C-Api.h"
+			$File "$BULLETDIR\BulletMultiThreaded\btGpu3DGridBroadphase.h"
+			$File "$BULLETDIR\BulletMultiThreaded\btGpu3DGridBroadphaseSharedCode.h"
+			$File "$BULLETDIR\BulletMultiThreaded\btGpu3DGridBroadphaseSharedDefs.h"
+			$File "$BULLETDIR\BulletMultiThreaded\btGpu3DGridBroadphaseSharedTypes.h"
+			$File "$BULLETDIR\BulletMultiThreaded\btGpuDefines.h"
+			$File "$BULLETDIR\BulletMultiThreaded\btGpuUtilsSharedCode.h"
+			$File "$BULLETDIR\BulletMultiThreaded\btGpuUtilsSharedDefs.h"
+			$File "$BULLETDIR\BulletMultiThreaded\btParallelCollisionDispatcher.h"
+			$File "$BULLETDIR\BulletMultiThreaded\btParallelConstraintSolver.h"
+			$File "$BULLETDIR\BulletMultiThreaded\btThreading.h"
+			$File "$BULLETDIR\BulletMultiThreaded\btThreadPool.h"
+			$File "$BULLETDIR\BulletMultiThreaded\HeapManager.h"
+			$File "$BULLETDIR\BulletMultiThreaded\PlatformDefinitions.h"
+			$File "$BULLETDIR\BulletMultiThreaded\PpuAddressSpace.h"
+			$File "$BULLETDIR\BulletMultiThreaded\TrbDynBody.h"
+			$File "$BULLETDIR\BulletMultiThreaded\TrbStateVec.h"
+			$File "$BULLETDIR\BulletMultiThreaded\vectormath2bullet.h"
+		}
+
+		$Folder "Source Files"
+		{
+			$File "$BULLETDIR\BulletMultiThreaded\btGpu3DGridBroadphase.cpp"
+			$File "$BULLETDIR\BulletMultiThreaded\btParallelCollisionDispatcher.cpp"
+			$File "$BULLETDIR\BulletMultiThreaded\btParallelConstraintSolver.cpp"
+			$File "$BULLETDIR\BulletMultiThreaded\btThreadPool.cpp"
+			$File "$BULLETDIR\BulletMultiThreaded\PosixThreading.cpp"
+			$File "$BULLETDIR\BulletMultiThreaded\Win32Threading.cpp"
+		}
+	}
+
+
+	$Folder "BulletSoftBody"
+	{
+		$Folder "Header Files"
+		{
+			$File "$BULLETDIR\btBulletCollisionCommon.h"
+			$File "$BULLETDIR\btBulletDynamicsCommon.h"
+			$File "$BULLETDIR\Bullet-C-Api.h"
+			$File "$BULLETDIR\BulletSoftBody\btDefaultSoftBodySolver.h"
+			$File "$BULLETDIR\BulletSoftBody\btSoftBody.h"
+			$File "$BULLETDIR\BulletSoftBody\btSoftBodyConcaveCollisionAlgorithm.h"
+			$File "$BULLETDIR\BulletSoftBody\btSoftBodyData.h"
+			$File "$BULLETDIR\BulletSoftBody\btSoftBodyHelpers.h"
+			$File "$BULLETDIR\BulletSoftBody\btSoftBodyInternals.h"
+			$File "$BULLETDIR\BulletSoftBody\btSoftBodyRigidBodyCollisionConfiguration.h"
+			$File "$BULLETDIR\BulletSoftBody\btSoftBodySolvers.h"
+			$File "$BULLETDIR\BulletSoftBody\btSoftBodySolverVertexBuffer.h"
+			$File "$BULLETDIR\BulletSoftBody\btSoftRigidCollisionAlgorithm.h"
+			$File "$BULLETDIR\BulletSoftBody\btSoftRigidDynamicsWorld.h"
+			$File "$BULLETDIR\BulletSoftBody\btSoftSoftCollisionAlgorithm.h"
+			$File "$BULLETDIR\BulletSoftBody\btSparseSDF.h"
+		}
+
+		$Folder "Source Files"
+		{
+			$File "$BULLETDIR\BulletSoftBody\btDefaultSoftBodySolver.cpp"
+			$File "$BULLETDIR\BulletSoftBody\btSoftBody.cpp"
+			$File "$BULLETDIR\BulletSoftBody\btSoftBodyConcaveCollisionAlgorithm.cpp"
+			$File "$BULLETDIR\BulletSoftBody\btSoftBodyHelpers.cpp"
+			$File "$BULLETDIR\BulletSoftBody\btSoftBodyRigidBodyCollisionConfiguration.cpp"
+			$File "$BULLETDIR\BulletSoftBody\btSoftRigidCollisionAlgorithm.cpp"
+			$File "$BULLETDIR\BulletSoftBody\btSoftRigidDynamicsWorld.cpp"
+			$File "$BULLETDIR\BulletSoftBody\btSoftSoftCollisionAlgorithm.cpp"
+		}
+	}
+}
+
