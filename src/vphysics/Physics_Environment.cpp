@@ -339,7 +339,7 @@ class CCollisionEventListener : public btSolveCallback {
 			m_tmpEvent.collisionSpeed = 0.f; // Invalid pre-collision
 			m_tmpEvent.deltaCollisionTime = 10.f; // FIXME: Find a way to track the real delta time
 			m_tmpEvent.isCollision = (flags0 & flags1 & CALLBACK_GLOBAL_COLLISION); // False when either one of the objects don't have CALLBACK_GLOBAL_COLLISION
-			m_tmpEvent.isShadowCollision = (flags0 ^ flags1) & CALLBACK_SHADOW_COLLISION; // True when only one of the objects is a shadow (if both are shadow, it's handled by the game)
+			m_tmpEvent.isShadowCollision = ((flags0 ^ flags1) & CALLBACK_SHADOW_COLLISION); // True when only one of the objects is a shadow (if both are shadow, it's handled by the game)
 
 			m_tmpEvent.pObjects[0] = pObj0;
 			m_tmpEvent.pObjects[1] = pObj1;	

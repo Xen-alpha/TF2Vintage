@@ -20,6 +20,11 @@ $Project "client"
 	"game\client\client_tf2vintage.vpc"		[($WIN32||$POSIX) && $TF2VINTAGE]
 }
 
+$Project "bullet"
+{
+	"thirdparty\bullet\proj\bullet.vpc" [$WIN32]
+}
+
 $Project "fgdlib"
 {
 	"fgdlib\fgdlib.vpc" [$WIN32]

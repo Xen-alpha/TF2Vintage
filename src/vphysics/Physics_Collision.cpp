@@ -244,7 +244,7 @@ btConvexTriangleMeshShape *CreateTriMeshFromHull(HullResult &res) {
 	// Duplicate the output vertex array
 	mesh.m_numVertices = res.mNumOutputVertices;
 	btVector3 *pVerts = new btVector3[res.mNumOutputVertices];
-	for (int i = 0; i < res.mNumOutputVertices; i++) {
+	for (size_t i = 0; i < res.mNumOutputVertices; i++) {
 		pVerts[i] = res.m_OutputVertices[i];
 	}
 
@@ -254,7 +254,7 @@ btConvexTriangleMeshShape *CreateTriMeshFromHull(HullResult &res) {
 
 	// Duplicate the index array
 	unsigned short *pIndices = new unsigned short[res.mNumIndices];
-	for (int i = 0; i < res.mNumIndices; i++) {
+	for (size_t i = 0; i < res.mNumIndices; i++) {
 		pIndices[i] = res.m_Indices[i];
 	}
 
@@ -991,7 +991,9 @@ class CFilteredConvexResultCallback : public btCollisionWorld::ClosestConvexResu
 		btCollisionShape *m_pShape;
 };
 
-static ConVar vphysics_visualizetraces("vphysics_visualizetraces", "0", FCVAR_CHEAT, "Visualize physics traces");
+static ConVar		vphysics_visualizetraces("vphysics_visualizetraces", "0", FCVAR_CHEAT, "Visualize physics traces");
+static char*		map_nullname = "**empty**";
+static csurface_t	nullsurface = { map_nullname, 0 };
 
 void CPhysicsCollision::TraceBox(const Ray_t &ray, unsigned int contentsMask, IConvexInfo *pConvexInfo, const CPhysCollide *pCollide, const Vector &collideOrigin, const QAngle &collideAngles, trace_t *ptr) {
 	if (!pCollide || !ptr) return;
@@ -1000,8 +1002,7 @@ void CPhysicsCollision::TraceBox(const Ray_t &ray, unsigned int contentsMask, IC
 	memset(ptr, 0, sizeof(trace_t));
 	ptr->fraction = 1.f;
 	ptr->fractionleftsolid = 0;
-	ptr->surface.flags = 0;
-	ptr->surface.name = "**empty**";
+	ptr->surface = nullsurface;
 
 	// 2 Variables used mainly for converting units.
 	btVector3 btvec;
@@ -1243,7 +1244,7 @@ static btConvexShape *LedgeToConvex(const ivpcompactledge_t *ledge) {
 		// Make an index array
 		unsigned short *indices = new unsigned short[ledge->n_triangles * 3];
 		int curIdx = 0;
-		for (int j = 0; j < ledge->n_triangles; j++) {
+		for (uint16 j = 0; j < ledge->n_triangles; j++) {
 			Assert(j == tris[j].tri_index);
 
 			for (int k = 0; k < 3; k++) {
