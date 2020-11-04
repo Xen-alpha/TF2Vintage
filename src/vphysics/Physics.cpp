@@ -1,26 +1,82 @@
 #include "cbase.h"
+#include <utlhashtable.h>
 
 #include <LinearMath/btDebug.h>
 
-#include "Physics.h"
 #include "Physics_Environment.h"
 #include "Physics_ObjectPairHash.h"
 #include "Physics_CollisionSet.h"
+
+#if defined(_WIN32)
+#define WIN32_LEAN_AND_MEAN
+#include <windows.h>
+#endif	// _WIN32
 
 // memdbgon must be the last include file in a .cpp file!!!
 #include "tier0/memdbgon.h"
 
 ConVar vphysics_bulletdebugoutput("vphysics_bulletdebugoutput", "0", FCVAR_ARCHIVE);
 
-void btDebugMessage(const char *str) {
+static void btDebugMessage(const char *str) {
 	if (vphysics_bulletdebugoutput.GetBool()) {
 		Msg("%s", str);
 	}
 }
 
-void btDebugWarning(const char *str) {
+static void btDebugWarning(const char *str) {
 	Warning("%s", str);
 }
+
+#if defined(_WIN32)
+BOOL WINAPI DllMain( HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved )
+{
+	if ( fdwReason == DLL_PROCESS_ATTACH )
+	{
+		// Hook up our debug output functions
+		btSetDbgMsgFn( btDebugMessage );
+		btSetDbgWarnFn( btDebugWarning );
+
+		MathLib_Init( 2.2f, 2.2f, 0.0f, 2.0f, false, false, false, false );
+	}
+	return TRUE;
+}
+#endif // _WIN32
+
+#ifdef POSIX
+void __attribute__ ((constructor)) vphysics_init(void);
+void vphysics_init(void)
+{
+	// Hook up our debug output functions
+	btSetDbgMsgFn( btDebugMessage );
+	btSetDbgWarnFn( btDebugWarning );
+
+	MathLib_Init( 2.2f, 2.2f, 0.0f, 2.0f, false, false, false, false );
+}
+#endif
+
+class CPhysics : public CTier1AppSystem<IPhysics32> {
+	typedef CTier1AppSystem<IPhysics32> BaseClass;
+public:
+	~CPhysics();
+
+	void *						QueryInterface(const char *pInterfaceName);
+
+	IPhysicsEnvironment *		CreateEnvironment();
+	void						DestroyEnvironment(IPhysicsEnvironment *pEnv);
+	IPhysicsEnvironment *		GetActiveEnvironmentByIndex(int index);
+	int							GetActiveEnvironmentCount();
+
+	IPhysicsObjectPairHash *	CreateObjectPairHash();
+	void						DestroyObjectPairHash(IPhysicsObjectPairHash *pHash);
+
+	IPhysicsCollisionSet *		FindOrCreateCollisionSet(unsigned int id, int maxElementCount);
+	IPhysicsCollisionSet *		FindCollisionSet(unsigned int id);
+	void						DestroyAllCollisionSets();
+private:
+	CUtlVector<IPhysicsEnvironment *>	m_envList;
+	CUtlVector<IPhysicsCollisionSet *>	m_collisionSets;
+	CUtlHashtable<unsigned int, unsigned int> m_colSetTable;
+};
 
 /******************
 * CLASS CPhysics
@@ -35,28 +91,8 @@ CPhysics::~CPhysics() {
 #endif
 }
 
-InitReturnVal_t CPhysics::Init() {
-	InitReturnVal_t nRetVal = BaseClass::Init();
-	if (nRetVal != INIT_OK) return nRetVal;
-
-	MathLib_Init();
-
-	// Hook up our debug output functions
-	btSetDbgMsgFn(btDebugMessage);
-	btSetDbgWarnFn(btDebugWarning);
-
-	return INIT_OK;
-}
-
-void CPhysics::Shutdown() {
-	BaseClass::Shutdown();
-}
-
 void *CPhysics::QueryInterface(const char *pInterfaceName) {
 	CreateInterfaceFn func = Sys_GetFactoryThis();
-	if (!func)
-		return NULL;
-
 	return func(pInterfaceName, NULL);
 }
 
@@ -119,6 +155,6 @@ void CPhysics::DestroyAllCollisionSets() {
 }
 
 static CPhysics g_Interface;
-IPhysics *g_Physics = &g_Interface;
+IPhysics32 *g_Physics = &g_Interface;
 EXPOSE_SINGLE_INTERFACE_GLOBALVAR(CPhysics, IPhysics, VPHYSICS_INTERFACE_VERSION, g_Interface);
 EXPOSE_SINGLE_INTERFACE_GLOBALVAR(CPhysics, IPhysics32, "VPhysics032", g_Interface); // "Undocumented" way to determine if this is the newer vphysics or not.

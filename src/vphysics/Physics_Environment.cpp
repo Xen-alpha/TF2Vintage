@@ -1,6 +1,7 @@
 #include "cbase.h"
 
 #include <cmodel.h>
+#include <tier1/convar.h>
 
 #include "Physics_Environment.h"
 #include "Physics.h"
@@ -509,10 +510,9 @@ static void vphysics_numthreads_Change(IConVar *var, const char *pOldValue, floa
 	int newVal = vphysics_numthreads.GetInt();
 	if (newVal <= 0 || newVal > 8) return;
 
-	Assert( dynamic_cast<IPhysics32 *>( g_Physics ) != NULL );
 	Msg("VPhysics: Resizing to %d threads\n", newVal);
 
-	for (int i = 0; i < ((IPhysics32 *)g_Physics)->GetActiveEnvironmentCount(); i++) {
+	for (int i = 0; i < g_Physics->GetActiveEnvironmentCount(); i++) {
 		((CPhysicsEnvironment *)g_Physics->GetActiveEnvironmentByIndex(i))->ChangeThreadCount(newVal);
 	}
 }
@@ -1100,24 +1100,6 @@ void CPhysicsEnvironment::CleanupDeleteList() {
 
 void CPhysicsEnvironment::EnableDeleteQueue(bool enable) {
 	m_bUseDeleteQueue = enable;
-}
-
-bool CPhysicsEnvironment::Save(const physsaveparams_t &params) {
-	NOT_IMPLEMENTED
-	return false;
-}
-
-void CPhysicsEnvironment::PreRestore(const physprerestoreparams_t &params) {
-	NOT_IMPLEMENTED
-}
-
-bool CPhysicsEnvironment::Restore(const physrestoreparams_t &params) {
-	NOT_IMPLEMENTED
-	return false;
-}
-
-void CPhysicsEnvironment::PostRestore() {
-	NOT_IMPLEMENTED
 }
 
 bool CPhysicsEnvironment::IsCollisionModelUsed(CPhysCollide *pCollide) const {
