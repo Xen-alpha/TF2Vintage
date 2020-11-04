@@ -1,15 +1,22 @@
 #include <ctype.h>
 
-#include <tier1/tier1.h>
+#include <tier1/utlvector.h>
 #include <tier1/utlsymbol.h>
 #include <tier0/platform.h>
 #include <tier0/dbg.h>
+#include <mathlib/mathlib.h>
+#include <mathlib/vector.h>
+#include <utlvector.h>
+#include <commonmacros.h>
 
 #include <vphysics_interface.h>
 #include <vphysics/collision_set.h> // THIS FILE HAS NO INCLUDE GUARDS!
 
 // NEW INTERFACE HEADERS
 #include "vphysics_interfaceV32.h"
+#include "Physics_Environment.h"
+#include "Physics_Object.h"
+#include "convert.h"
 
 #include <cmodel.h>
 
