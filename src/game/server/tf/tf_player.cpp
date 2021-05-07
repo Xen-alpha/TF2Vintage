@@ -1327,19 +1327,14 @@ void CTFPlayer::GiveDefaultItems()
 	}
 
 	// Give weapons.
-	if ( tf2c_random_weapons.GetBool() && !m_bRegenerating )
-		ManageRandomWeapons( pData );
-	else if ( tf2c_legacy_weapons.GetBool() )
-		ManageRegularWeaponsLegacy( pData );
-	else if ( !tf2c_random_weapons.GetBool() )
-		ManageRegularWeapons( pData );
+	ManageRegularWeaponsLegacy( pData );
 
 
 	// Give grenades.
 	//ManageGrenades( pData );
 
 	// Give a builder weapon for each object the playerclass is allowed to build
-	ManageBuilderWeapons( pData );
+	// ManageBuilderWeapons( pData );
 
 	// Equip weapons set by tf_player_equip
 	CBaseEntity	*pWeaponEntity = NULL;
