@@ -1,4 +1,4 @@
-//====== Copyright © 1996-2003, Valve Corporation, All rights reserved. =======
+//====== Copyright ?1996-2003, Valve Corporation, All rights reserved. =======
 //
 // Purpose: 
 //
@@ -52,6 +52,8 @@ CTFWeaponInfo::CTFWeaponInfo()
 	m_szExplosionWaterEffect[0] = '\0';
 
 	m_iWeaponType = TF_WPN_TYPE_PRIMARY;
+	m_bhascustom = false;
+	m_szCustomModel[0] = '\0';
 }
 
 CTFWeaponInfo::~CTFWeaponInfo()
@@ -207,4 +209,10 @@ void CTFWeaponInfo::Parse( KeyValues *pKeyValuesData, const char *szWeaponName )
 	}
 
 	m_bDontDrop = ( pKeyValuesData->GetInt( "DontDrop", 0 ) > 0 );
+	m_bhascustom = (pKeyValuesData->GetInt("hascustom", 0) > 0);
+	const char *pszCustom = pKeyValuesData->GetString("custommodel", NULL);
+	if (pszCustom)
+	{
+		Q_strncpy(m_szCustomModel, pszCustom, sizeof(m_szCustomModel));
+	}
 }

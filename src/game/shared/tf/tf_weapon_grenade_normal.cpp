@@ -44,6 +44,78 @@ PRECACHE_WEAPON_REGISTER( tf_weapon_grenade_normal );
 // TF Normal Grenade functions.
 //
 
+void CTFGrenadeNormal::PrimaryAttack()
+{
+	/*
+	if ( !m_bPrimed )
+	return;
+
+	m_bPrimed = false;
+	m_bThrow = false;
+	*/
+	// Get the owning player.
+	CTFPlayer *pPlayer = ToTFPlayer(GetOwner());
+	if (!pPlayer)
+		return;
+
+#ifdef GAME_DLL
+	// Calculate the time remaining.
+	Vector vecSrc, vecThrow;
+	vecSrc = pPlayer->Weapon_ShootPosition();
+
+	// Determine the throw angle and velocity.
+	QAngle angThrow = pPlayer->LocalEyeAngles();
+	if (angThrow.x < 90.0f)
+	{
+		angThrow.x = -10.0f + angThrow.x * ((90.0f + 10.0f) / 90.0f);
+	}
+	else
+	{
+		angThrow.x = 360.0f - angThrow.x;
+		angThrow.x = -10.0f + angThrow.x * -((90.0f - 10.0f) / 90.0f);
+	}
+
+	// Adjust for the lowering of the spawn point
+	angThrow.x -= 10;
+
+	float flVelocity = (90.0f - angThrow.x) * 8.0f;
+	if (flVelocity > 950.0f)
+	{
+		flVelocity = 950.0f;
+	}
+
+	Vector vForward, vRight, vUp;
+	AngleVectors(angThrow, &vForward, &vRight, &vUp);
+
+	// Throw from the player's left hand position.
+	vecSrc += vForward * 16.0f + vRight * -8.0f + vUp * -20.0f;
+
+	vecThrow = vForward * flVelocity;
+
+#if 0
+	// Debug!!!
+	char str[256];
+	Q_snprintf(str, sizeof(str), "GrenadeTime = %f\n", flTime);
+	NDebugOverlay::ScreenText(0.5f, 0.38f, str, 255, 255, 255, 255, 2.0f);
+#endif
+
+	QAngle vecAngles = RandomAngle(0, 360);
+
+	// Create the projectile and send in the time remaining.
+
+	// We're holding onto an exploding grenade
+	CTFWeaponBaseGrenadeProj *pGrenade = EmitGrenade(vecSrc, vecAngles, vecThrow, AngularImpulse(600, random->RandomInt(-1200, 1200), 0), pPlayer, GRENADE_TIMER);
+
+	// The grenade is about to be destroyed, so it won't be able to holster.
+	// Handle the viewmodel hiding for it.}
+#endif
+
+	// Reset the throw time
+	m_flThrowTime = 0.0f;
+
+	BaseClass::PrimaryAttack();
+}
+
 // Server specific.
 #ifdef GAME_DLL
 

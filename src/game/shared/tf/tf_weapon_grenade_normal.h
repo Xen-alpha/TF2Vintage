@@ -9,7 +9,7 @@
 #pragma once
 #endif
 
-#include "tf_weaponbase_grenade.h"
+
 #include "tf_weaponbase_grenadeproj.h"
 
 // Client specific.
@@ -34,7 +34,7 @@ public:
 
 	// Unique identifier.
 	virtual int			GetWeaponID( void ) const			{ return TF_WEAPON_GRENADE_NORMAL; }
-
+	virtual void		PrimaryAttack(void);
 // Server specific.
 #ifdef GAME_DLL
 
@@ -43,6 +43,8 @@ public:
 	virtual CTFWeaponBaseGrenadeProj *EmitGrenade( Vector vecSrc, QAngle vecAngles, Vector vecVel, AngularImpulse angImpulse, CBasePlayer *pPlayer, float flTime, int iflags = 0 );
 
 #endif
+
+	float m_flThrowTime;
 
 	CTFGrenadeNormal( const CTFGrenadeNormal & ) {}
 };
