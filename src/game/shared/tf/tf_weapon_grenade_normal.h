@@ -1,4 +1,4 @@
-//====== Copyright © 1996-2005, Valve Corporation, All rights reserved. ========//
+//====== Copyright ?1996-2005, Valve Corporation, All rights reserved. ========//
 //
 // Purpose: TF Normal Grenade.
 //
@@ -21,11 +21,11 @@
 //
 // TF Normal Grenade
 //
-class CTFGrenadeNormal : public CTFWeaponBaseGrenade
+class CTFGrenadeNormal : public CTFWeaponBase
 {
 public:
 
-	DECLARE_CLASS( CTFGrenadeNormal, CTFWeaponBaseGrenade );
+	DECLARE_CLASS( CTFGrenadeNormal, CTFWeaponBase );
 	DECLARE_NETWORKCLASS();
 	DECLARE_PREDICTABLE();
 //	DECLARE_ACTTABLE();

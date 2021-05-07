@@ -1,11 +1,11 @@
 "GameInfo"
 {
-	game		"Team Fortress 2 Classic" 
+	game		"Ultra Fortress" 
 	gamelogo 	1 
 	type 		multiplayer_only 
 	icon		"resource/game"		
-	developer 	"Team Fortress 2 Classic Team"
-	developer_url 	"http://tf2classic.com/"
+	developer 	"Xenα"
+	developer_url 	"https://sites.google.com/site/senouis/https://sites.google.com/site/senouis/"
 	nomodels 	1 
 	nohimodel 	1	
 	nocrosshair 	0 
