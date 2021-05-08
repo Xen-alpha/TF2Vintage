@@ -891,6 +891,9 @@ public:
 
 	void		AdjustDrownDmg( int nAmount );
 
+	bool IsDucked(void) const { return m_Local.m_bDucked; }
+	bool IsDucking(void) const { return m_Local.m_bDucking; }
+
 #if defined ( USES_ECON_ITEMS ) || defined ( TF_VINTAGE )
 	CEconWearable			*GetWearable( int i ) { return m_hMyWearables[i]; }
 	const CEconWearable		*GetWearable( int i ) const { return m_hMyWearables[i]; }
@@ -1138,6 +1141,8 @@ private:
 	// Player name
 	char					m_szNetname[MAX_PLAYER_NAME_LENGTH];
 
+	
+
 protected:
 	// HACK FOR TF2 Prediction
 	friend class CTFGameMovementRecon;
@@ -1150,8 +1155,7 @@ protected:
 	friend class CPortalGameMovement;
 	
 	// Accessors for gamemovement
-	bool IsDucked( void ) const { return m_Local.m_bDucked; }
-	bool IsDucking( void ) const { return m_Local.m_bDucking; }
+	
 	float GetStepSize( void ) const { return m_Local.m_flStepSize; }
 
 	CNetworkVar( float,  m_flLaggedMovementValue );

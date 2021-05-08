@@ -1838,7 +1838,7 @@ Vector CObjectSentrygun::GetEnemyAimPosition( CBaseEntity *pEnemy ) const
 //-----------------------------------------------------------------------------
 float CObjectSentrygun::GetConstructionMultiplier( void )
 {
-	float flMultiplier = 1.0f;
+	float flMultiplier = 0.5f;
 
 	// Re-deploy twice as fast.
 	if ( IsRedeploying() )

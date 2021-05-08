@@ -1334,7 +1334,7 @@ void CTFPlayer::GiveDefaultItems()
 	//ManageGrenades( pData );
 
 	// Give a builder weapon for each object the playerclass is allowed to build
-	// ManageBuilderWeapons( pData );
+	ManageBuilderWeapons( pData );
 
 	// Equip weapons set by tf_player_equip
 	CBaseEntity	*pWeaponEntity = NULL;
@@ -3303,6 +3303,7 @@ void CTFPlayer::TraceAttack( const CTakeDamageInfo &info, const Vector &vecDir, 
 				CTFWeaponBase *pWpn = pAttacker->GetActiveTFWeapon();
 
 				float flDamage = info_modified.GetDamage();
+				flDamage *= 1.1;
 				bool bCritical = true;
 
 				if ( pWpn && !pWpn->CanFireCriticalShot( true ) )
