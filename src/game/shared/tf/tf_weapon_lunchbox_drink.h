@@ -1,4 +1,4 @@
-//====== Copyright © 1996-2013, Valve Corporation, All rights reserved. =======
+//====== Copyright ?1996-2013, Valve Corporation, All rights reserved. =======
 //
 // Purpose: A remake of the Bonk! Atomic Punch from live TF2
 //
@@ -36,6 +36,16 @@ public:
 	virtual bool		HasChargeBar( void ) 						{ return true; }
 	virtual float		InternalGetEffectBarRechargeTime( void ) 	{ return 22.2f; }
 	virtual const char	*GetEffectLabelText( void )					{ return "#TF_EnergyDrink"; }
+
+	virtual int TranslateViewmodelHandActivity(int iActivity);
+	virtual void SetViewModel();
+	virtual const char *GetViewModel(int iViewModel = 0) const;
+	virtual const char *DetermineViewModelType(const char *vModel) const;
+
+
+#ifdef CLIENT_DLL
+	virtual C_BaseAnimating *GetAppropriateWorldOrViewModel(void);
+#endif
 
 #ifdef GAME_DLL
 	virtual void		Precache( void );

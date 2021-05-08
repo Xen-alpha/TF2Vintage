@@ -38,6 +38,15 @@ public:
 	virtual const char	*GetEffectLabelText( void )					{ return "#TF_Sandwich"; }
 	virtual void		SwitchBodyGroups( void );
 
+	virtual int TranslateViewmodelHandActivity(int iActivity);
+	virtual void SetViewModel();
+	virtual const char *GetViewModel( int iViewModel = 0 ) const;
+	virtual const char *DetermineViewModelType(const char *vModel) const;
+	
+
+#ifdef CLIENT_DLL
+	virtual C_BaseAnimating *GetAppropriateWorldOrViewModel(void);
+#endif
 
 #ifdef GAME_DLL
 	virtual void		Precache( void );

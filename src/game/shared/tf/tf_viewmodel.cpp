@@ -1,4 +1,4 @@
-//===== Copyright © 1996-2005, Valve Corporation, All rights reserved. ======//
+//===== Copyright ?1996-2005, Valve Corporation, All rights reserved. ======//
 //
 // Purpose:
 //
@@ -464,7 +464,8 @@ void CTFViewModel::CalcMinViewmodelOffset( C_TFPlayer *owner )
 {
 	// Always update this even if we're not using min viewmodels
 	// in case the player decides to activate them
-
+	return;
+	// will not use the code below
 	if ( !owner )
 		return;
 

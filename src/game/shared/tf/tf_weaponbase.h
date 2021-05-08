@@ -143,12 +143,12 @@ class CTFWeaponBase : public CBaseCombatWeapon
 #ifdef CLIENT_DLL
 	virtual void UpdateViewModel( void );
 
-	C_ViewmodelAttachmentModel *GetViewmodelAddon( void );
+	virtual C_ViewmodelAttachmentModel *GetViewmodelAddon( void );
 
 	// AE_CL_BODYGROUP_SET_VALUE_CMODEL_WPN
-	C_BaseAnimating *GetAppropriateWorldOrViewModel( void );
+	virtual C_BaseAnimating *GetAppropriateWorldOrViewModel( void );
 
-	string_t GetViewModelOffset( void );
+	virtual string_t GetViewModelOffset( void );
 
 	// Stunball
 	virtual const char *GetStunballViewmodel( void ) { return NULL_STRING; }

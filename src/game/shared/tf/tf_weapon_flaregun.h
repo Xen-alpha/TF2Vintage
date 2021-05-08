@@ -1,4 +1,4 @@
-//====== Copyright © 1996-2013, Valve Corporation, All rights reserved. =======
+//====== Copyright ?1996-2013, Valve Corporation, All rights reserved. =======
 //
 // Purpose: A remake of Pyro's flaregun from live TF2s
 //
@@ -32,6 +32,16 @@ public:
 
 	virtual void	Spawn( void );
 	virtual int		GetWeaponID( void ) const			{ return TF_WEAPON_FLAREGUN; }
+
+	virtual int TranslateViewmodelHandActivity(int iActivity);
+	virtual void SetViewModel();
+	virtual const char *GetViewModel(int iViewModel = 0) const;
+	virtual const char *DetermineViewModelType(const char *vModel) const;
+
+
+#ifdef CLIENT_DLL
+	virtual C_BaseAnimating *GetAppropriateWorldOrViewModel(void);
+#endif
 };
 
 #endif // TF_WEAPON_FLAREGUN_H
