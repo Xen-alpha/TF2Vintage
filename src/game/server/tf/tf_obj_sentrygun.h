@@ -1,4 +1,4 @@
-//========= Copyright © 1996-2005, Valve Corporation, All rights reserved. ============//
+//========= Copyright ?1996-2005, Valve Corporation, All rights reserved. ============//
 //
 // Purpose: Engineer's Sentrygun
 //
@@ -91,6 +91,7 @@ public:
 	Vector			GetEnemyAimPosition( CBaseEntity *pEnemy ) const;
 
 	virtual float	GetConstructionMultiplier( void );
+	virtual void	DeterminePlaybackRate(void);
 
 private:
 

@@ -1838,7 +1838,7 @@ Vector CObjectSentrygun::GetEnemyAimPosition( CBaseEntity *pEnemy ) const
 //-----------------------------------------------------------------------------
 float CObjectSentrygun::GetConstructionMultiplier( void )
 {
-	float flMultiplier = 0.5f;
+	float flMultiplier = 1.0f;
 
 	// Re-deploy twice as fast.
 	if ( IsRedeploying() )
@@ -1847,6 +1847,24 @@ float CObjectSentrygun::GetConstructionMultiplier( void )
 	CALL_ATTRIB_HOOK_FLOAT_ON_OTHER( GetBuilder(), flMultiplier, sentry_build_rate_multiplier );
 
 	return BaseClass::GetConstructionMultiplier();
+}
+
+//-----------------------------------------------------------------------------
+// Purpose: 
+//-----------------------------------------------------------------------------
+void CObjectSentrygun::DeterminePlaybackRate(void)
+{
+	if (IsBuilding())
+	{
+		// Default half rate, author build anim as if one player is building
+		SetPlaybackRate(GetConstructionMultiplier() * 0.25);
+	}
+	else
+	{
+		SetPlaybackRate(1.0);
+	}
+
+	StudioFrameAdvance();
 }
 
 void CObjectSentrygun::UpdateSentryAngles( Vector vecDir )

@@ -1328,6 +1328,7 @@ void CTFPlayer::GiveDefaultItems()
 
 	// Give weapons.
 	ManageRegularWeaponsLegacy( pData );
+	
 
 
 	// Give grenades.
@@ -1697,13 +1698,12 @@ void CTFPlayer::ManageRegularWeaponsLegacy( TFPlayerClassData_t *pData )
 			}
 
 			pWeapon = Weapon_OwnsThisID( iWeaponID );
-
-			if ( pWeapon )
+			if (pWeapon)
 			{
-				pWeapon->ChangeTeam( GetTeamNumber() );
+				pWeapon->ChangeTeam(GetTeamNumber());
 				pWeapon->GiveDefaultAmmo();
 
-				if ( m_bRegenerating == false )
+				if (m_bRegenerating == false)
 				{
 					pWeapon->WeaponReset();
 				}
@@ -1731,6 +1731,13 @@ void CTFPlayer::ManageRegularWeaponsLegacy( TFPlayerClassData_t *pData )
 				UTIL_Remove( pCarriedWeapon );
 			}
 		}
+	}
+	for (int iWeapon = 0; iWeapon < TF_PLAYER_WEAPON_COUNT; ++iWeapon)
+	{
+		int iWeaponID = GetTFInventory()->GetWeapon(m_PlayerClass.GetClassIndex(), iWeapon);
+		const char *pszWeaponName = WeaponIdToClassname(iWeaponID);
+		
+
 	}
 }
 

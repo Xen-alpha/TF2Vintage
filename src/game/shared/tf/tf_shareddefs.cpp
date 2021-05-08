@@ -398,6 +398,8 @@ const char *g_aWeaponNames[] =
 	"TF_WEAPON_BAT_WOOD",
 	"TF_WEAPON_ROBOT_ARM",
 	"TF_WEAPON_BUFF_ITEM",
+	"TF_WEAPON_RAZORBACK",
+
 	"TF_WEAPON_COUNT",	// end marker, do not add below here
 };
 
@@ -469,6 +471,7 @@ int g_aWeaponDamageTypes[] =
 	DMG_CLUB,	// TF_WEAPON_BAT_WOOD,
 	DMG_CLUB,   // TF_WEAPON_ROBOT_ARM
 	DMG_GENERIC, // TF_WEAPON_BUFF_ITEM
+	DMG_GENERIC, // TF_WEAPON_RAZORBACK
 
 	// This is a special entry that must match with TF_WEAPON_COUNT
 	// to protect against updating the weapon list without updating this list
