@@ -1,4 +1,4 @@
-//========= Copyright © 1996-2002, Valve LLC, All rights reserved. ============
+//========= Copyright ?1996-2002, Valve LLC, All rights reserved. ============
 //
 // Purpose: 
 //
@@ -154,7 +154,7 @@ void CHudItemEffectMeter::UpdateStatus( void )
 
 	if ( m_pEffectMeter )
 	{
-		float flCharge = m_hWeapon->GetEffectBarProgress();;
+		float flCharge = m_hWeapon->GetEffectBarProgress();
 		m_pEffectMeter->SetProgress( flCharge );
 		
 		// Play a ding when full charged.

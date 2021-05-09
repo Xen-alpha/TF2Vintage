@@ -92,3 +92,19 @@ void CTFShotgun::UpdatePunchAngles( CTFPlayer *pPlayer )
 	angle.x -= SharedRandomInt( "ShotgunPunchAngle", ( flPunchAngle - 1 ), ( flPunchAngle + 1 ) );
 	pPlayer->SetPunchAngle( angle );
 }
+
+//-----------------------------------------------------------------------------
+// Purpose: 
+//-----------------------------------------------------------------------------
+float CTFShotgun_HWG::GetWeaponSpread(void)
+{
+	float flSpread = m_pWeaponInfo->GetWeaponData(m_iWeaponMode).m_flSpread;
+
+	CTFPlayer *pPlayer = GetTFPlayerOwner();
+	if (pPlayer->IsDucked() || pPlayer->IsDucking()){
+		flSpread *= 0.5f;
+	}
+
+	CALL_ATTRIB_HOOK_FLOAT(flSpread, mult_spread_scale);
+	return flSpread;
+}

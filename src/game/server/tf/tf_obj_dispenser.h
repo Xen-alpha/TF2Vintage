@@ -1,4 +1,4 @@
-//========= Copyright © 1996-2005, Valve Corporation, All rights reserved. ============//
+//========= Copyright ?1996-2005, Valve Corporation, All rights reserved. ============//
 //
 // Purpose: Engineer's Dispenser
 //
@@ -83,6 +83,8 @@ public:
 	CUtlVector< EHANDLE >	m_hHealingTargets;
 
 	virtual bool	OnWrenchHit( CTFPlayer *pPlayer, CTFWrench *pWrench, Vector vecHitPos );
+
+	virtual void DeterminePlaybackRate(void);
 
 	virtual bool	IsUpgrading( void ) const;
 	virtual int		GetMaxUpgradeLevel( void );

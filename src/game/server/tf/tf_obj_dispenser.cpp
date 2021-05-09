@@ -524,6 +524,24 @@ void CObjectDispenser::FinishUpgrading( void )
 	BaseClass::FinishUpgrading();
 }
 
+//-----------------------------------------------------------------------------
+// Purpose: 
+//-----------------------------------------------------------------------------
+void CObjectDispenser::DeterminePlaybackRate(void)
+{
+	if (IsBuilding())
+	{
+		// Default half rate, author build anim as if one player is building
+		SetPlaybackRate(GetConstructionMultiplier() * 1.0f);
+	}
+	else
+	{
+		SetPlaybackRate(1.0f);
+	}
+
+	StudioFrameAdvance();
+}
+
 bool CObjectDispenser::DispenseAmmo( CTFPlayer *pPlayer )
 {
 	int iTotalPickedUp = 0;

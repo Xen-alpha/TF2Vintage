@@ -5573,7 +5573,7 @@ float CTFGameRules::GetRespawnWaveMaxLength( int iTeam, bool bScaleWithNumPlayer
 
 bool CTFGameRules::ShouldBalanceTeams( void )
 {
-	return BaseClass::ShouldBalanceTeams();
+	return false;
 }
 
 #ifdef CLIENT_DLL

@@ -1,4 +1,4 @@
-//====== Copyright © 1996-2005, Valve Corporation, All rights reserved. =======
+//====== Copyright ?1996-2005, Valve Corporation, All rights reserved. =======
 //
 // Purpose: Weapon Knife.
 //
@@ -151,12 +151,19 @@ float CTFKnife::GetMeleeDamage( CBaseEntity *pTarget, int &iCustomDamage )
 
 	if ( pOwner && pTarget->IsPlayer() )
 	{
+		CTFPlayer *pVictim = ToTFPlayer(pTarget);
+		
 		// Since Swing and Smack are done in the same frame now we don't need to run additional checks anymore.
 		if ( m_iWeaponMode == TF_WEAPON_SECONDARY_MODE && m_hBackstabVictim.Get() == pTarget )
 		{
 			// this will be a backstab, do the strong anim.
 			// Do twice the target's health so that random modification will still kill him.
-			flBaseDamage = pTarget->GetHealth() * 2;
+			if (Q_strncmp(pVictim->GetWeapon(3)->GetClassname(), "tf_weapon_razorback", 19) == 0){
+				flBaseDamage = 40.0f;
+			}
+			else {
+				flBaseDamage = pTarget->GetHealth() * 2;
+			}
 
 			// Declare a backstab.
 			iCustomDamage = TF_DMG_CUSTOM_BACKSTAB;
