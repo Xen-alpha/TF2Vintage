@@ -23,16 +23,20 @@ public:
 	DECLARE_CLASS(CTFRazorback, CTFWeaponBase);
 	DECLARE_NETWORKCLASS();
 	DECLARE_PREDICTABLE();
-
 	virtual int 		GetWeaponID() const 						{ return TF_WEAPON_RAZORBACK; }
+	virtual bool		IsWearable() { return true; }
+	
 #ifdef GAME_DLL
 	virtual void	Precache();
+	virtual void	Equip(CBasePlayer *pPlayer);
+	void			UpdateModelToClass(void);
 #endif
-	virtual bool	IsWearable() { return true; }
+
+	virtual void SetWeaponVisible(bool visible);
+
 	virtual bool	CanDeploy() { return false; }
 	virtual bool	CanAttack() { return false; }
 	virtual bool	CanHolster() { return false; }
-	
 };
 
 #endif // TF_WEARABLE_H

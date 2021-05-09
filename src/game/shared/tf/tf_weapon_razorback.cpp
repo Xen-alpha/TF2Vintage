@@ -20,4 +20,39 @@ void CTFRazorback::Precache(void){
 	return;
 }
 
+//-----------------------------------------------------------------------------
+// Purpose: 
+//-----------------------------------------------------------------------------
+void CTFRazorback::Equip(CBasePlayer *pPlayer)
+{
+	BaseClass::Equip(pPlayer);
+	UpdateModelToClass();
+
+	// player_bodygroups
+	UpdatePlayerBodygroups();
+}
+
+//---------------------------------------------------------------------------- -
+// Purpose: 
+//-----------------------------------------------------------------------------
+void CTFRazorback::UpdateModelToClass(void)
+{
+
+	SetModel("models/player/items/sniper/knife_shield.mdl");
+}
+
 #endif
+
+//-----------------------------------------------------------------------------
+// Purpose: Show/hide weapon and corresponding view model if any
+// Input  : visible - 
+//-----------------------------------------------------------------------------
+void CTFRazorback::SetWeaponVisible(bool visible)
+{
+	RemoveEffects(EF_NODRAW);
+
+#ifdef CLIENT_DLL
+	UpdateVisibility();
+#endif
+
+}

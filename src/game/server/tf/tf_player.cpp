@@ -1328,8 +1328,6 @@ void CTFPlayer::GiveDefaultItems()
 
 	// Give weapons.
 	ManageRegularWeaponsLegacy( pData );
-	
-
 
 	// Give grenades.
 	//ManageGrenades( pData );
@@ -1675,11 +1673,53 @@ void CTFPlayer::PostInventoryApplication( void )
 	m_Shared.RecalculatePlayerBodygroups();
 }
 
+void CTFPlayer::ManageRegularWearable(TFPlayerClassData_t *pData) {
+	/*
+	for (int iWeapon = 0; iWeapon < TF_PLAYER_WEAPON_COUNT; ++iWeapon)
+	{
+		int iWeaponID = GetTFInventory()->GetWeapon(m_PlayerClass.GetClassIndex(), iWeapon);
+
+		if (iWeaponID != TF_WEAPON_NONE)
+		{
+			const char *pszWeaponName = WeaponIdToClassname(iWeaponID);
+
+			CTFWeaponBase *pWeapon = (CTFWeaponBase *)Weapon_GetSlot(iWeapon);
+
+			//If we already have a weapon in this slot but is not the same type then nuke it (changed classes)
+			if (pWeapon && pWeapon->GetWeaponID() != iWeaponID)
+			{
+				Weapon_Detach(pWeapon);
+				UTIL_Remove(pWeapon);
+			}
+
+			if (pWeapon && pWeapon->IsWearable()){
+				CTFWearable *pWearable = (CTFWearable *) CreateEntityByName(pWeapon->GetClassname());
+				pWearable->SetLocalOrigin(GetLocalOrigin());
+				pWearable->AddSpawnFlags(SF_NORESPAWN);
+
+				DispatchSpawn(pWearable);
+				pWearable->Activate();
+
+				if (pWearable != NULL && !(pWearable->IsMarkedForDeletion()))
+				{
+					pWearable->Equip(this);
+				}
+			}
+			else {
+				continue;
+			}
+		}
+	}*/
+	return;
+}
+
+
 //-----------------------------------------------------------------------------
 // Purpose: 
 //-----------------------------------------------------------------------------
 void CTFPlayer::ManageRegularWeaponsLegacy( TFPlayerClassData_t *pData )
 {
+
 	for ( int iWeapon = 0; iWeapon < TF_PLAYER_WEAPON_COUNT; ++iWeapon )
 	{
 		int iWeaponID = GetTFInventory()->GetWeapon( m_PlayerClass.GetClassIndex(), iWeapon );
@@ -1698,14 +1738,22 @@ void CTFPlayer::ManageRegularWeaponsLegacy( TFPlayerClassData_t *pData )
 			}
 
 			pWeapon = Weapon_OwnsThisID( iWeaponID );
+
 			if (pWeapon)
 			{
-				pWeapon->ChangeTeam(GetTeamNumber());
-				pWeapon->GiveDefaultAmmo();
+				if (pWeapon->IsWearable()){
+					pWeapon->FollowEntity(this, true);
+					pWeapon->SetOwnerEntity(this);
+					pWeapon->ChangeTeam(this->GetTeamNumber());
+				}
+				else {
+					pWeapon->ChangeTeam(GetTeamNumber());
+					pWeapon->GiveDefaultAmmo();
 
-				if (m_bRegenerating == false)
-				{
-					pWeapon->WeaponReset();
+					if (m_bRegenerating == false)
+					{
+						pWeapon->WeaponReset();
+					}
 				}
 			}
 			else
@@ -1714,9 +1762,17 @@ void CTFPlayer::ManageRegularWeaponsLegacy( TFPlayerClassData_t *pData )
 
 				if ( pWeapon )
 				{
-					pWeapon->DefaultTouch( this );
+					if (pWeapon->IsWearable()){
+						pWeapon->FollowEntity(this, true);
+						pWeapon->SetOwnerEntity(this);
+						pWeapon->ChangeTeam(this->GetTeamNumber());
+					}
+					else {
+						pWeapon->DefaultTouch(this);
+					}
 				}
 			}
+
 		}
 		else
 		{
@@ -1731,13 +1787,6 @@ void CTFPlayer::ManageRegularWeaponsLegacy( TFPlayerClassData_t *pData )
 				UTIL_Remove( pCarriedWeapon );
 			}
 		}
-	}
-	for (int iWeapon = 0; iWeapon < TF_PLAYER_WEAPON_COUNT; ++iWeapon)
-	{
-		int iWeaponID = GetTFInventory()->GetWeapon(m_PlayerClass.GetClassIndex(), iWeapon);
-		const char *pszWeaponName = WeaponIdToClassname(iWeaponID);
-		
-
 	}
 }
 
