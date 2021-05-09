@@ -360,6 +360,8 @@ public:
 
 	int				m_nForceTauntCam;
 
+	float			m_flMedigunCharge;
+
 	int				m_iSpawnCounter;
 
 	bool			m_bSaveMeParity;

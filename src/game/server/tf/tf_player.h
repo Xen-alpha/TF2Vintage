@@ -649,6 +649,8 @@ private:
 
 	CUtlVector<AppliedContext_t> m_hActiveContexts;
 
+	CNetworkVar(float, m_flMedigunCharge);
+
 public:
 	bool				SetPowerplayEnabled( bool bOn );
 	bool				PlayerHasPowerplay( void );

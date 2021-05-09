@@ -119,7 +119,6 @@ ConVar tf2c_legacy_weapons( "tf2c_legacy_weapons", "0", FCVAR_DEVELOPMENTONLY, "
 // TF2V specific cvars
 ConVar tf2v_disable_holiday_loot( "tf2v_disable_holiday_loot", "0", FCVAR_REPLICATED | FCVAR_NOTIFY, "Disable loot drops in holiday gamemodes" );
 
-
 // -------------------------------------------------------------------------------- //
 // Player animation event. Sent to the client when a player fires, jumps, reloads, etc..
 // -------------------------------------------------------------------------------- //
@@ -355,6 +354,8 @@ IMPLEMENT_SERVERCLASS_ST( CTFPlayer, DT_TFPlayer )
 
 	SendPropInt( SENDINFO( m_nForceTauntCam ), 2, SPROP_UNSIGNED ),
 
+	SendPropFloat(SENDINFO(m_flMedigunCharge)),
+
 	SendPropInt( SENDINFO( m_iSpawnCounter ) ),
 
 END_SEND_TABLE()
@@ -456,6 +457,8 @@ CTFPlayer::CTFPlayer()
 	m_flStunTime = 0.0f;
 
 	m_bInArenaQueue = false;
+
+	m_flMedigunCharge = 0.0f;
 }
 
 
@@ -1216,6 +1219,10 @@ void CTFPlayer::InitClass( void )
 
 	// Give default items for class.
 	GiveDefaultItems();
+
+	if (GetPlayerClass()->GetClassIndex() == TF_CLASS_MEDIC){
+		GetMedigun()->m_flChargeLevel = m_flMedigunCharge;
+	}
 
 	// Set initial health and armor based on class.
 	int iHealthToAdd = 0;
@@ -3069,6 +3076,12 @@ bool CTFPlayer::ClientCommand( const CCommand &args )
 		m_flDeathTime += 2.0f;
 		return true;
 	}
+	else if (FStrEq(pcmd, "SetMedigunCharge"))
+	{
+		if (GetPlayerClass()->GetClassIndex() == TF_CLASS_MEDIC)
+			GetMedigun()->m_flChargeLevel = atof(args[1]);
+		return true;
+	}
 	else if ( FStrEq( pcmd, "show_motd" ) )
 	{
 		KeyValues *data = new KeyValues( "data" );
@@ -4756,6 +4769,13 @@ void CTFPlayer::Event_Killed( const CTakeDamageInfo &info )
 	SpeakConceptIfAllowed( MP_CONCEPT_DIED );
 
 	StateTransition( TF_STATE_DYING );	// Transition into the dying state.
+
+	if (GetPlayerClass()->GetClassIndex() == TF_CLASS_MEDIC){
+		m_flMedigunCharge = GetMedigun()->GetChargeLevel() * 0.5f;
+	}
+	else {
+		m_flMedigunCharge = 0.0f;
+	}
 
 	CBaseEntity *pAttacker = info.GetAttacker();
 	CBaseEntity *pInflictor = info.GetInflictor();
