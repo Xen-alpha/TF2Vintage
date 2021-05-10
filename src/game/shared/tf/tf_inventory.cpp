@@ -32,6 +32,13 @@ CTFInventory::CTFInventory() : CAutoGameSystemPerFrame( "CTFInventory" )
 			m_Items[iClass][iSlot].AddToTail( NULL );
 		}
 	}
+	for (int iClass = 0; iClass < TF_CLASS_COUNT_ALL; iClass++)
+	{
+		for (int iSlot = 0; iSlot < MAX_WEAPON_SLOTS; iSlot++)
+		{
+			Weapons_Custom[iClass][iSlot].AddToTail(Weapons[iClass][iSlot]);
+		}
+	}
 };
 
 CTFInventory::~CTFInventory()
@@ -43,53 +50,12 @@ CTFInventory::~CTFInventory()
 
 bool CTFInventory::Init( void )
 {
-	GetItemSchema()->Init();
-
-	// Generate item list.
-	FOR_EACH_MAP( GetItemSchema()->m_Items, i )
-	{
-		int iItemID = GetItemSchema()->m_Items.Key( i );
-		CEconItemDefinition *pItemDef = GetItemSchema()->m_Items.Element( i );
-
-		if ( pItemDef->item_slot == -1 )
-			continue;
-
-		// Add it to each class that uses it.
-		for ( int iClass = 0; iClass < TF_CLASS_COUNT_ALL; iClass++ )
-		{
-			if ( pItemDef->used_by_classes & ( 1 << iClass ) )
-			{
-				// Show it if it's either base item or has show_in_armory flag.
-				int iSlot = pItemDef->GetLoadoutSlot( iClass );
-
-				if ( pItemDef->baseitem )
-				{
-					CEconItemView *pBaseItem = m_Items[iClass][iSlot][0];
-					if ( pBaseItem != NULL )
-					{
-						Warning( "Duplicate base item %d for class %s in slot %s!\n", iItemID, g_aPlayerClassNames_NonLocalized[iClass], g_LoadoutSlots[iSlot] );
-						delete pBaseItem;
-					}
-
-					CEconItemView *pNewItem = new CEconItemView( iItemID );
-
-#if defined ( GAME_DLL )
-					pNewItem->SetItemClassNumber( iClass );
-#endif
-					m_Items[iClass][iSlot][0] = pNewItem;
-				}
-				else if ( pItemDef->show_in_armory )
-				{
-					CEconItemView *pNewItem = new CEconItemView( iItemID );
-
-#if defined ( GAME_DLL )
-					pNewItem->SetItemClassNumber( iClass );
-#endif
-					m_Items[iClass][iSlot].AddToTail( pNewItem );
-				}
-			}
-		}
-	}
+	Weapons_Custom[TF_CLASS_SCOUT][2].AddToTail(TF_WEAPON_BAT_WOOD);
+	Weapons_Custom[TF_CLASS_SOLDIER][1].AddToTail(TF_WEAPON_BUFF_ITEM);
+	Weapons_Custom[TF_CLASS_SNIPER][0].AddToTail(TF_WEAPON_COMPOUND_BOW);
+	Weapons_Custom[TF_CLASS_SNIPER][1].AddToTail(TF_WEAPON_JAR);
+	Weapons_Custom[TF_CLASS_ENGINEER][1].AddToTail(TF_WEAPON_LASER_POINTER);
+	Weapons_Custom[TF_CLASS_DEMOMAN][2].AddToTail(TF_WEAPON_STICKBOMB);
 
 
 #if defined( CLIENT_DLL )

@@ -1,4 +1,4 @@
-//========= Copyright © 1996-2006, Valve LLC, All rights reserved. ============
+//========= Copyright ?1996-2006, Valve LLC, All rights reserved. ============
 //
 // Purpose: 
 //
@@ -47,7 +47,7 @@ public:
 	virtual void ApplySchemeSettings(vgui::IScheme *pScheme);
 	virtual void PerformLayout();
 	virtual void SetWeapon(C_BaseCombatWeapon *pWeapon, int iBorderStyle = -1, int ID = -1);
-	virtual void SetWeapon(CEconItemDefinition *pItemDefinition, int iBorderStyle = -1, int ID = -1);
+	//virtual void SetWeapon(CEconItemDefinition *pItemDefinition, int iBorderStyle = -1, int ID = -1);
 private:
 	C_BaseCombatWeapon	*m_pWeapon;
 	vgui::Label			*m_pWeaponName;
@@ -190,7 +190,7 @@ void CItemModelPanel::SetWeapon(C_BaseCombatWeapon *pWeapon, int iBorderStyle, i
 	}
 	PerformLayout();
 }
-
+/*
 void CItemModelPanel::SetWeapon(CEconItemDefinition *pItemDefinition, int iBorderStyle, int ID)
 {
 	m_pWeapon = NULL;
@@ -220,7 +220,7 @@ void CItemModelPanel::SetWeapon(CEconItemDefinition *pItemDefinition, int iBorde
 	}
 	PerformLayout();
 }
-
+*/
 //-----------------------------------------------------------------------------
 // Purpose: tf weapon selection hud element
 //-----------------------------------------------------------------------------

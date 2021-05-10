@@ -12,8 +12,8 @@ using namespace vgui;
 // memdbgon must be the last include file in a .cpp file!!!
 #include "tier0/memdbgon.h"
 
-#define PANEL_WIDE 110
-#define PANEL_TALL 70
+#define PANEL_WIDE 100
+#define PANEL_TALL 50
 
 static char* pszClassModels[TF_CLASS_COUNT_ALL] =
 {
