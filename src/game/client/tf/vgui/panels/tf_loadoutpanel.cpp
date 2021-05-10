@@ -144,12 +144,12 @@ public:
 				}
 			}
 		}
-		m_WeaponInfoDatabase.Insert( szFileWithoutEXT, sTemp );
+		m_WeaponInfoDatabase.Insert(pKeyValuesData->GetString("WeaponType"), sTemp);
 	};
 
 	_WeaponData *GetTFWeaponInfo( const char *name )
 	{
-		return &m_WeaponInfoDatabase[m_WeaponInfoDatabase.Find( name )];
+		return &m_WeaponInfoDatabase[m_WeaponInfoDatabase.Find(name)];
 	}
 
 private:
@@ -185,6 +185,8 @@ bool CTFLoadoutPanel::Init()
 	m_pWeaponSetPanel = new CTFWeaponSetPanel( this, "weaponsetpanel" );
 	g_TFWeaponScriptParser.InitParser( "scripts/tf_weapon_*.txt", true, false );
 
+	//_WeaponData *pData = g_TFWeaponScriptParser.GetTFWeaponInfo(WeaponIdToClassname(GetTFInventory()->GetWeapon(iClassIndex, iSlot, iPresetID)));
+
 	for ( int i = 0; i < INVENTORY_VECTOR_NUM; i++ ){
 		m_pWeaponIcons.AddToTail( new CTFAdvItemButton( m_pWeaponSetPanel, "WeaponIcons", "DUK" ) );
 	}
@@ -194,7 +196,6 @@ bool CTFLoadoutPanel::Init()
 	for ( int i = 0; i < INVENTORY_ROWNUM; i++ ){
 		m_RawIDPos.AddToTail(0);
 	}
-
 	return true;
 }
 
@@ -563,9 +564,11 @@ void CTFLoadoutPanel::DefaultLayout()
 			CTFAdvItemButton *m_pWeaponButton = m_pWeaponIcons[INVENTORY_COLNUM * iRow + iColumn];
 			if (iColumn < GetTFInventory()->GetNumPresets(iClassIndex, iSlot)){
 				m_pWeaponButton->SetVisible(true);
+				iPresetID++;
 			}
 			else {
 				m_pWeaponButton->SetVisible(false);
+				iPresetID = 0;
 			}
 		}
 		if (iColumnCount > 2)
