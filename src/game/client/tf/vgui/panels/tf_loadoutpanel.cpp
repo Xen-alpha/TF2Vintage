@@ -563,6 +563,17 @@ void CTFLoadoutPanel::DefaultLayout()
 		{
 			CTFAdvItemButton *m_pWeaponButton = m_pWeaponIcons[INVENTORY_COLNUM * iRow + iColumn];
 			if (iColumn < GetTFInventory()->GetNumPresets(iClassIndex, iSlot)){
+				m_pWeaponButton->SetText(WeaponIdToClassname(GetTFInventory()->GetWeapon(iClassIndex, iSlot, iPresetID)));
+				int iWeaponPreset = GetTFInventory()->GetWeaponPreset(iClassIndex, iSlot);
+				if (iColumn == iWeaponPreset)
+				{
+					m_pWeaponButton->SetBorderByString("AdvRoundedButtonDefault", "AdvRoundedButtonArmed", "AdvRoundedButtonDepressed");
+				}
+				else
+				{
+					m_pWeaponButton->SetBorderByString("AdvRoundedButtonDisabled", "AdvRoundedButtonArmed", "AdvRoundedButtonDepressed");
+				}
+				m_pWeaponButton->GetButton()->SetSelected((iColumn == iWeaponPreset));
 				m_pWeaponButton->SetVisible(true);
 				iPresetID++;
 			}
