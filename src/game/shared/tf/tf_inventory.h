@@ -25,7 +25,7 @@
 #define INVENTORY_WEAPONS		5
 #define INVENTORY_WEAPONS_COUNT	500
 #define INVENTORY_COLNUM		6
-#define INVENTORY_ROWNUM		4
+#define INVENTORY_ROWNUM		5
 #define INVENTORY_VECTOR_NUM	INVENTORY_COLNUM * INVENTORY_ROWNUM
 
 class CTFInventory : public CAutoGameSystemPerFrame
@@ -40,7 +40,7 @@ public:
 	virtual void LevelInitPreEntity( void );
 
 	int GetNumPresets( int iClass, int iSlot );
-	int GetWeapon( int iClass, int iSlot );
+	int GetWeapon( int iClass, int iSlot , int iNum);
 	CEconItemView *GetItem( int iClass, int iSlot, int iNum );
 	bool CheckValidSlot( int iClass, int iSlot, bool bHudCheck = false );
 	bool CheckValidWeapon( int iClass, int iSlot, int iWeapon, bool bHudCheck = false );

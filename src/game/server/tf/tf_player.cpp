@@ -1729,7 +1729,7 @@ void CTFPlayer::ManageRegularWeaponsLegacy( TFPlayerClassData_t *pData )
 
 	for ( int iWeapon = 0; iWeapon < TF_PLAYER_WEAPON_COUNT; ++iWeapon )
 	{
-		int iWeaponID = GetTFInventory()->GetWeapon( m_PlayerClass.GetClassIndex(), iWeapon );
+		int iWeaponID = GetTFInventory()->GetWeapon(m_PlayerClass.GetClassIndex(), iWeapon, m_WeaponPreset[m_PlayerClass.GetClassIndex()][iWeapon]);
 
 		if ( iWeaponID != TF_WEAPON_NONE )
 		{

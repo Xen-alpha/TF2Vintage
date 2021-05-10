@@ -72,12 +72,12 @@ void CTFInventory::LevelInitPreEntity( void )
 
 int CTFInventory::GetNumPresets(int iClass, int iSlot)
 {
-	return m_Items[iClass][iSlot].Count();
+	return Weapons_Custom[iClass][iSlot].Count();
 };
 
-int CTFInventory::GetWeapon(int iClass, int iSlot)
+int CTFInventory::GetWeapon(int iClass, int iSlot, int iNum)
 {
-	return Weapons[iClass][iSlot];
+	return Weapons_Custom[iClass][iSlot][iNum];
 };
 
 CEconItemView *CTFInventory::GetItem( int iClass, int iSlot, int iNum )
@@ -184,8 +184,8 @@ int CTFInventory::GetWeaponPreset(int iClass, int iSlot)
 		return 0;
 	}
 
-	if ( CheckValidWeapon( iClass, iSlot, iPreset ) == false )
-		return 0;
+	//if ( CheckValidWeapon( iClass, iSlot, iPreset ) == false )
+	//	return 0;
 
 	return iPreset;
 };
