@@ -26,7 +26,6 @@
 #include "tf_imagepanel.h"
 #include "c_tf_player.h"
 #include "c_tf_weapon_builder.h"
-#include "tf_inventory.h"
 
 #define SELECTION_TIMEOUT_THRESHOLD		2.5f	// Seconds
 #define SELECTION_FADEOUT_TIME			3.0f
@@ -155,8 +154,9 @@ void CItemModelPanel::SetWeapon(C_BaseCombatWeapon *pWeapon, int iBorderStyle, i
 	m_ID = ID;
 	m_iBorderStyle = iBorderStyle;
 
-	wchar_t *pText = NULL;
+	int iItemID = m_pWeapon->GetItemID();
 	
+	wchar_t *pText = NULL;
 	pText = g_pVGuiLocalize->Find(m_pWeapon->GetWpnData().szPrintName);
 	const CHudTexture *pTexture = pWeapon->GetSpriteInactive(); // red team
 	if (pTexture)
@@ -170,7 +170,7 @@ void CItemModelPanel::SetWeapon(C_BaseCombatWeapon *pWeapon, int iBorderStyle, i
 	if (ID != -1)
 	{
 		char szSlotID[8];
-		Q_snprintf(szSlotID, sizeof(szSlotID), "%d", m_ID + 1);
+		Q_snprintf( szSlotID, sizeof(szSlotID), "%d", m_ID + 1 );
 		m_pSlotID->SetText(szSlotID);
 	}
 	else

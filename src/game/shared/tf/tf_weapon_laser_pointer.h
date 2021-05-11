@@ -61,15 +61,6 @@ public:
 private:
 	CHandle<CObjectSentrygun> m_hGun;
 #endif
-	virtual int TranslateViewmodelHandActivity(int iActivity);
-	virtual void SetViewModel();
-	virtual const char *GetViewModel(int iViewModel = 0) const;
-	virtual const char *DetermineViewModelType(const char *vModel) const;
-
-
-#ifdef CLIENT_DLL
-	virtual C_BaseAnimating *GetAppropriateWorldOrViewModel(void);
-#endif
 };
 
 #endif // TF_WEAPON_LASER_POINTER_H

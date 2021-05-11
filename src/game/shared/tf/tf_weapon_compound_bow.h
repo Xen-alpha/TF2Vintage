@@ -68,16 +68,6 @@ public:
 	virtual float		GetChargeMaxTime( void );
 	virtual const char 	*GetChargeSound( void ) 	{ return NULL; }
 
-	virtual int TranslateViewmodelHandActivity(int iActivity);
-	virtual void SetViewModel();
-	virtual const char *GetViewModel(int iViewModel = 0) const;
-	virtual const char *DetermineViewModelType(const char *vModel) const;
-
-
-#ifdef CLIENT_DLL
-	virtual C_BaseAnimating *GetAppropriateWorldOrViewModel(void);
-#endif
-
 private:
 	CNetworkVar( float, m_flChargeBeginTime );
 	CNetworkVar( bool , m_bFlame );

@@ -67,16 +67,6 @@ public:
 	virtual void		FireGameEvent( IGameEvent *event );
 #endif
 
-	virtual int TranslateViewmodelHandActivity(int iActivity);
-	virtual void SetViewModel();
-	virtual const char *GetViewModel(int iViewModel = 0) const;
-	virtual const char *DetermineViewModelType(const char *vModel) const;
-
-
-#ifdef CLIENT_DLL
-	virtual C_BaseAnimating *GetAppropriateWorldOrViewModel(void);
-#endif
-
 private:
 
 	CTFBuffItem( const CTFBuffItem & ) {}
