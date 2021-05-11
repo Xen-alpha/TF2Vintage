@@ -100,7 +100,7 @@ bool CTFInventory::CheckValidSlot(int iClass, int iSlot, bool bHudCheck /*= fals
 		return false;
 
 	// Slot must contain a base item.
-	if ( m_Items[iClass][iSlot][0] == NULL )
+	if (Weapons_Custom[iClass][iSlot][0] == NULL)
 		return false;
 
 	return true;
@@ -111,14 +111,14 @@ bool CTFInventory::CheckValidWeapon(int iClass, int iSlot, int iWeapon, bool bHu
 	if (iClass < TF_CLASS_UNDEFINED || iClass > TF_CLASS_COUNT)
 		return false;
 
-	int iCount = ( bHudCheck ? INVENTORY_COLNUM : m_Items[iClass][iSlot].Count() );
+	int iCount = ( bHudCheck ? INVENTORY_COLNUM : Weapons_Custom[iClass][iSlot].Count() );
 
 	// Array bounds check.
 	if ( iWeapon >= iCount || iWeapon < 0 )
 		return false;
 
 	// Don't allow switching if this class has no weapon at this position.
-	if ( m_Items[iClass][iSlot][iWeapon] == NULL )
+	if (Weapons_Custom[iClass][iSlot][iWeapon] == NULL)
 		return false;
 
 	return true;
@@ -242,7 +242,8 @@ const int CTFInventory::Weapons[TF_CLASS_COUNT_ALL][TF_PLAYER_WEAPON_COUNT] =
 	{
 		TF_WEAPON_SYRINGEGUN_MEDIC,
 		TF_WEAPON_MEDIGUN,
-		TF_WEAPON_BONESAW
+		TF_WEAPON_BONESAW,
+		TF_WEAPON_NONE
 	},
 	{
 		TF_WEAPON_MINIGUN,
@@ -257,11 +258,12 @@ const int CTFInventory::Weapons[TF_CLASS_COUNT_ALL][TF_PLAYER_WEAPON_COUNT] =
 		TF_WEAPON_FLAREGUN
 	},
 	{
-		TF_WEAPON_REVOLVER,
-		TF_WEAPON_NONE,
-		TF_WEAPON_KNIFE,
 		TF_WEAPON_PDA_SPY,
+		TF_WEAPON_REVOLVER,
+		TF_WEAPON_KNIFE,
+		TF_WEAPON_PDA,
 		TF_WEAPON_INVIS
+		
 	},
 	{
 		TF_WEAPON_SHOTGUN_PRIMARY,

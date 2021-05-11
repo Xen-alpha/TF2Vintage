@@ -1738,22 +1738,30 @@ void CTFPlayer::ManageRegularWeaponsLegacy( TFPlayerClassData_t *pData )
 			CTFWeaponBase *pWeapon = (CTFWeaponBase *)Weapon_GetSlot( iWeapon );
 
 			//If we already have a weapon in this slot but is not the same type then nuke it (changed classes)
-			if ( pWeapon && pWeapon->GetWeaponID() != iWeaponID )
+			if (pWeapon && pWeapon->GetWeaponID() != iWeaponID)
 			{
-				Weapon_Detach( pWeapon );
-				UTIL_Remove( pWeapon );
+				Weapon_Detach(pWeapon);
+				UTIL_Remove(pWeapon);
 			}
+			if (pWeapon && pWeapon->IsWearable()){
+				CTFWearable *pWearable = (CTFWearable *)CreateEntityByName(pWeapon->GetClassname());
+				pWearable->SetLocalOrigin(GetLocalOrigin());
+				pWearable->AddSpawnFlags(SF_NORESPAWN);
 
-			pWeapon = Weapon_OwnsThisID( iWeaponID );
+				DispatchSpawn(pWearable);
+				pWearable->Activate();
 
-			if (pWeapon)
-			{
-				if (pWeapon->IsWearable()){
-					pWeapon->FollowEntity(this, true);
-					pWeapon->SetOwnerEntity(this);
-					pWeapon->ChangeTeam(this->GetTeamNumber());
+				if (pWearable != NULL && !(pWearable->IsMarkedForDeletion()))
+				{
+					pWearable->Equip(this);
 				}
-				else {
+			}
+			else {
+				pWeapon = Weapon_OwnsThisID(iWeaponID);
+
+				if (pWeapon)
+				{
+
 					pWeapon->ChangeTeam(GetTeamNumber());
 					pWeapon->GiveDefaultAmmo();
 
@@ -1762,24 +1770,16 @@ void CTFPlayer::ManageRegularWeaponsLegacy( TFPlayerClassData_t *pData )
 						pWeapon->WeaponReset();
 					}
 				}
-			}
-			else
-			{
-				pWeapon = (CTFWeaponBase *)GiveNamedItem( pszWeaponName );
-
-				if ( pWeapon )
+				else
 				{
-					if (pWeapon->IsWearable()){
-						pWeapon->FollowEntity(this, true);
-						pWeapon->SetOwnerEntity(this);
-						pWeapon->ChangeTeam(this->GetTeamNumber());
-					}
-					else {
+					pWeapon = (CTFWeaponBase *)GiveNamedItem(pszWeaponName);
+
+					if (pWeapon)
+					{
 						pWeapon->DefaultTouch(this);
 					}
 				}
 			}
-
 		}
 		else
 		{
@@ -5452,14 +5452,7 @@ void CTFPlayer::RemoveAllWeapons( void )
 	BaseClass::RemoveAllWeapons();
 
 	// Remove all wearables.
-	for ( int i = 0; i < GetNumWearables(); i++ )
-	{
-		CEconWearable *pWearable = GetWearable( i );
-		if ( !pWearable )
-			continue;
-
-		RemoveWearable( pWearable );
-	}
+	// Do nothing
 }
 
 //-----------------------------------------------------------------------------
