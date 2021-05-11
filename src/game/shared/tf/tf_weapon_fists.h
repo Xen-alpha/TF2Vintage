@@ -1,4 +1,4 @@
-//====== Copyright ?1996-2005, Valve Corporation, All rights reserved. =======
+//====== Copyright © 1996-2005, Valve Corporation, All rights reserved. =======
 //
 // Purpose: 
 //
@@ -28,7 +28,7 @@ public:
 	DECLARE_NETWORKCLASS(); 
 	DECLARE_PREDICTABLE();
 
-	CTFFists() { m_bHook = false; m_bSwapPunch = false; }
+	CTFFists() {}
 	virtual int			GetWeaponID( void ) const			{ return TF_WEAPON_FISTS; }
 
 	virtual void PrimaryAttack();
@@ -40,12 +40,7 @@ public:
 
 	void Punch( void );
 
-	virtual float GetMeleeDamage(CBaseEntity *pTarget, int &iCustomDamage);
-
 private:
-
-	CNetworkVar( bool, m_bSwapPunch);
-	CNetworkVar(bool, m_bHook);
 
 	CTFFists( const CTFFists & ) {}
 };

@@ -961,15 +961,6 @@ bool CTFWeaponBase::CalcIsAttackCriticalHelper()
 	if ( !CanFireCriticalShot() )
 		return false;
 
-	int heaviestTeam = TEAM_UNASSIGNED;
-	int lightestTeam = TEAM_UNASSIGNED;
-
-	TFGameRules()->AreTeamsUnbalanced(heaviestTeam, lightestTeam);
-
-	if (GetPlayerOwner()->GetTeamNumber() == heaviestTeam){
-		return false;
-	}
-
 	float flPlayerCritMult = pPlayer->GetCritMult();
 
 	if ( m_pWeaponInfo->GetWeaponData( m_iWeaponMode ).m_bUseRapidFireCrits )

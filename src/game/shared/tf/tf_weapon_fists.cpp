@@ -1,4 +1,4 @@
-//====== Copyright ?1996-2005, Valve Corporation, All rights reserved. =======
+//====== Copyright © 1996-2005, Valve Corporation, All rights reserved. =======
 //
 // Purpose: 
 //
@@ -24,16 +24,6 @@
 IMPLEMENT_NETWORKCLASS_ALIASED( TFFists, DT_TFWeaponFists )
 
 BEGIN_NETWORK_TABLE( CTFFists, DT_TFWeaponFists )
-
-#ifdef CLIENT_DLL
-RecvPropBool(RECVINFO(m_bSwapPunch)),
-RecvPropBool(RECVINFO(m_bHook)),
-// Server specific.
-#else
-SendPropBool(SENDINFO(m_bSwapPunch)),
-SendPropBool(SENDINFO(m_bHook)),
-#endif
-
 END_NETWORK_TABLE()
 
 BEGIN_PREDICTION_DATA( CTFFists )
@@ -58,7 +48,7 @@ void CTFFists::PrimaryAttack()
 
 	// Set the weapon usage mode - primary, secondary.
 	// reversed for 360 because the primary attack is on the right side of the controller
-	if ( m_bSwapPunch )
+	if ( IsX360() )
 	{
 		m_iWeaponMode = TF_WEAPON_SECONDARY_MODE;
 	}
@@ -66,7 +56,7 @@ void CTFFists::PrimaryAttack()
 	{
 		m_iWeaponMode = TF_WEAPON_PRIMARY_MODE;
 	}
-	//Punch
+
 	Punch();
 }
 
@@ -78,11 +68,17 @@ void CTFFists::SecondaryAttack()
 	if ( !CanAttack() )
 		return;
 
-	// Hook
-	m_bHook = true;
-	Swing(GetTFPlayerOwner());
-	m_flNextSecondaryAttack = m_flNextPrimaryAttack;
-	m_bHook = false;
+	// Set the weapon usage mode - primary, secondary.
+	if ( IsX360() )
+	{
+		m_iWeaponMode = TF_WEAPON_PRIMARY_MODE;
+	}
+	else
+	{
+		m_iWeaponMode = TF_WEAPON_SECONDARY_MODE;
+	}
+
+	Punch();
 }
 
 // -----------------------------------------------------------------------------
@@ -104,7 +100,6 @@ void CTFFists::Punch( void )
 	pPlayer->SpeakWeaponFire();
 	CTF_GameStats.Event_PlayerFiredWeapon( pPlayer, IsCurrentAttackACritical() );
 #endif
-	m_bSwapPunch = !m_bSwapPunch;
 }
 
 //-----------------------------------------------------------------------------
@@ -113,7 +108,7 @@ void CTFFists::Punch( void )
 //-----------------------------------------------------------------------------
 void CTFFists::SendPlayerAnimEvent( CTFPlayer *pPlayer )
 {
-	if ( m_bHook )
+	if ( IsCurrentAttackACrit() )
 	{
 		pPlayer->DoAnimationEvent( PLAYERANIMEVENT_ATTACK_SECONDARY );
 	}
@@ -130,29 +125,14 @@ void CTFFists::DoViewModelAnimation( void )
 {
 	Activity act;
 
-	if (m_bHook)
+	if ( IsCurrentAttackACritical() )
 	{
 		act = ACT_VM_SWINGHARD;
 	}
 	else
 	{
-		act = m_bSwapPunch ? ACT_VM_HITLEFT : ACT_VM_HITRIGHT;
+		act = ( m_iWeaponMode == TF_WEAPON_PRIMARY_MODE ) ? ACT_VM_HITLEFT : ACT_VM_HITRIGHT;
 	}
 
 	SendWeaponAnim( act );
-}
-
-//-----------------------------------------------------------------------------
-// Purpose: 
-// Output : float
-//-----------------------------------------------------------------------------
-float CTFFists::GetMeleeDamage(CBaseEntity *pTarget, int &iCustomDamage)
-{
-	float flDamage = (float)m_pWeaponInfo->GetWeaponData(m_iWeaponMode).m_nDamage;
-
-	if (m_bHook) {
-		flDamage *= 1.2f;
-	}
-
-	return flDamage;
 }

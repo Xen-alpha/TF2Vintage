@@ -763,6 +763,11 @@ bool CTFWeaponBaseGun::IsFlameArrow(void)
 float CTFWeaponBaseGun::GetWeaponSpread( void )
 {
 	float flSpread = m_pWeaponInfo->GetWeaponData( m_iWeaponMode ).m_flSpread;
+	CTFPlayer *pPlayer = GetTFPlayerOwner();
+	if (pPlayer->GetPlayerClass()->GetClassIndex() == TF_CLASS_HEAVYWEAPONS && pPlayer->m_nButtons & IN_DUCK != 0){
+		flSpread *= 0.5;
+	}
+
 	CALL_ATTRIB_HOOK_FLOAT( flSpread, mult_spread_scale );
 	return flSpread;
 }

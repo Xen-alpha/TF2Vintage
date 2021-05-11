@@ -1,4 +1,4 @@
-//====== Copyright ?1996-2005, Valve Corporation, All rights reserved. =======
+//====== Copyright © 1996-2005, Valve Corporation, All rights reserved. =======
 //
 // Purpose: 
 //
@@ -87,7 +87,6 @@ public:
 	DECLARE_PREDICTABLE();
 
 	virtual int		GetWeaponID( void ) const			{ return TF_WEAPON_SHOTGUN_HWG; }
-	virtual float	GetWeaponSpread(void);
 };
 
 class CTFShotgun_Pyro : public CTFShotgun

@@ -303,10 +303,6 @@ void CTFFlameThrower::PrimaryAttack()
 	if ( !pOwner )
 		return;
 
-	if (pOwner->m_Shared.InCond(TF_COND_URINE) || pOwner->m_Shared.InCond(TF_COND_MAD_MILK)){
-		return;
-	}
-
 	if ( !CanAttack() )
 	{
 #if defined ( CLIENT_DLL )

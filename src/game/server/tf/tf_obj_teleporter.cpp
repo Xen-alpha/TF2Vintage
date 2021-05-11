@@ -535,7 +535,7 @@ void CObjectTeleporter::DeterminePlaybackRate( void )
 	if ( IsBuilding() )
 	{
 		// Default half rate, author build anim as if one player is building
-		SetPlaybackRate( GetConstructionMultiplier() * 1.0 );	
+		SetPlaybackRate( GetConstructionMultiplier() * 0.5 );	
 	}
 	else if ( IsPlacing() )
 	{

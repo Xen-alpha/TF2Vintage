@@ -3076,6 +3076,12 @@ bool CTFPlayer::ClientCommand( const CCommand &args )
 		m_flDeathTime += 2.0f;
 		return true;
 	}
+	else if (FStrEq(pcmd, "SetMedigunCharge"))
+	{
+		if (GetPlayerClass()->GetClassIndex() == TF_CLASS_MEDIC)
+			GetMedigun()->m_flChargeLevel = atof(args[1]);
+		return true;
+	}
 	else if ( FStrEq( pcmd, "show_motd" ) )
 	{
 		KeyValues *data = new KeyValues( "data" );
@@ -3647,9 +3653,6 @@ int CTFPlayer::OnTakeDamage( const CTakeDamageInfo &inputInfo )
 	if ( !IsAlive() )
 		return 0;
 
-	int largeTeam = TEAM_UNASSIGNED;
-	int smallTeam = TEAM_UNASSIGNED;
-
 	CBaseEntity *pAttacker = info.GetAttacker();
 	CBaseEntity *pInflictor = info.GetInflictor();
 	CTFWeaponBase *pWeapon = NULL;
@@ -3869,35 +3872,35 @@ int CTFPlayer::OnTakeDamage( const CTakeDamageInfo &inputInfo )
 		float flDamage = 0;
 		if ( bitsDamage & DMG_CRITICAL )
 		{
-			if (bDebug)
+			if ( bDebug )
 			{
-				Warning("    CRITICAL!\n");
+				Warning( "    CRITICAL!\n");
 			}
 
 			flDamage = info.GetDamage() * TF_DAMAGE_CRIT_MULTIPLIER;
 
 			// Show the attacker, unless the target is a disguised spy
-			if (pAttacker && pAttacker->IsPlayer() && !m_Shared.InCond(TF_COND_DISGUISED))
+			if ( pAttacker && pAttacker->IsPlayer() && !m_Shared.InCond( TF_COND_DISGUISED ) )
 			{
 				CEffectData	data;
-				data.m_nHitBox = GetParticleSystemIndex("crit_text");
-				data.m_vOrigin = WorldSpaceCenter() + Vector(0, 0, 32);
+				data.m_nHitBox = GetParticleSystemIndex( "crit_text" );
+				data.m_vOrigin = WorldSpaceCenter() + Vector(0,0,32);
 				data.m_vAngles = vec3_angle;
 				data.m_nEntIndex = 0;
 
-				CSingleUserRecipientFilter filter((CBasePlayer*)pAttacker);
-				te->DispatchEffect(filter, 0.0, data.m_vOrigin, "ParticleEffect", data);
+				CSingleUserRecipientFilter filter( (CBasePlayer*)pAttacker );
+				te->DispatchEffect( filter, 0.0, data.m_vOrigin, "ParticleEffect", data );
 
 				EmitSound_t params;
 				params.m_flSoundTime = 0;
 				params.m_pSoundName = "TFPlayer.CritHit";
-				EmitSound(filter, info.GetAttacker()->entindex(), params);
+				EmitSound( filter, info.GetAttacker()->entindex(), params );
 			}
 
 			// Burn sounds are handled in ConditionThink()
-			if (!(bitsDamage & DMG_BURN))
+			if ( !(bitsDamage & DMG_BURN ) )
 			{
-				SpeakConceptIfAllowed(MP_CONCEPT_HURT, "damagecritical:1");
+				SpeakConceptIfAllowed( MP_CONCEPT_HURT, "damagecritical:1" );
 			}
 		}
 		else if ( bitsDamage & DMG_MINICRITICAL )
