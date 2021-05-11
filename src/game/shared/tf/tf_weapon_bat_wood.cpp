@@ -1,4 +1,4 @@
-//====== Copyright © 1996-2005, Valve Corporation, All rights reserved. =======
+//====== Copyright ?1996-2005, Valve Corporation, All rights reserved. =======
 //
 // Purpose: 
 //
@@ -334,5 +334,124 @@ void C_TFBat_Wood::CreateMove( float flInputSampleTime, CUserCmd *pCmd, const QA
 	}
 
 	BaseClass::CreateMove( flInputSampleTime, pCmd, vecOldViewAngles );
+}
+#endif
+
+
+//-----------------------------------------------------------------------------
+// Purpose: 
+//-----------------------------------------------------------------------------
+int CTFBat_Wood::TranslateViewmodelHandActivity(int iActivity)
+{
+	CTFPlayer *pTFPlayer = ToTFPlayer(GetOwner());
+	if (pTFPlayer == NULL)
+	{
+		Assert(false); // This shouldn't be possible
+		return iActivity;
+	}
+
+	CTFViewModel *vm = dynamic_cast<CTFViewModel*>(pTFPlayer->GetViewModel(m_nViewModelIndex, false));
+	if (vm == NULL)
+	{
+		return iActivity;
+	}
+
+	int iWeaponRole = GetTFWpnData().m_iWeaponType;
+	for (int i = 0; i <= 160; i++)
+	{
+		const viewmodel_acttable_t& act = s_viewmodelacttable[i];
+		if (iActivity == act.actBaseAct && iWeaponRole == act.iWeaponRole)
+		{
+			return act.actTargetAct;
+		}
+	}
+
+	return iActivity;
+}
+
+//-----------------------------------------------------------------------------
+// Purpose: 
+//-----------------------------------------------------------------------------
+void CTFBat_Wood::SetViewModel()
+{
+	CTFPlayer *pTFPlayer = ToTFPlayer(GetOwner());
+	if (pTFPlayer == NULL)
+		return;
+
+	CTFViewModel *vm = dynamic_cast< CTFViewModel* >(pTFPlayer->GetViewModel(m_nViewModelIndex, false));
+	if (vm == NULL)
+		return;
+
+	Assert(vm->ViewModelIndex() == m_nViewModelIndex);
+
+	vm->SetViewModelType(VMTYPE_NONE);
+
+	const char *pszModelName = GetViewModel(m_nViewModelIndex);
+
+	m_iViewModelIndex = modelinfo->GetModelIndex(pszModelName);
+
+	vm->SetWeaponModel(pszModelName, this);
+
+#ifdef CLIENT_DLL
+	UpdateViewModel();
+#endif
+}
+
+const char *CTFBat_Wood::DetermineViewModelType(const char *vModel) const
+{
+	CTFPlayer *pPlayer = ToTFPlayer(GetPlayerOwner());
+	if (!pPlayer)
+		return vModel;
+
+
+	int iType = 1;
+
+	CTFViewModel *vm = dynamic_cast<CTFViewModel *>(pPlayer->GetViewModel(m_nViewModelIndex));
+	if (vm)
+		vm->SetViewModelType(iType);
+
+	if (iType == VMTYPE_TF2)
+	{
+		int iGunslinger = 0;
+		CALL_ATTRIB_HOOK_INT_ON_OTHER(pPlayer, iGunslinger, wrench_builds_minisentry);
+
+		return iGunslinger ? pPlayer->GetPlayerClass()->GetHandModelName(true) : pPlayer->GetPlayerClass()->GetHandModelName(false);
+	}
+
+	return vModel;
+}
+
+// -----------------------------------------------------------------------------
+// Purpose:
+// -----------------------------------------------------------------------------
+const char *CTFBat_Wood::GetViewModel(int iViewModel) const
+{
+	const char *pszModelName = NULL;
+	CTFPlayer *pOwner = GetTFPlayerOwner();
+
+
+	pszModelName = BaseClass::GetViewModel(iViewModel);
+
+
+	return DetermineViewModelType(pszModelName);
+}
+#ifdef CLIENT_DLL
+//-----------------------------------------------------------------------------
+// Purpose: Find the appropriate weapon model to update bodygroups on
+//-----------------------------------------------------------------------------
+C_BaseAnimating *C_TFBat_Wood::GetAppropriateWorldOrViewModel(void)
+{
+	C_TFPlayer *pPlayer = GetTFPlayerOwner();
+	if (pPlayer && UsingViewModel())
+	{
+
+		C_ViewmodelAttachmentModel *pAttach = GetViewmodelAddon();
+		if (pAttach)
+			return pAttach;
+
+	}
+
+	// this too
+	return this;
 }
 #endif
