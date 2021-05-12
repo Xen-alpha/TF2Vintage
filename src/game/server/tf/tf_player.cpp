@@ -7451,17 +7451,10 @@ void CTFPlayer::Taunt( void )
 
 	m_bInitTaunt = true;
 	char szResponse[AI_Response::MAX_RESPONSE_NAME];
-	if ( SpeakConceptIfAllowed( MP_CONCEPT_PLAYER_TAUNT, NULL, szResponse, AI_Response::MAX_RESPONSE_NAME ) || tf2c_random_weapons.GetBool() )
+	if (SpeakConceptIfAllowed(MP_CONCEPT_PLAYER_TAUNT, NULL, szResponse, AI_Response::MAX_RESPONSE_NAME) || SpeakConceptIfAllowed(MP_CONCEPT_ATE_FOOD, NULL, szResponse, AI_Response::MAX_RESPONSE_NAME))
 	{
 		// Get the duration of the scene.
 		float flDuration = GetSceneDuration( szResponse ) + 0.2f;
-
-		// Crappy default taunt for randomizer
-		if ( tf2c_random_weapons.GetBool() && flDuration == 0.2f )
-		{
-			flDuration += 3.0f;
-			m_Shared.StunPlayer( 3.0f, 0.0f, 0.0f, TF_STUNFLAGS_NORMALBONK, this );
-		}
 
 		// Clear disguising state.
 		if ( m_Shared.InCond( TF_COND_DISGUISING ) )
@@ -7491,7 +7484,7 @@ void CTFPlayer::Taunt( void )
 		{
 			if ( pWeapon->IsWeapon( TF_WEAPON_LUNCHBOX ) )
 			{
-				m_flTauntAttackTime = gpGlobals->curtime + 1.0f;
+				m_flTauntAttackTime = gpGlobals->curtime + 4.0f;
 				m_iTauntAttack = TAUNTATK_HEAVY_EAT;
 			}
 			else if ( pWeapon->IsWeapon( TF_WEAPON_LUNCHBOX_DRINK ) )
@@ -7707,7 +7700,7 @@ void CTFPlayer::DoTauntAttack( void )
 				}
 
 				m_iTauntAttack = TAUNTATK_HEAVY_EAT;
-				m_flTauntAttackTime = gpGlobals->curtime + 1.0f;
+				m_flTauntAttackTime = gpGlobals->curtime + 8.0f;
 			}
 			else if ( pWeapon && pWeapon->IsWeapon( TF_WEAPON_LUNCHBOX_DRINK ) )
 			{
