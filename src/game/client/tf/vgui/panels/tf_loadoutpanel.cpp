@@ -209,16 +209,26 @@ void CTFLoadoutPanel::ApplySchemeSettings( vgui::IScheme *pScheme )
 void CTFLoadoutPanel::PerformLayout()
 {
 	BaseClass::PerformLayout();
+	char szCommand[64];
 	for ( int iSlot = 0; iSlot < INVENTORY_ROWNUM; iSlot++ )
 	{
+		int iSelectedSlot = GetTFInventory()->GetWeaponPreset(m_iCurrentClass, iSlot);
 		for ( int iPreset = 0; iPreset < INVENTORY_COLNUM; iPreset++ )
 		{
 			CTFAdvItemButton *m_pWeaponButton = m_pWeaponIcons[INVENTORY_COLNUM * iSlot + iPreset];
 			m_pWeaponButton->SetSize( XRES( PANEL_WIDE ), YRES( PANEL_TALL ) );
 			m_pWeaponButton->SetPos( iPreset * XRES( ( PANEL_WIDE + 10 ) ), iSlot * YRES( ( PANEL_TALL + 5 ) ) );
 			m_pWeaponButton->SetBorderVisible( true );
-			m_pWeaponButton->SetBorderByString( "AdvRoundedButtonDefault", "AdvRoundedButtonArmed", "AdvRoundedButtonDepressed" );
-			m_pWeaponButton->SetLoadoutSlot( iSlot, iPreset );
+			if (iPreset == iSelectedSlot)
+			{
+				m_pWeaponButton->SetBorderByString("AdvRoundedButtonDefault", "AdvRoundedButtonArmed", "AdvRoundedButtonDepressed");
+			}
+			else
+			{
+				m_pWeaponButton->SetBorderByString("AdvRoundedButtonDisabled", "AdvRoundedButtonArmed", "AdvRoundedButtonDepressed");
+			}
+			Q_snprintf(szCommand, sizeof(szCommand), "loadout %d %d", iSlot, iPreset);
+			m_pWeaponButton->SetCommandString(szCommand);
 		}
 
 		CTFAdvItemButton *m_pSlideButtonL = m_pSlideButtons[iSlot * 2];
@@ -229,7 +239,7 @@ void CTFLoadoutPanel::PerformLayout()
 		m_pSlideButtonL->SetText( "<" );
 		m_pSlideButtonL->SetBorderVisible( true );
 		m_pSlideButtonL->SetBorderByString( "AdvLeftButtonDefault", "AdvLeftButtonArmed", "AdvLeftButtonDepressed" );
-		char szCommand[64];
+		
 		Q_snprintf( szCommand, sizeof( szCommand), "SlideL%i", iSlot );
 		m_pSlideButtonL->SetCommandString( szCommand );
 		
@@ -553,19 +563,18 @@ void CTFLoadoutPanel::DefaultLayout()
 	for ( int iRow = 0; iRow < INVENTORY_ROWNUM; iRow++ )
 	{
 		int iColumnCount = 0;
-		int iPresetID = 0;
+		//int iPresetID = 0;
 		int iPos = m_RawIDPos[iRow];
 		CTFAdvItemButton *m_pSlideButtonL = m_pSlideButtons[iRow * 2];
 		CTFAdvItemButton *m_pSlideButtonR = m_pSlideButtons[( iRow * 2 ) + 1];
 		int iSlot = g_aClassLoadoutSlots[iClassIndex][iRow];
-
+		int iSelectedSlot = GetTFInventory()->GetWeaponPreset(m_iCurrentClass, iRow);
 		for ( int iColumn = 0; iColumn < INVENTORY_COLNUM; iColumn++ )
 		{
 			CTFAdvItemButton *m_pWeaponButton = m_pWeaponIcons[INVENTORY_COLNUM * iRow + iColumn];
 			if (iColumn < GetTFInventory()->GetNumPresets(iClassIndex, iSlot)){
-				m_pWeaponButton->SetText(WeaponIdToClassname(GetTFInventory()->GetWeapon(iClassIndex, iSlot, iPresetID)));
-				int iWeaponPreset = GetTFInventory()->GetWeaponPreset(iClassIndex, iSlot);
-				if (iColumn == iWeaponPreset)
+				m_pWeaponButton->SetText(WeaponIdToClassname(GetTFInventory()->GetWeapon(iClassIndex, iRow, iColumn)));
+				if (iColumn == iSelectedSlot)
 				{
 					m_pWeaponButton->SetBorderByString("AdvRoundedButtonDefault", "AdvRoundedButtonArmed", "AdvRoundedButtonDepressed");
 				}
@@ -573,13 +582,11 @@ void CTFLoadoutPanel::DefaultLayout()
 				{
 					m_pWeaponButton->SetBorderByString("AdvRoundedButtonDisabled", "AdvRoundedButtonArmed", "AdvRoundedButtonDepressed");
 				}
-				m_pWeaponButton->GetButton()->SetSelected((iColumn == iWeaponPreset));
 				m_pWeaponButton->SetVisible(true);
-				iPresetID++;
+				iColumnCount++;
 			}
 			else {
 				m_pWeaponButton->SetVisible(false);
-				iPresetID = 0;
 			}
 		}
 		if (iColumnCount > 2)

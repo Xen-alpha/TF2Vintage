@@ -231,6 +231,8 @@ void CTFWeaponBaseGrenade::Throw()
 
 	// Reset the throw time
 	m_flThrowTime = 0.0f;
+
+
 }
 
 //-----------------------------------------------------------------------------

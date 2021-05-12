@@ -58,6 +58,12 @@ void CTFGrenadeNormal::PrimaryAttack()
 	if (!pPlayer)
 		return;
 
+	// Set the weapon mode.
+	m_iWeaponMode = TF_WEAPON_PRIMARY_MODE;
+
+	if ( !CanAttack() )
+		return;
+
 #ifdef GAME_DLL
 	// Calculate the time remaining.
 	Vector vecSrc, vecThrow;
@@ -113,7 +119,8 @@ void CTFGrenadeNormal::PrimaryAttack()
 	// Reset the throw time
 	m_flThrowTime = 0.0f;
 
-	BaseClass::PrimaryAttack();
+	pPlayer->RemoveAmmo(1, TF_AMMO_GRENADES1);
+	//BaseClass::PrimaryAttack();
 }
 
 // Server specific.
