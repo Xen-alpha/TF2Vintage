@@ -89,14 +89,14 @@ bool CTFBat_Wood::CanCreateBall( CTFPlayer *pPlayer )
 	// We need ammo to fire
 	if ( !pPlayer )
 		return false;
-
+	/*
 	int iType = 0;
 	CALL_ATTRIB_HOOK_INT( iType, set_weapon_mode );
 
 	// Only weapon mode 1 can fire balls
 	if ( !iType )
 		return false;
-
+	*/
 	trace_t tr;
 	Vector vecStart, vecEnd, vecDir;
 	AngleVectors( pPlayer->EyeAngles(), &vecDir );

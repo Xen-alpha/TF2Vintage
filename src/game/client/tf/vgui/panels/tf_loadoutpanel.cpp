@@ -40,7 +40,7 @@ static int g_aClassLoadoutSlots[TF_CLASS_COUNT_ALL][INVENTORY_ROWNUM] =
 		TF_LOADOUT_SLOT_MELEE,
 		TF_LOADOUT_SLOT_PDA1,
 	},
-	{
+	{ // sniper
 		TF_LOADOUT_SLOT_PRIMARY,
 		TF_LOADOUT_SLOT_SECONDARY,
 		TF_LOADOUT_SLOT_MELEE,
@@ -58,11 +58,11 @@ static int g_aClassLoadoutSlots[TF_CLASS_COUNT_ALL][INVENTORY_ROWNUM] =
 		TF_LOADOUT_SLOT_MELEE,
 		TF_LOADOUT_SLOT_PDA1,
 	},
-	{
+	{ //medic
 		TF_LOADOUT_SLOT_PRIMARY,
 		TF_LOADOUT_SLOT_SECONDARY,
 		TF_LOADOUT_SLOT_MELEE,
-		TF_LOADOUT_SLOT_PDA1,
+		-1,
 	},
 	{
 		TF_LOADOUT_SLOT_PRIMARY,
@@ -76,7 +76,7 @@ static int g_aClassLoadoutSlots[TF_CLASS_COUNT_ALL][INVENTORY_ROWNUM] =
 		TF_LOADOUT_SLOT_MELEE,
 		TF_LOADOUT_SLOT_PDA1,
 	},
-	{
+	{ //spy
 		TF_LOADOUT_SLOT_SECONDARY,
         TF_LOADOUT_SLOT_PDA2,
         TF_LOADOUT_SLOT_MELEE,
@@ -95,6 +95,7 @@ struct _WeaponData
 	char szWorldModel[64];
 	char iconActive[64];
 	char iconInactive[64];
+	char iconBackpack[64];
 	char szPrintName[64];
 	int m_iWeaponType;
 };
@@ -141,10 +142,14 @@ public:
 					{
 						Q_strncpy( sTemp.iconActive, pTextureData->GetString( "file", "" ), sizeof( sTemp.iconActive ) );
 					}
+					if (!Q_stricmp(pTextureData->GetName(), "weapon_backpack"))
+					{
+						Q_strncpy(sTemp.iconBackpack, pTextureData->GetString("file", ""), sizeof(sTemp.iconBackpack));
+					}
 				}
 			}
 		}
-		m_WeaponInfoDatabase.Insert(pKeyValuesData->GetString("WeaponType"), sTemp);
+		m_WeaponInfoDatabase.Insert(szFileWithoutEXT, sTemp);
 	};
 
 	_WeaponData *GetTFWeaponInfo( const char *name )
@@ -573,7 +578,6 @@ void CTFLoadoutPanel::DefaultLayout()
 		{
 			CTFAdvItemButton *m_pWeaponButton = m_pWeaponIcons[INVENTORY_COLNUM * iRow + iColumn];
 			if (iColumn < GetTFInventory()->GetNumPresets(iClassIndex, iSlot)){
-				m_pWeaponButton->SetText(WeaponIdToClassname(GetTFInventory()->GetWeapon(iClassIndex, iRow, iColumn)));
 				if (iColumn == iSelectedSlot)
 				{
 					m_pWeaponButton->SetBorderByString("AdvRoundedButtonDefault", "AdvRoundedButtonArmed", "AdvRoundedButtonDepressed");
@@ -582,7 +586,17 @@ void CTFLoadoutPanel::DefaultLayout()
 				{
 					m_pWeaponButton->SetBorderByString("AdvRoundedButtonDisabled", "AdvRoundedButtonArmed", "AdvRoundedButtonDepressed");
 				}
-				m_pWeaponButton->SetVisible(true);
+				_WeaponData * pData = g_TFWeaponScriptParser.GetTFWeaponInfo(WeaponIdToClassname(GetTFInventory()->GetWeapon(iClassIndex, iRow, iColumn)));
+				if (pData && GetTFInventory()->GetWeapon(iClassIndex, iRow, iColumn) > TF_WEAPON_NONE){
+					char szIcon[128];
+					Q_snprintf(szIcon, sizeof(szIcon), "../%s_large", pData->iconBackpack);
+					m_pWeaponButton->SetImage(szIcon);
+					m_pWeaponButton->SetText(pData->szPrintName);
+					m_pWeaponButton->SetVisible(true);
+				}
+				else {
+					m_pWeaponButton->SetVisible(false);
+				}
 				iColumnCount++;
 			}
 			else {

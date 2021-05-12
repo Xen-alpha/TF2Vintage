@@ -3076,12 +3076,6 @@ bool CTFPlayer::ClientCommand( const CCommand &args )
 		m_flDeathTime += 2.0f;
 		return true;
 	}
-	else if (FStrEq(pcmd, "SetMedigunCharge"))
-	{
-		if (GetPlayerClass()->GetClassIndex() == TF_CLASS_MEDIC)
-			GetMedigun()->m_flChargeLevel = atof(args[1]);
-		return true;
-	}
 	else if ( FStrEq( pcmd, "show_motd" ) )
 	{
 		KeyValues *data = new KeyValues( "data" );
@@ -3675,6 +3669,11 @@ int CTFPlayer::OnTakeDamage( const CTakeDamageInfo &inputInfo )
 	{
 		// Assume that player used his currently active weapon.
 		pWeapon = ToTFPlayer( pAttacker )->GetActiveTFWeapon();
+	}
+
+	// special ability to syringe gun
+	if (pWeapon->GetWeaponID() == TF_WEAPON_SYRINGEGUN_MEDIC){
+		m_Shared.AddCond(TF_COND_STUNNED, 0.5f);
 	}
 
 	int iHealthBefore = GetHealth();
