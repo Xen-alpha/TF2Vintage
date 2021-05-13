@@ -40,7 +40,7 @@ extern ConVar tf_obj_upgrade_per_hit;
 #define SENTRYGUN_MINS			Vector(-20, -20, 0)
 #define SENTRYGUN_MAXS			Vector( 20,  20, 66)
 
-#define SENTRYGUN_MAX_HEALTH		160
+#define SENTRYGUN_MAX_HEALTH		150
 #define MINI_SENTRYGUN_MAX_HEALTH	100
 
 #define SENTRYGUN_ADD_SHELLS	40
@@ -431,7 +431,7 @@ void CObjectSentrygun::Precache()
 
 	PrecacheModel( SENTRY_ROCKET_MODEL );
 	PrecacheModel( "models/effects/sentry1_muzzle/sentry1_muzzle.mdl" );
-	//PrecacheModel( "models/buildables/sentry_shield.mdl" );
+	PrecacheModel( "models/buildables/sentry_shield.mdl" );
 
 	// Sounds
 	PrecacheScriptSound( "Building_Sentrygun.Fire" );
@@ -454,7 +454,7 @@ void CObjectSentrygun::Precache()
 	PrecacheParticleSystem( "sentrydamage_2" );
 	PrecacheParticleSystem( "sentrydamage_3" );
 	PrecacheParticleSystem( "sentrydamage_4" );
-	//PrecacheParticleSystem( "turret_shield" );
+	PrecacheParticleSystem( "turret_shield" );
 }
 
 //-----------------------------------------------------------------------------
@@ -657,7 +657,7 @@ bool CObjectSentrygun::Command_Repair( CTFPlayer *pActivator )
 		else 
 		{
 			// 33% of normal rate
-			iAmountToHeal = min( ( 80 ), GetMaxHealth() - GetHealth() );
+			iAmountToHeal = min( ( 33 ), GetMaxHealth() - GetHealth() );
 		}
 
 		// repair the building
@@ -701,7 +701,7 @@ bool CObjectSentrygun::CheckUpgradeOnHit( CTFPlayer *pPlayer )
 	}
 	else
 	{
-		iAmountToAdd = min( ( tf_obj_upgrade_per_hit.GetInt() * .80 ), iPlayerMetal );
+		iAmountToAdd = min( ( tf_obj_upgrade_per_hit.GetInt() * .33 ), iPlayerMetal );
 	}
 
 	if ( iAmountToAdd > ( m_iUpgradeMetalRequired - m_iUpgradeMetal ) )
@@ -1696,7 +1696,6 @@ int CObjectSentrygun::OnTakeDamage( const CTakeDamageInfo &info )
 
 	// As we increase in level, we get more resistant to minigun bullets, to compensate for
 	// our increased surface area taking more minigun hits.
-	/*
 	if ( ( info.GetDamageType() & DMG_BULLET ) && ( info.GetDamageCustom() == TF_DMG_CUSTOM_MINIGUN ) )
 	{
 		float flDamage = newInfo.GetDamage();
@@ -1705,7 +1704,7 @@ int CObjectSentrygun::OnTakeDamage( const CTakeDamageInfo &info )
 
 		newInfo.SetDamage( flDamage );
 	}
-	*/
+
 	// Check to see if we are being sapped.
 	if ( HasSapper() )
 	{
@@ -1720,14 +1719,15 @@ int CObjectSentrygun::OnTakeDamage( const CTakeDamageInfo &info )
 			newInfo.SetDamage( flDamage );
 		}
 	}
+
 	if ( m_iState == SENTRY_STATE_WRANGLED || m_iState == SENTRY_STATE_WRANGLED_RECOVERY )
 	{
 		float flDamage = newInfo.GetDamage();
 
-		// Wrangler shield absorbs 20% of damage
-		newInfo.SetDamage( flDamage * 0.8 );
+		// Wrangler shield absorbs 66% of damage
+		newInfo.SetDamage( flDamage * 0.34 );
 	}
-	
+
 	int iDamageTaken = BaseClass::OnTakeDamage( newInfo );
 
 	if ( iDamageTaken > 0 )

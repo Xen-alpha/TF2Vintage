@@ -1,4 +1,4 @@
-//========= Copyright ?1996-2002, Valve LLC, All rights reserved. ============
+//========= Copyright © 1996-2002, Valve LLC, All rights reserved. ============
 //
 // Purpose: 
 //
@@ -179,13 +179,13 @@ int	CHudMenuSpyDisguise::HudElementKeyInput( int down, ButtonCode_t keynum, cons
 	{
 		TF_CLASS_SCOUT,
 		TF_CLASS_SOLDIER,
-		TF_CLASS_SPY,
+		TF_CLASS_PYRO,
 		TF_CLASS_DEMOMAN,
 		TF_CLASS_HEAVYWEAPONS,
-		TF_CLASS_PYRO,
+		TF_CLASS_ENGINEER,
 		TF_CLASS_MEDIC,
 		TF_CLASS_SNIPER,
-		TF_CLASS_ENGINEER
+		TF_CLASS_SPY
 	};
 
 	bool bController = ( IsConsole() || ( keynum >= JOYSTICK_FIRST ) );
