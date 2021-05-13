@@ -3672,7 +3672,7 @@ int CTFPlayer::OnTakeDamage( const CTakeDamageInfo &inputInfo )
 	}
 
 	// special ability to syringe gun
-	if (pWeapon->GetWeaponID() == TF_WEAPON_SYRINGEGUN_MEDIC){
+	if (pWeapon && pWeapon->GetWeaponID() == TF_WEAPON_SYRINGEGUN_MEDIC){
 		m_Shared.AddCond(TF_COND_STUNNED, 0.5f);
 	}
 

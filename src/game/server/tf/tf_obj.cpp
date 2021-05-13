@@ -1846,19 +1846,7 @@ int CBaseObject::OnTakeDamage( const CTakeDamageInfo &info )
 	if ( IsPlacing() )
 		return 0;
 
-	// Check teams
-	if ( info.GetAttacker() )
-	{
-		CTFWeaponBase * pWeapon = (CTFWeaponBase *)info.GetWeapon();
-		if (InSameTeam(info.GetAttacker())){
-			if (pWeapon && pWeapon->GetWeaponID() == TF_WEAPON_NAILGUN){
-				SetHealth(min(GetMaxHealth(), m_flHealth + 10.0f));
-			}
-		}
-		return 0;
-	}
 
-	
 
 	IHasBuildPoints *pBPInterface = dynamic_cast<IHasBuildPoints*>(this);
 

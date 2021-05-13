@@ -57,6 +57,7 @@ bool CTFInventory::Init( void )
 	Weapons_Custom[TF_CLASS_SNIPER][1].AddToTail(TF_WEAPON_JAR);
 	Weapons_Custom[TF_CLASS_ENGINEER][1].AddToTail(TF_WEAPON_LASER_POINTER);
 	Weapons_Custom[TF_CLASS_DEMOMAN][2].AddToTail(TF_WEAPON_STICKBOMB);
+	Weapons_Custom[TF_CLASS_SNIPER][0].AddToTail(TF_WEAPON_MILKRIFLE);
 
 
 #if defined( CLIENT_DLL )
