@@ -46,7 +46,7 @@ END_DATADESC()
 
 PRECACHE_REGISTER( obj_teleporter );
 
-#define TELEPORTER_MAX_HEALTH	150
+#define TELEPORTER_MAX_HEALTH	160
 
 #define TELEPORTER_THINK_CONTEXT				"TeleporterContext"
 

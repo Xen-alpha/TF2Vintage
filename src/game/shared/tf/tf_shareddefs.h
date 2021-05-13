@@ -69,7 +69,7 @@ enum
 #define TF_DAMAGE_CRITMOD_MAXMULT			6
 
 #define TF_DAMAGE_CRIT_MULTIPLIER			3.0f
-#define TF_DAMAGE_MINICRIT_MULTIPLIER		1.35f
+#define TF_DAMAGE_MINICRIT_MULTIPLIER		1.5f
 
 
 //-----------------------------------------------------------------------------
@@ -356,6 +356,7 @@ enum
 	TF_WEAPON_ROBOT_ARM,
 	TF_WEAPON_BUFF_ITEM,
 	TF_WEAPON_RAZORBACK,
+	TF_WEAPON_MILKRIFLE,
 
 	TF_WEAPON_COUNT
 };

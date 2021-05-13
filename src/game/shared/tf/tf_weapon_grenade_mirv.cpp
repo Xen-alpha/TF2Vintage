@@ -312,8 +312,8 @@ CTFGrenadeMirvBomb *CTFGrenadeMirvBomb::Create( const Vector &position, const QA
 		pBomb->SetFriction( TF_WEAPON_GRENADE_MIRV_BOMB_GRAVITY );
 		pBomb->SetElasticity( TF_WEAPON_GRENADE_MIRV_BOMB_ELASTICITY );
 
-		pBomb->m_flDamage = 180.0f;
-		pBomb->m_DmgRadius = 198.0f;
+		pBomb->m_flDamage = 60.0f;
+		pBomb->m_DmgRadius = 120.0f;
 
 		pBomb->ChangeTeam( pOwner->GetTeamNumber() );
 

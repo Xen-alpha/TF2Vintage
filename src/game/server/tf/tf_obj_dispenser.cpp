@@ -84,7 +84,7 @@ END_DATADESC()
 LINK_ENTITY_TO_CLASS( obj_dispenser, CObjectDispenser );
 PRECACHE_REGISTER( obj_dispenser );
 
-#define DISPENSER_MAX_HEALTH	150
+#define DISPENSER_MAX_HEALTH	160
 
 // How much of each ammo gets added per refill
 #define DISPENSER_REFILL_METAL_AMMO	40

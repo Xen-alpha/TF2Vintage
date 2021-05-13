@@ -40,6 +40,8 @@ public:
 	virtual const char* GetEffectLabelText( void )					{ return "#TF_Ball"; }
 	virtual float		InternalGetEffectBarRechargeTime( void );
 
+	virtual int	GetAdditionalHealth() { return -15; }
+
 	virtual bool       	SendWeaponAnim( int iActivity );
 
 	virtual bool		CanCreateBall( CTFPlayer *pPlayer );
