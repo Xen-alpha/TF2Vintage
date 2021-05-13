@@ -108,13 +108,13 @@ public:
 
 	bool IsZoomed( void );
 
-protected:
+private:
 
 	void CreateSniperDot( void );
 	void DestroySniperDot( void );
 	void UpdateSniperDot( void );
 
-protected:
+private:
 	// Auto-rezooming handling
 	void SetRezoom( bool bRezoom, float flDelay );
 
@@ -124,7 +124,7 @@ protected:
 	void ZoomOut( void );
 	void Fire( CTFPlayer *pPlayer );
 
-protected:
+private:
 
 	CNetworkVar( float,	m_flChargedDamage );
 
