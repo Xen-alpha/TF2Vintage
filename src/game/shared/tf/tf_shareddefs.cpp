@@ -472,6 +472,7 @@ int g_aWeaponDamageTypes[] =
 	DMG_CLUB,   // TF_WEAPON_ROBOT_ARM
 	DMG_GENERIC, // TF_WEAPON_BUFF_ITEM
 	DMG_GENERIC, // TF_WEAPON_RAZORBACK
+	DMG_BULLET, // TF_WEAPON_NAILGUN
 
 	// This is a special entry that must match with TF_WEAPON_COUNT
 	// to protect against updating the weapon list without updating this list
@@ -524,6 +525,7 @@ const char *g_szProjectileNames[] =
 	"projectile_grapplinghook",
 	"projectile_sentry_rocket",
 	"projectile_bread_monster",
+	"projectile_nail",
 };
 
 // these map to the projectiles named in g_szProjectileNames
@@ -536,6 +538,7 @@ int g_iProjectileWeapons[] =
 	TF_WEAPON_GRENADELAUNCHER,
 	TF_WEAPON_SYRINGEGUN_MEDIC,
 	TF_WEAPON_FLAREGUN,
+	TF_WEAPON_NAILGUN,
 };
 
 const char *g_pszHintMessages[] =

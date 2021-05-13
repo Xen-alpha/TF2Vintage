@@ -50,6 +50,7 @@ CTFInventory::~CTFInventory()
 
 bool CTFInventory::Init( void )
 {
+	Weapons_Custom[TF_CLASS_SCOUT][1].AddToTail(TF_WEAPON_NAILGUN);
 	Weapons_Custom[TF_CLASS_SCOUT][2].AddToTail(TF_WEAPON_BAT_WOOD);
 	Weapons_Custom[TF_CLASS_SOLDIER][1].AddToTail(TF_WEAPON_BUFF_ITEM);
 	Weapons_Custom[TF_CLASS_SNIPER][0].AddToTail(TF_WEAPON_COMPOUND_BOW);
