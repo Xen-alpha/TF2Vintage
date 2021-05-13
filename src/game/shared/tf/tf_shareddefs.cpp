@@ -399,6 +399,7 @@ const char *g_aWeaponNames[] =
 	"TF_WEAPON_ROBOT_ARM",
 	"TF_WEAPON_BUFF_ITEM",
 	"TF_WEAPON_RAZORBACK",
+	"TF_WEAPON_MILKRIFLE",
 
 	"TF_WEAPON_COUNT",	// end marker, do not add below here
 };
@@ -473,6 +474,7 @@ int g_aWeaponDamageTypes[] =
 	DMG_GENERIC, // TF_WEAPON_BUFF_ITEM
 	DMG_GENERIC, // TF_WEAPON_RAZORBACK
 	DMG_BULLET, // TF_WEAPON_NAILGUN
+	DMG_BULLET, // TF_WEAPON_MILKRIFLE
 
 	// This is a special entry that must match with TF_WEAPON_COUNT
 	// to protect against updating the weapon list without updating this list

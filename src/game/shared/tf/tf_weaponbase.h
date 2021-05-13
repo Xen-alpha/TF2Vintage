@@ -248,6 +248,8 @@ class CTFWeaponBase : public CBaseCombatWeapon
 	virtual void	WeaponReset( void );
 	virtual void	WeaponRegenerate() {}
 
+	virtual int	GetAdditionalHealth() { return 0; }
+
 	// Muzzleflashes
 	virtual const char *GetMuzzleFlashEffectName_3rd( void ) { return NULL; }
 	virtual const char *GetMuzzleFlashEffectName_1st( void ) { return NULL; }

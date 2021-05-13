@@ -1706,22 +1706,15 @@ int CTFWeaponBase::GetActivityWeaponRole( void )
 	CTFPlayer *pPlayer = GetTFPlayerOwner();
 	if ( pPlayer && pPlayer->m_Shared.InCond( TF_COND_DISGUISED ) && pPlayer->IsEnemyPlayer() )
 	{
-		CEconItemView *pItem = pPlayer->m_Shared.GetDisguiseItem();
-		if ( pItem->GetItemDefIndex() >= 0 )
+		CTFWeaponBase *pItem = pPlayer->m_Shared.GetDisguiseItem();
+		if ( pItem->GetWeaponID() >= 0 )
 		{
-			int iSchemaRole = pItem->GetAnimationSlot();
-			if ( iSchemaRole >= 0 )
+			CTFWeaponInfo *pWeaponInfo = pPlayer->m_Shared.GetDisguiseWeaponInfo();
+			if (pWeaponInfo)
 			{
-				iWeaponRole = iSchemaRole;
+				iWeaponRole = pWeaponInfo->m_iWeaponType;
 			}
-			else
-			{
-				CTFWeaponInfo *pWeaponInfo = pPlayer->m_Shared.GetDisguiseWeaponInfo();
-				if (pWeaponInfo)
-				{
-					iWeaponRole = pWeaponInfo->m_iWeaponType;
-				}
-			}
+			
 		}
 	}
 #endif
