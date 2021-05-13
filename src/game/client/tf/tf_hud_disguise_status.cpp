@@ -1,4 +1,4 @@
-//========= Copyright © 1996-2002, Valve LLC, All rights reserved. ============
+//========= Copyright ?1996-2002, Valve LLC, All rights reserved. ============
 //
 // Purpose: HUD Target ID element
 //
@@ -148,9 +148,8 @@ void CDisguiseStatus::CheckWeapon(void)
 	if (!pPlayer)
 		return;
 
-	CEconItemDefinition *pItem = pPlayer->m_Shared.GetDisguiseItem()->GetStaticData();
-	if (pItem)
-		SetDialogVariable( "weaponname", pItem->GenerateLocalizedItemNameNoQuality() );
+	CTFWeaponInfo pItem = pPlayer->m_Shared.GetDisguiseItem()->GetTFWpnData();
+	SetDialogVariable( "weaponname", pItem.szPrintName );
 }
 
 //-----------------------------------------------------------------------------
