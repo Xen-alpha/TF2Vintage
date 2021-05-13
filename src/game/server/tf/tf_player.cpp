@@ -56,7 +56,6 @@
 #include "tf_weapon_flamethrower.h"
 #include "tf_weapon_lunchbox.h"
 #include "tf_weapon_laser_pointer.h"
-#include "tf_weapon_milkrifle.h"
 
 // memdbgon must be the last include file in a .cpp file!!!
 #include "tier0/memdbgon.h"
@@ -1228,12 +1227,6 @@ void CTFPlayer::InitClass( void )
 	// Set initial health and armor based on class.
 	int iHealthToAdd = 0;
 	CALL_ATTRIB_HOOK_INT( iHealthToAdd, add_maxhealth );
-
-	for (int iSlot = 0; iSlot < MAX_WEAPON_SLOTS; iSlot++){
-		CTFWeaponBase *pWeapon = (CTFWeaponBase *)Weapon_GetSlot(iSlot);
-		if (pWeapon) iHealthToAdd += pWeapon->GetAdditionalHealth();
-	}
-
 	if( iHealthToAdd != 0 )
 	{
 		SetMaxHealth( GetPlayerClass()->GetMaxHealth() + iHealthToAdd );
@@ -3353,12 +3346,6 @@ void CTFPlayer::TraceAttack( const CTakeDamageInfo &info, const Vector &vecDir, 
 			if (!g_pGameRules->FPlayerCanTakeDamage(this, info.GetAttacker(), info))
 				return;
 		}
-		if (info.GetAttacker()->GetTeamNumber() == this->GetTeamNumber()){
-			if (strncmp(info.GetWeapon()->GetClassname(), "tf_weapon_milkrifle", 19) == 0){
-				CTFMilkRifle * pRifle = (CTFMilkRifle *)info.GetWeapon();
-				m_Shared.Heal(this, pRifle->GetProjectileDamage());
-			}
-		}
 	}
 
 	// Save this bone for the ragdoll.
@@ -3683,16 +3670,12 @@ int CTFPlayer::OnTakeDamage( const CTakeDamageInfo &inputInfo )
 		// Assume that player used his currently active weapon.
 		pWeapon = ToTFPlayer( pAttacker )->GetActiveTFWeapon();
 	}
-	/*
+
 	// special ability to syringe gun
 	if (pWeapon->GetWeaponID() == TF_WEAPON_SYRINGEGUN_MEDIC){
 		m_Shared.AddCond(TF_COND_STUNNED, 0.5f);
 	}
-	// special ability to milk rifle
-	if (pWeapon->GetWeaponID() == TF_WEAPON_MILKRIFLE){
-		m_Shared.AddCond(TF_COND_MAD_MILK, 4.0f);
-	}
-	*/
+
 	int iHealthBefore = GetHealth();
 
 	bool bDebug = tf_debug_damage.GetBool();
@@ -3863,11 +3846,6 @@ int CTFPlayer::OnTakeDamage( const CTakeDamageInfo &inputInfo )
 		{
 			bitsDamage |= DMG_MINICRITICAL;
 			info.AddDamageType( DMG_MINICRITICAL );
-		}
-		// shovel mini crit with rocket jump
-		if (pTFAttacker && pTFAttacker->m_Shared.InCond(TF_COND_BLASTJUMPING) && pWeapon && pWeapon->GetWeaponID() == TF_WEAPON_SHOVEL){
-			bitsDamage |= DMG_MINICRITICAL;
-			info.AddDamageType(DMG_MINICRITICAL);
 		}
 		
 		// Notify the damaging weapon.

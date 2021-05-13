@@ -1,4 +1,4 @@
-//====== Copyright ?1996-2005, Valve Corporation, All rights reserved. =======
+//====== Copyright © 1996-2005, Valve Corporation, All rights reserved. =======
 //
 // Purpose: 
 //
@@ -65,18 +65,6 @@ public:
 
 	virtual void	DoViewModelAnimation( void );
 
-	virtual int		GetAdditionalHealth(void) { return 25; }
-	/*
-	virtual int TranslateViewmodelHandActivity(int iActivity);
-	virtual void SetViewModel();
-	virtual const char *GetViewModel(int iViewModel = 0) const;
-	virtual const char *DetermineViewModelType(const char *vModel) const;
-
-
-#ifdef CLIENT_DLL
-	virtual C_BaseAnimating *GetAppropriateWorldOrViewModel(void);
-#endif
-	*/
 private:
 
 	int				m_iConsecutivePunches;
