@@ -1,0 +1,74 @@
+﻿Build started 2021-05-07(금) 오전 11:30:12.
+     1>Project "C:\Program Files (x86)\Steam\steamapps\common\Source SDK Base 2013 Multiplayer\dev\Ultra-Fortress\src\tier1\tier1.vcxproj" on node 4 (Build target(s)).
+     1>PreBuildEvent:
+         if EXIST ..\lib\public\.\tier1.lib ( for /f "delims=" %%A in ('attrib "..\lib\public\.\tier1.lib"') do set valveTmpIsReadOnly="%%A"
+         ) else ( if not EXIST ..\lib\public\. mkdir ..\lib\public\. )
+         set valveTmpIsReadOnlyLetter=%valveTmpIsReadOnly:~6,1%
+         if "%valveTmpIsReadOnlyLetter%"=="R" (
+             attrib -r ..\lib\public\.\tier1.lib
+             ..\devtools\bin\gnu\touch.exe -d "1999-01-01" ..\lib\public\.\tier1.lib
+             attrib +r ..\lib\public\.\tier1.lib
+         )
+         if exist "..\devtools\bin\vpc.exe" "..\devtools\bin\vpc.exe" -crc2 "tier1.vcxproj"
+         if ERRORLEVEL 1 exit /b 1
+         
+         :VCEnd
+       CustomBuild:
+         Running VPC CRC Check - tier1.vpc
+         액세스가 거부되었습니다.
+       ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I..\common /I..\public /I..\public\tier0 /I..\public\tier1 /ZI /nologo /W4 /WX /MP /Od /Oy- /D VPC /D RAD_TELEMETRY_DISABLED /D _HAS_ITERATOR_DEBUGGING=0 /D WIN32 /D _WIN32 /D _DEBUG /D DEBUG /D _LIB /D _CRT_SECURE_NO_DEPRECATE /D _CRT_NONSTDC_NO_DEPRECATE /D _ALLOW_RUNTIME_LIBRARY_MISMATCH /D _ALLOW_ITERATOR_DEBUG_LEVEL_MISMATCH /D _ALLOW_MSC_VER_MISMATCH /D _USING_V110_SDK71_ /D _MBCS /D COMPILER_MSVC32 /D COMPILER_MSVC32 /D COMPILER_MSVC /D _DLL_EXT=.dll /D LIBNAME=tier1 /D BINK_VIDEO /D AVI_VIDEO /D WMV_VIDEO /D DEV_BUILD /D FRAME_POINTER_OMISSION_DISABLED /D TIER1_STATIC_LIB /D _EXTERNAL_DLL_EXT=.dll /D VPCGAMECAPS=TF2VINTAGE /D "PROJECTDIR=C:\Program Files (x86)\Steam\steamapps\common\Source SDK Base 2013 Multiplayer\dev\Ultra-Fortress\src\tier1" /D _DLL_EXT=.dll /D SOURCE1=1 /D VPCGAME=tf2vintage /GF /Gm- /MTd /GS /arch:SSE /fp:fast /Zc:wchar_t /Zc:forScope /GR /openmp- /Fo".\Debug\.\/" /Fd".\Debug\.\/vc120.pdb" /Gd /TP /wd4316 /analyze- /FC /errorReport:prompt  /Gw /Zc:inline ..\utils\lzma\C\LzmaDec.c bitbuf.cpp byteswap.cpp characterset.cpp checksum_crc.cpp checksum_md5.cpp checksum_sha1.cpp commandbuffer.cpp convar.cpp datamanager.cpp diff.cpp generichash.cpp ilocalize.cpp interface.cpp KeyValues.cpp kvpacker.cpp lzmaDecoder.cpp mempool.cpp memstack.cpp NetAdr.cpp newbitbuf.cpp rangecheckedvar.cpp reliabletimer.cpp "snappy-sinksource.cpp" "snappy-stubs-internal.cpp" snappy.cpp sparsematrix.cpp splitstring.cpp stringpool.cpp strtools.cpp strtools_unicode.cpp tier1.cpp tokenreader.cpp uniqueid.cpp utlbinaryblock.cpp utlbuffer.cpp utlbufferutil.cpp utlstring.cpp utlsymbol.cpp
+         LzmaDec.c
+         bitbuf.cpp
+         byteswap.cpp
+         characterset.cpp
+         checksum_crc.cpp
+         checksum_md5.cpp
+         checksum_sha1.cpp
+         commandbuffer.cpp
+         convar.cpp
+         datamanager.cpp
+         diff.cpp
+         generichash.cpp
+         ilocalize.cpp
+         interface.cpp
+         KeyValues.cpp
+         kvpacker.cpp
+         lzmaDecoder.cpp
+         mempool.cpp
+         memstack.cpp
+         NetAdr.cpp
+         newbitbuf.cpp
+         rangecheckedvar.cpp
+         reliabletimer.cpp
+         snappy-sinksource.cpp
+         snappy-stubs-internal.cpp
+         snappy.cpp
+         sparsematrix.cpp
+         splitstring.cpp
+         stringpool.cpp
+         strtools.cpp
+         strtools_unicode.cpp
+         tier1.cpp
+         tokenreader.cpp
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\tier1\utlsortvector.h : error C2220: warning treated as error - no 'object' file generated (KeyValues.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\tier1\utlsortvector.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss (KeyValues.cpp)
+         uniqueid.cpp
+         utlbinaryblock.cpp
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\tier1\utlbinaryblock.h : error C2220: warning treated as error - no 'object' file generated (utlbinaryblock.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\tier1\utlbinaryblock.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss (utlbinaryblock.cpp)
+         utlbuffer.cpp
+         utlbufferutil.cpp
+         utlstring.cpp
+         utlsymbol.cpp
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\tier1\snappy-stubs-internal.h : error C2220: warning treated as error - no 'object' file generated (snappy-stubs-internal.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\tier1\snappy-stubs-internal.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss (snappy-stubs-internal.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\tier1\snappy-stubs-internal.h : error C2220: warning treated as error - no 'object' file generated (snappy.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\tier1\snappy-stubs-internal.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss (snappy.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\tier1\utlbinaryblock.h : error C2220: warning treated as error - no 'object' file generated (utlbufferutil.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\tier1\utlbinaryblock.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss (utlbufferutil.cpp)
+     1>Done Building Project "C:\Program Files (x86)\Steam\steamapps\common\Source SDK Base 2013 Multiplayer\dev\Ultra-Fortress\src\tier1\tier1.vcxproj" (Build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:05.97
