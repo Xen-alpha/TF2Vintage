@@ -1,0 +1,190 @@
+﻿Build started 2021-05-07(금) 오전 11:30:12.
+     1>Project "C:\Program Files (x86)\Steam\steamapps\common\Source SDK Base 2013 Multiplayer\dev\Ultra-Fortress\src\vgui2\vgui_controls\vgui_controls.vcxproj" on node 3 (Build target(s)).
+     1>PreBuildEvent:
+         if EXIST ..\..\lib\public\.\vgui_controls.lib ( for /f "delims=" %%A in ('attrib "..\..\lib\public\.\vgui_controls.lib"') do set valveTmpIsReadOnly="%%A"
+         ) else ( if not EXIST ..\..\lib\public\. mkdir ..\..\lib\public\. )
+         set valveTmpIsReadOnlyLetter=%valveTmpIsReadOnly:~6,1%
+         if "%valveTmpIsReadOnlyLetter%"=="R" (
+             attrib -r ..\..\lib\public\.\vgui_controls.lib
+             ..\..\devtools\bin\gnu\touch.exe -d "1999-01-01" ..\..\lib\public\.\vgui_controls.lib
+             attrib +r ..\..\lib\public\.\vgui_controls.lib
+         )
+         if exist "..\..\devtools\bin\vpc.exe" "..\..\devtools\bin\vpc.exe" -crc2 "vgui_controls.vcxproj"
+         if ERRORLEVEL 1 exit /b 1
+         
+         :VCEnd
+       CustomBuild:
+         Running VPC CRC Check - vgui_controls.vpc
+         액세스가 거부되었습니다.
+       ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I..\..\common /I..\..\public /I..\..\public\tier0 /I..\..\public\tier1 /Igenerated_proto /I"..\..\thirdparty\protobuf-2.3.0\src" /I..\..\thirdparty /I..\..\thirdparty\cef /Igenerated_proto /ZI /nologo /W4 /WX /MP /Od /Oy- /D VPC /D RAD_TELEMETRY_DISABLED /D _HAS_ITERATOR_DEBUGGING=0 /D WIN32 /D _WIN32 /D _DEBUG /D DEBUG /D _LIB /D _CRT_SECURE_NO_DEPRECATE /D _CRT_NONSTDC_NO_DEPRECATE /D _ALLOW_RUNTIME_LIBRARY_MISMATCH /D _ALLOW_ITERATOR_DEBUG_LEVEL_MISMATCH /D _ALLOW_MSC_VER_MISMATCH /D _USING_V110_SDK71_ /D _MBCS /D COMPILER_MSVC32 /D COMPILER_MSVC32 /D COMPILER_MSVC /D _DLL_EXT=.dll /D LIBNAME=vgui_controls /D BINK_VIDEO /D AVI_VIDEO /D WMV_VIDEO /D DEV_BUILD /D FRAME_POINTER_OMISSION_DISABLED /D _EXTERNAL_DLL_EXT=.dll /D VPCGAMECAPS=TF2VINTAGE /D "PROJECTDIR=C:\Program Files (x86)\Steam\steamapps\common\Source SDK Base 2013 Multiplayer\dev\Ultra-Fortress\src\vgui2\vgui_controls" /D _DLL_EXT=.dll /D VPCGAME=tf2vintage /D SOURCE1=1 /GF /Gm- /MTd /GS /arch:SSE /fp:fast /Zc:wchar_t /Zc:forScope /GR /openmp- /Fo".\Debug\.\/" /Fd".\Debug\.\/vc120.pdb" /Gd /TP /wd4316 /analyze- /FC /errorReport:prompt  /Gw /Zc:inline AnalogBar.cpp AnimatingImagePanel.cpp AnimationController.cpp BitmapImagePanel.cpp BuildFactoryHelper.cpp BuildGroup.cpp BuildModeDialog.cpp Button.cpp CheckButton.cpp CheckButtonList.cpp CircularProgressBar.cpp ComboBox.cpp consoledialog.cpp ControllerMap.cpp controls.cpp CvarToggleCheckButton.cpp DirectorySelectDialog.cpp Divider.cpp EditablePanel.cpp ExpandButton.cpp FileOpenDialog.cpp FileOpenStateMachine.cpp ..\..\public\filesystem_helpers.cpp FocusNavGroup.cpp Frame.cpp GraphPanel.cpp HTML.cpp Image.cpp ImageList.cpp ImagePanel.cpp InputDialog.cpp KeyBindingHelpDialog.cpp KeyBoardEditorDialog.cpp KeyRepeat.cpp Label.cpp ListPanel.cpp ListViewPanel.cpp Menu.cpp MenuBar.cpp MenuButton.cpp MenuItem.cpp MessageBox.cpp MessageDialog.cpp Panel.cpp PanelListPanel.cpp PerforceFileExplorer.cpp PerforceFileList.cpp perforcefilelistframe.cpp ProgressBar.cpp ProgressBox.cpp PropertyDialog.cpp PropertyPage.cpp PropertySheet.cpp QueryBox.cpp RadioButton.cpp RichText.cpp RotatingProgressBar.cpp savedocumentquery.cpp ScalableImagePanel.cpp ScrollableEditablePanel.cpp ScrollBar.cpp ScrollBarSlider.cpp SectionedListPanel.cpp Slider.cpp Splitter.cpp subrectimage.cpp TextEntry.cpp TextImage.cpp ToggleButton.cpp Tooltip.cpp ToolWindow.cpp TreeView.cpp TreeViewListControl.cpp URLLabel.cpp ..\..\vgui2\src\vgui_key_translation.cpp WizardPanel.cpp WizardSubPanel.cpp
+         AnalogBar.cpp
+         AnimatingImagePanel.cpp
+         AnimationController.cpp
+         BitmapImagePanel.cpp
+         BuildFactoryHelper.cpp
+         BuildGroup.cpp
+         BuildModeDialog.cpp
+         Button.cpp
+         CheckButton.cpp
+         CheckButtonList.cpp
+         CircularProgressBar.cpp
+         ComboBox.cpp
+         consoledialog.cpp
+         ControllerMap.cpp
+         controls.cpp
+         CvarToggleCheckButton.cpp
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\vgui2\vgui_controls\buildgroup.cpp : error C2220: warning treated as error - no 'object' file generated
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\vgui2\vgui_controls\buildgroup.cpp : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
+         DirectorySelectDialog.cpp
+         Divider.cpp
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\tier1\utlsortvector.h : error C2220: warning treated as error - no 'object' file generated (CheckButtonList.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\tier1\utlsortvector.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss (CheckButtonList.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\tier1\utlsortvector.h : error C2220: warning treated as error - no 'object' file generated (CvarToggleCheckButton.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\tier1\utlsortvector.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss (CvarToggleCheckButton.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\tier1\utlsortvector.h : error C2220: warning treated as error - no 'object' file generated (CheckButton.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\tier1\utlsortvector.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss (CheckButton.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\tier1\utlsortvector.h : error C2220: warning treated as error - no 'object' file generated (ComboBox.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\tier1\utlsortvector.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss (ComboBox.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\tier1\utlsortvector.h : error C2220: warning treated as error - no 'object' file generated (BuildModeDialog.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\tier1\utlsortvector.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss (BuildModeDialog.cpp)
+         EditablePanel.cpp
+         ExpandButton.cpp
+         FileOpenDialog.cpp
+         FileOpenStateMachine.cpp
+         filesystem_helpers.cpp
+         FocusNavGroup.cpp
+         Frame.cpp
+         GraphPanel.cpp
+         HTML.cpp
+         Image.cpp
+         ImageList.cpp
+         ImagePanel.cpp
+         InputDialog.cpp
+         KeyBindingHelpDialog.cpp
+         KeyBoardEditorDialog.cpp
+         KeyRepeat.cpp
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\tier1\utlsortvector.h : error C2220: warning treated as error - no 'object' file generated (ExpandButton.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\tier1\utlsortvector.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss (ExpandButton.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\tier1\utlsortvector.h : error C2220: warning treated as error - no 'object' file generated (EditablePanel.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\tier1\utlsortvector.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss (EditablePanel.cpp)
+         Label.cpp
+         ListPanel.cpp
+         ListViewPanel.cpp
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\tier1\utlsortvector.h : error C2220: warning treated as error - no 'object' file generated (Frame.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\tier1\utlsortvector.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss (Frame.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\tier1\utlsortvector.h : error C2220: warning treated as error - no 'object' file generated (HTML.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\tier1\utlsortvector.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss (HTML.cpp)
+         Menu.cpp
+         MenuBar.cpp
+         MenuButton.cpp
+         MenuItem.cpp
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\steam\steamtypes.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss (HTML.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\steam\steamclientpublic.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss (HTML.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\steam\steamuniverse.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss (HTML.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\steam\isteamutils.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss (HTML.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\steam\matchmakingtypes.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss (HTML.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\steam\isteamuserstats.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss (HTML.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\steam\isteamremotestorage.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss (HTML.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\steam\steamhttpenums.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss (HTML.cpp)
+         MessageBox.cpp
+         MessageDialog.cpp
+         Panel.cpp
+         PanelListPanel.cpp
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\tier1\utlsortvector.h : error C2220: warning treated as error - no 'object' file generated (KeyRepeat.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\tier1\utlsortvector.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss (KeyRepeat.cpp)
+         PerforceFileExplorer.cpp
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\tier1\utlsortvector.h : error C2220: warning treated as error - no 'object' file generated (Label.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\tier1\utlsortvector.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss (Label.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\tier1\utlsortvector.h : error C2220: warning treated as error - no 'object' file generated (ListViewPanel.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\tier1\utlsortvector.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss (ListViewPanel.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\tier1\utlsortvector.h : error C2220: warning treated as error - no 'object' file generated (ListPanel.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\tier1\utlsortvector.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss (ListPanel.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\steam\steamtypes.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss (KeyRepeat.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\steam\steamclientpublic.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss (KeyRepeat.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\steam\steamuniverse.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss (KeyRepeat.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\steam\isteamutils.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss (KeyRepeat.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\steam\matchmakingtypes.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss (KeyRepeat.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\steam\isteamuserstats.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss (KeyRepeat.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\steam\isteamremotestorage.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss (KeyRepeat.cpp)
+         PerforceFileList.cpp
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\steam\steamhttpenums.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss (KeyRepeat.cpp)
+         perforcefilelistframe.cpp
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\tier1\utlsortvector.h : error C2220: warning treated as error - no 'object' file generated (MenuButton.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\tier1\utlsortvector.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss (MenuButton.cpp)
+         ProgressBar.cpp
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\tier1\utlsortvector.h : error C2220: warning treated as error - no 'object' file generated (MenuItem.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\tier1\utlsortvector.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss (MenuItem.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\tier1\utlsortvector.h : error C2220: warning treated as error - no 'object' file generated (Menu.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\tier1\utlsortvector.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss (Menu.cpp)
+         ProgressBox.cpp
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\steam\steamtypes.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss (Menu.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\steam\steamclientpublic.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss (Menu.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\steam\steamuniverse.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss (Menu.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\steam\isteamutils.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss (Menu.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\steam\matchmakingtypes.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss (Menu.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\steam\isteamuserstats.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss (Menu.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\steam\isteamremotestorage.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss (Menu.cpp)
+         PropertyDialog.cpp
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\steam\steamhttpenums.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss (Menu.cpp)
+         PropertyPage.cpp
+         PropertySheet.cpp
+         QueryBox.cpp
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\tier1\utlsortvector.h : error C2220: warning treated as error - no 'object' file generated (Panel.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\tier1\utlsortvector.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss (Panel.cpp)
+         RadioButton.cpp
+         RichText.cpp
+         RotatingProgressBar.cpp
+         savedocumentquery.cpp
+         ScalableImagePanel.cpp
+         ScrollableEditablePanel.cpp
+         ScrollBar.cpp
+         ScrollBarSlider.cpp
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\tier1\utlsortvector.h : error C2220: warning treated as error - no 'object' file generated (QueryBox.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\tier1\utlsortvector.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss (QueryBox.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\tier1\utlsortvector.h : error C2220: warning treated as error - no 'object' file generated (PropertySheet.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\tier1\utlsortvector.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss (PropertySheet.cpp)
+         SectionedListPanel.cpp
+         Slider.cpp
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\tier1\utlsortvector.h : error C2220: warning treated as error - no 'object' file generated (RadioButton.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\tier1\utlsortvector.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss (RadioButton.cpp)
+         Splitter.cpp
+         subrectimage.cpp
+         TextEntry.cpp
+         TextImage.cpp
+         ToggleButton.cpp
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\tier1\utlsortvector.h : error C2220: warning treated as error - no 'object' file generated (RichText.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\tier1\utlsortvector.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss (RichText.cpp)
+         Tooltip.cpp
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\steam\steamtypes.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss (RichText.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\steam\steamclientpublic.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss (RichText.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\steam\steamuniverse.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss (RichText.cpp)
+         ToolWindow.cpp
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\steam\isteamutils.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss (RichText.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\steam\matchmakingtypes.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss (RichText.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\steam\isteamuserstats.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss (RichText.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\steam\isteamremotestorage.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss (RichText.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\steam\steamhttpenums.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss (RichText.cpp)
+         TreeView.cpp
+         TreeViewListControl.cpp
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\tier1\utlsortvector.h : error C2220: warning treated as error - no 'object' file generated (TextImage.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\tier1\utlsortvector.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss (TextImage.cpp)
+         URLLabel.cpp
+         vgui_key_translation.cpp
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\tier1\utlsortvector.h : error C2220: warning treated as error - no 'object' file generated (Slider.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\tier1\utlsortvector.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss (Slider.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\tier1\utlsortvector.h : error C2220: warning treated as error - no 'object' file generated (SectionedListPanel.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\tier1\utlsortvector.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss (SectionedListPanel.cpp)
+         WizardPanel.cpp
+         WizardSubPanel.cpp
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\tier1\utlsortvector.h : error C2220: warning treated as error - no 'object' file generated (TreeView.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\tier1\utlsortvector.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss (TreeView.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\tier1\utlsortvector.h : error C2220: warning treated as error - no 'object' file generated (URLLabel.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\tier1\utlsortvector.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss (URLLabel.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\tier1\utlsortvector.h : error C2220: warning treated as error - no 'object' file generated (TreeViewListControl.cpp)
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\tier1\utlsortvector.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss (TreeViewListControl.cpp)
+     1>Done Building Project "C:\Program Files (x86)\Steam\steamapps\common\Source SDK Base 2013 Multiplayer\dev\Ultra-Fortress\src\vgui2\vgui_controls\vgui_controls.vcxproj" (Build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:10.31

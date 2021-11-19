@@ -1,4 +1,4 @@
-//========= Copyright © 1996-2004, Valve LLC, All rights reserved. ============
+//========= Copyright ?1996-2004, Valve LLC, All rights reserved. ============
 //
 //	Weapons.
 //
@@ -128,6 +128,7 @@ class CTFWeaponBase : public CBaseCombatWeapon
 	CTFWeaponInfo const	&GetTFWpnData() const;
 	virtual int GetWeaponID( void ) const;
 	bool IsWeapon( int iWeapon ) const;
+	virtual bool IsWearable() { return false; }
 	virtual int	GetDamageType() const { return g_aWeaponDamageTypes[ GetWeaponID() ]; }
 	virtual int GetCustomDamageType() const { return TF_DMG_CUSTOM_NONE; }
 
@@ -143,12 +144,12 @@ class CTFWeaponBase : public CBaseCombatWeapon
 #ifdef CLIENT_DLL
 	virtual void UpdateViewModel( void );
 
-	C_ViewmodelAttachmentModel *GetViewmodelAddon( void );
+	virtual C_ViewmodelAttachmentModel *GetViewmodelAddon( void );
 
 	// AE_CL_BODYGROUP_SET_VALUE_CMODEL_WPN
-	C_BaseAnimating *GetAppropriateWorldOrViewModel( void );
+	virtual C_BaseAnimating *GetAppropriateWorldOrViewModel( void );
 
-	string_t GetViewModelOffset( void );
+	virtual string_t GetViewModelOffset( void );
 
 	// Stunball
 	virtual const char *GetStunballViewmodel( void ) { return NULL_STRING; }

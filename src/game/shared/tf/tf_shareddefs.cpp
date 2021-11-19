@@ -1,4 +1,4 @@
-//====== Copyright © 1996-2004, Valve Corporation, All rights reserved. =======
+//====== Copyright ?1996-2004, Valve Corporation, All rights reserved. =======
 //
 // Purpose: 
 //
@@ -398,6 +398,9 @@ const char *g_aWeaponNames[] =
 	"TF_WEAPON_BAT_WOOD",
 	"TF_WEAPON_ROBOT_ARM",
 	"TF_WEAPON_BUFF_ITEM",
+	"TF_WEAPON_RAZORBACK",
+	"TF_WEAPON_MILKRIFLE",
+
 	"TF_WEAPON_COUNT",	// end marker, do not add below here
 };
 
@@ -421,7 +424,7 @@ int g_aWeaponDamageTypes[] =
 	DMG_BUCKSHOT | DMG_USEDISTANCEMOD,  // TF_WEAPON_SCATTERGUN,
 	DMG_BULLET | DMG_USE_HITLOCATIONS,	// TF_WEAPON_SNIPERRIFLE,
 	DMG_BULLET | DMG_USEDISTANCEMOD,		// TF_WEAPON_MINIGUN,
-	DMG_BULLET | DMG_USEDISTANCEMOD,		// TF_WEAPON_SMG,
+	DMG_BULLET ,		// TF_WEAPON_SMG,
 	DMG_BULLET | DMG_USEDISTANCEMOD | DMG_NOCLOSEDISTANCEMOD | DMG_PREVENT_PHYSICS_FORCE,		// TF_WEAPON_SYRINGEGUN_MEDIC,
 	DMG_BULLET | DMG_USEDISTANCEMOD | DMG_PREVENT_PHYSICS_FORCE | DMG_PARALYZE,		// TF_WEAPON_TRANQ,
 	DMG_BLAST | DMG_HALF_FALLOFF | DMG_USEDISTANCEMOD,		// TF_WEAPON_ROCKETLAUNCHER,
@@ -469,6 +472,9 @@ int g_aWeaponDamageTypes[] =
 	DMG_CLUB,	// TF_WEAPON_BAT_WOOD,
 	DMG_CLUB,   // TF_WEAPON_ROBOT_ARM
 	DMG_GENERIC, // TF_WEAPON_BUFF_ITEM
+	DMG_GENERIC, // TF_WEAPON_RAZORBACK
+	DMG_BULLET, // TF_WEAPON_NAILGUN
+	DMG_BULLET, // TF_WEAPON_MILKGUN
 
 	// This is a special entry that must match with TF_WEAPON_COUNT
 	// to protect against updating the weapon list without updating this list
@@ -521,6 +527,7 @@ const char *g_szProjectileNames[] =
 	"projectile_grapplinghook",
 	"projectile_sentry_rocket",
 	"projectile_bread_monster",
+	"projectile_nail",
 };
 
 // these map to the projectiles named in g_szProjectileNames
@@ -533,6 +540,7 @@ int g_iProjectileWeapons[] =
 	TF_WEAPON_GRENADELAUNCHER,
 	TF_WEAPON_SYRINGEGUN_MEDIC,
 	TF_WEAPON_FLAREGUN,
+	TF_WEAPON_NAILGUN,
 };
 
 const char *g_pszHintMessages[] =

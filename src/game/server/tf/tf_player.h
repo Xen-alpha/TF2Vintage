@@ -1,4 +1,4 @@
-//========= Copyright © 1996-2005, Valve LLC, All rights reserved. ============
+//========= Copyright ?1996-2005, Valve LLC, All rights reserved. ============
 //
 //=============================================================================
 #ifndef TF_PLAYER_H
@@ -430,6 +430,7 @@ public:
 	void				ValidateWearables( void );
 	void				ManageRegularWeapons( TFPlayerClassData_t *pData );
 	void				ManageRegularWeaponsLegacy( TFPlayerClassData_t *pData );
+	void				ManageRegularWearable(TFPlayerClassData_t *pData);
 	void				ManageRandomWeapons( TFPlayerClassData_t *pData );
 	void				ManageBuilderWeapons( TFPlayerClassData_t *pData );
 	void				ManageGrenades(TFPlayerClassData_t *pData);
@@ -647,6 +648,8 @@ private:
 	COutputEvent		m_OnDeath;
 
 	CUtlVector<AppliedContext_t> m_hActiveContexts;
+
+	CNetworkVar(float, m_flMedigunCharge);
 
 public:
 	bool				SetPowerplayEnabled( bool bOn );

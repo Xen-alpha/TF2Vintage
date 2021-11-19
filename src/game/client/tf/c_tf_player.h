@@ -1,4 +1,4 @@
-//====== Copyright © 1996-2003, Valve Corporation, All rights reserved. =======
+//====== Copyright ?1996-2003, Valve Corporation, All rights reserved. =======
 //
 // Purpose: 
 //
@@ -359,6 +359,8 @@ public:
 	bool			m_bIsDisplayingNemesisIcon;
 
 	int				m_nForceTauntCam;
+
+	float			m_flMedigunCharge;
 
 	int				m_iSpawnCounter;
 

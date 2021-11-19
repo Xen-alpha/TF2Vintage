@@ -44,6 +44,16 @@ public:
 	virtual bool		HasChargeBar( void )				{ return true; }
 	virtual const char* GetEffectLabelText( void )			{ return "#TF_Jar"; }
 	virtual float		InternalGetEffectBarRechargeTime()	{ return 20.0; }
+
+	virtual int TranslateViewmodelHandActivity(int iActivity);
+	virtual void SetViewModel();
+	virtual const char *GetViewModel(int iViewModel = 0) const;
+	virtual const char *DetermineViewModelType(const char *vModel) const;
+
+
+#ifdef CLIENT_DLL
+	virtual C_BaseAnimating *GetAppropriateWorldOrViewModel(void);
+#endif
 };
 
 #endif // TF_WEAPON_JAR_H

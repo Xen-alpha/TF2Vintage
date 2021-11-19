@@ -393,6 +393,9 @@ public:
 	int						GetNumWearables( void ) { return m_hMyWearables.Count(); }
 #endif
 
+	virtual bool IsDucked(void) const { return m_Local.m_bDucked; }
+	virtual bool IsDucking(void) const { return m_Local.m_bDucking; }
+
 	bool					HasFiredWeapon( void ) { return m_bFiredWeapon; }
 	void					SetFiredWeapon( bool bFlag ) { m_bFiredWeapon = bFlag; }
 
@@ -581,9 +584,10 @@ private:
 	float m_flAvoidanceDotForward;
 	float m_flAvoidanceDotRight;
 
+	
+
 protected:
-	virtual bool IsDucked( void ) const { return m_Local.m_bDucked; }
-	virtual bool IsDucking( void ) const { return m_Local.m_bDucking; }
+	
 	virtual float GetFallVelocity( void ) { return m_Local.m_flFallVelocity; }
 	bool ForceSetupBonesAtTimeFakeInterpolation( matrix3x4_t *pBonesOut, float curtimeOffset );
 

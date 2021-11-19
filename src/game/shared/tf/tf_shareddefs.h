@@ -262,7 +262,7 @@ extern const char *g_aAmmoNames[];
 //-----------------------------------------------------------------------------
 // Weapons.
 //-----------------------------------------------------------------------------
-#define TF_PLAYER_WEAPON_COUNT		5
+#define TF_PLAYER_WEAPON_COUNT		6
 #define TF_PLAYER_GRENADE_COUNT		2
 #define TF_PLAYER_BUILDABLE_COUNT	4
 
@@ -355,6 +355,8 @@ enum
 	TF_WEAPON_BAT_WOOD,
 	TF_WEAPON_ROBOT_ARM,
 	TF_WEAPON_BUFF_ITEM,
+	TF_WEAPON_RAZORBACK,
+	TF_WEAPON_MILKRIFLE,
 
 	TF_WEAPON_COUNT
 };
@@ -404,6 +406,7 @@ enum
 	TF_PROJECTILE_GRAPPLINGHOOK,
 	TF_PROJECTILE_SENTRY_ROCKET,
 	TF_PROJECTILE_BREAD_MONSTER,
+	TF_PROJECTILE_NAIL,
 
 	TF_NUM_PROJECTILES
 };

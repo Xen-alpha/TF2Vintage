@@ -1,4 +1,4 @@
-//====== Copyright © 1996-2005, Valve Corporation, All rights reserved. =======
+//====== Copyright ?1996-2005, Valve Corporation, All rights reserved. =======
 //
 // Purpose: 
 //
@@ -47,6 +47,16 @@ public:
 
 	CBaseEntity			*LaunchBall( CTFPlayer *pPlayer );
 	virtual void		LaunchBallThink( void );
+
+	virtual int TranslateViewmodelHandActivity(int iActivity);
+	virtual void SetViewModel();
+	virtual const char *GetViewModel(int iViewModel = 0) const;
+	virtual const char *DetermineViewModelType(const char *vModel) const;
+
+
+#ifdef CLIENT_DLL
+	virtual C_BaseAnimating *GetAppropriateWorldOrViewModel(void);
+#endif
 
 #ifdef CLIENT_DLL
 	virtual void		CreateMove( float flInputSampleTime, CUserCmd *pCmd, const QAngle &vecOldViewAngles );

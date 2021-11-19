@@ -18,6 +18,7 @@
 #include "tf_viewmodel.h"
 #include "econ_wearable.h"
 #include "tf_weapon_buff_item.h"
+#include "tf_inventory.h"
 
 // Client specific.
 #ifdef CLIENT_DLL
@@ -2478,7 +2479,7 @@ void CTFPlayerShared::RecalcDisguiseWeapon(int iSlot /*= 0*/)
 		return;
 	}
 
-	CTFWeaponInfo *pDisguiseWeaponInfo = GetTFWeaponInfoForItem(m_DisguiseItem.GetItemDefIndex(), m_nDisguiseClass);
+	CTFWeaponInfo *pDisguiseWeaponInfo = GetTFWeaponInfo(GetTFInventory()->GetWeapon(m_nDisguiseClass, iSlot, 0));
 
 	m_pDisguiseWeaponInfo = pDisguiseWeaponInfo;
 	m_iDisguiseWeaponModelIndex = -1;

@@ -1,4 +1,4 @@
-//====== Copyright © 1996-2005, Valve Corporation, All rights reserved. =======
+//====== Copyright ?1996-2005, Valve Corporation, All rights reserved. =======
 //
 // TF Nail Projectile
 //
@@ -12,7 +12,7 @@
 #include "cbase.h"
 #include "tf_projectile_base.h"
 
-/*//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 // Purpose: The base Nail projectile
 //-----------------------------------------------------------------------------
 class CTFProjectile_Nail : public CTFBaseProjectile
@@ -31,7 +31,7 @@ public:
 	virtual float GetGravity(void);
 
 	static float	GetInitialVelocity(void) { return 1500.0; }
-};*/
+};
 
 //-----------------------------------------------------------------------------
 // Purpose: Identical to a nail except for model used

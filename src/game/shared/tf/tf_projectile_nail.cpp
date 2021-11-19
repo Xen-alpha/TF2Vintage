@@ -1,4 +1,4 @@
-//====== Copyright © 1996-2005, Valve Corporation, All rights reserved. =======
+//====== Copyright ?1996-2005, Valve Corporation, All rights reserved. =======
 //
 // TF Nail
 //
@@ -15,6 +15,54 @@
 #include "c_tf_player.h"
 #include "cliententitylist.h"
 #endif
+
+#define NAIL_MODEL				"models/weapons/w_models/w_nail.mdl"
+#define NAIL_DISPATCH_EFFECT		"ClientProjectile_Syringe"
+#define NAIL_GRAVITY	0.2f
+
+LINK_ENTITY_TO_CLASS(tf_projectile_nail, CTFProjectile_Nail);
+PRECACHE_REGISTER(tf_projectile_nail);
+
+short g_sModelIndexNail;
+void PrecacheNail(void *pUser)
+{
+	g_sModelIndexNail = modelinfo->GetModelIndex(NAIL_MODEL);
+}
+
+PRECACHE_REGISTER_FN(PrecacheNail);
+
+
+CTFProjectile_Nail::CTFProjectile_Nail()
+{
+}
+
+CTFProjectile_Nail::~CTFProjectile_Nail()
+{
+}
+//-----------------------------------------------------------------------------
+// Purpose:
+//-----------------------------------------------------------------------------
+CTFProjectile_Nail *CTFProjectile_Nail::Create(const Vector &vecOrigin, const QAngle &vecAngles, CBaseEntity *pOwner, CBaseEntity *pScorer, bool bCritical)
+{
+	return static_cast<CTFProjectile_Nail*>(CTFBaseProjectile::Create("tf_projectile_nail", vecOrigin, vecAngles, pOwner, CTFProjectile_Nail::GetInitialVelocity(), g_sModelIndexNail, NAIL_DISPATCH_EFFECT, pScorer, bCritical));
+}
+
+//-----------------------------------------------------------------------------
+// Purpose:
+//-----------------------------------------------------------------------------
+const char *CTFProjectile_Nail::GetProjectileModelName(void)
+{
+	return NAIL_MODEL;
+}
+
+//-----------------------------------------------------------------------------
+// Purpose:
+//-----------------------------------------------------------------------------
+float CTFProjectile_Nail::GetGravity(void)
+{
+	return NAIL_GRAVITY;
+}
+
 
 //=============================================================================
 //

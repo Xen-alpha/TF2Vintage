@@ -5,6 +5,7 @@
 //=============================================================================
 
 #include "cbase.h"
+#include "in_buttons.h"
 #include "tf_weaponbase_gun.h"
 #include "tf_fx_shared.h"
 #include "effect_dispatch_data.h"
@@ -171,7 +172,7 @@ CBaseEntity *CTFWeaponBaseGun::FireProjectile( CTFPlayer *pPlayer )
 		pProjectile = FireRocket( pPlayer );
 		pPlayer->DoAnimationEvent( PLAYERANIMEVENT_ATTACK_PRIMARY );
 		break;
-
+	case TF_PROJECTILE_NAIL:
 	case TF_PROJECTILE_SYRINGE:
 		pProjectile = FireNail( pPlayer, iProjectile );
 		pPlayer->DoAnimationEvent( PLAYERANIMEVENT_ATTACK_PRIMARY );
@@ -502,7 +503,9 @@ CBaseEntity *CTFWeaponBaseGun::FireNail( CTFPlayer *pPlayer, int iSpecificNail )
 	case TF_PROJECTILE_SYRINGE:
 		pProjectile = CTFProjectile_Syringe::Create( vecSrc, angForward, pPlayer, pPlayer, IsCurrentAttackACrit() );
 		break;
-
+	case TF_PROJECTILE_NAIL:
+		pProjectile = CTFProjectile_Nail::Create(vecSrc, angForward, pPlayer, pPlayer, IsCurrentAttackACrit());
+		break;
 	default:
 		Assert(0);
 	}
@@ -762,6 +765,11 @@ bool CTFWeaponBaseGun::IsFlameArrow(void)
 float CTFWeaponBaseGun::GetWeaponSpread( void )
 {
 	float flSpread = m_pWeaponInfo->GetWeaponData( m_iWeaponMode ).m_flSpread;
+	CTFPlayer *pPlayer = GetTFPlayerOwner();
+	if (pPlayer->GetPlayerClass()->GetClassIndex() == TF_CLASS_HEAVYWEAPONS && pPlayer->m_nButtons & IN_DUCK != 0){
+		flSpread *= 0.5;
+	}
+
 	CALL_ATTRIB_HOOK_FLOAT( flSpread, mult_spread_scale );
 	return flSpread;
 }

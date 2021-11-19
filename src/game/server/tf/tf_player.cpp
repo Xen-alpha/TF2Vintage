@@ -119,7 +119,6 @@ ConVar tf2c_legacy_weapons( "tf2c_legacy_weapons", "0", FCVAR_DEVELOPMENTONLY, "
 // TF2V specific cvars
 ConVar tf2v_disable_holiday_loot( "tf2v_disable_holiday_loot", "0", FCVAR_REPLICATED | FCVAR_NOTIFY, "Disable loot drops in holiday gamemodes" );
 
-
 // -------------------------------------------------------------------------------- //
 // Player animation event. Sent to the client when a player fires, jumps, reloads, etc..
 // -------------------------------------------------------------------------------- //
@@ -355,6 +354,8 @@ IMPLEMENT_SERVERCLASS_ST( CTFPlayer, DT_TFPlayer )
 
 	SendPropInt( SENDINFO( m_nForceTauntCam ), 2, SPROP_UNSIGNED ),
 
+	SendPropFloat(SENDINFO(m_flMedigunCharge)),
+
 	SendPropInt( SENDINFO( m_iSpawnCounter ) ),
 
 END_SEND_TABLE()
@@ -456,6 +457,8 @@ CTFPlayer::CTFPlayer()
 	m_flStunTime = 0.0f;
 
 	m_bInArenaQueue = false;
+
+	m_flMedigunCharge = 0.0f;
 }
 
 
@@ -1217,6 +1220,10 @@ void CTFPlayer::InitClass( void )
 	// Give default items for class.
 	GiveDefaultItems();
 
+	if (GetPlayerClass()->GetClassIndex() == TF_CLASS_MEDIC){
+		GetMedigun()->m_flChargeLevel = m_flMedigunCharge;
+	}
+
 	// Set initial health and armor based on class.
 	int iHealthToAdd = 0;
 	CALL_ATTRIB_HOOK_INT( iHealthToAdd, add_maxhealth );
@@ -1327,13 +1334,7 @@ void CTFPlayer::GiveDefaultItems()
 	}
 
 	// Give weapons.
-	if ( tf2c_random_weapons.GetBool() && !m_bRegenerating )
-		ManageRandomWeapons( pData );
-	else if ( tf2c_legacy_weapons.GetBool() )
-		ManageRegularWeaponsLegacy( pData );
-	else if ( !tf2c_random_weapons.GetBool() )
-		ManageRegularWeapons( pData );
-
+	ManageRegularWeaponsLegacy( pData );
 
 	// Give grenades.
 	//ManageGrenades( pData );
@@ -1679,14 +1680,56 @@ void CTFPlayer::PostInventoryApplication( void )
 	m_Shared.RecalculatePlayerBodygroups();
 }
 
+void CTFPlayer::ManageRegularWearable(TFPlayerClassData_t *pData) {
+	/*
+	for (int iWeapon = 0; iWeapon < TF_PLAYER_WEAPON_COUNT; ++iWeapon)
+	{
+		int iWeaponID = GetTFInventory()->GetWeapon(m_PlayerClass.GetClassIndex(), iWeapon);
+
+		if (iWeaponID != TF_WEAPON_NONE)
+		{
+			const char *pszWeaponName = WeaponIdToClassname(iWeaponID);
+
+			CTFWeaponBase *pWeapon = (CTFWeaponBase *)Weapon_GetSlot(iWeapon);
+
+			//If we already have a weapon in this slot but is not the same type then nuke it (changed classes)
+			if (pWeapon && pWeapon->GetWeaponID() != iWeaponID)
+			{
+				Weapon_Detach(pWeapon);
+				UTIL_Remove(pWeapon);
+			}
+
+			if (pWeapon && pWeapon->IsWearable()){
+				CTFWearable *pWearable = (CTFWearable *) CreateEntityByName(pWeapon->GetClassname());
+				pWearable->SetLocalOrigin(GetLocalOrigin());
+				pWearable->AddSpawnFlags(SF_NORESPAWN);
+
+				DispatchSpawn(pWearable);
+				pWearable->Activate();
+
+				if (pWearable != NULL && !(pWearable->IsMarkedForDeletion()))
+				{
+					pWearable->Equip(this);
+				}
+			}
+			else {
+				continue;
+			}
+		}
+	}*/
+	return;
+}
+
+
 //-----------------------------------------------------------------------------
 // Purpose: 
 //-----------------------------------------------------------------------------
 void CTFPlayer::ManageRegularWeaponsLegacy( TFPlayerClassData_t *pData )
 {
+
 	for ( int iWeapon = 0; iWeapon < TF_PLAYER_WEAPON_COUNT; ++iWeapon )
 	{
-		int iWeaponID = GetTFInventory()->GetWeapon( m_PlayerClass.GetClassIndex(), iWeapon );
+		int iWeaponID = GetTFInventory()->GetWeapon(m_PlayerClass.GetClassIndex(), iWeapon, m_WeaponPreset[m_PlayerClass.GetClassIndex()][iWeapon]);
 
 		if ( iWeaponID != TF_WEAPON_NONE )
 		{
@@ -1703,14 +1746,21 @@ void CTFPlayer::ManageRegularWeaponsLegacy( TFPlayerClassData_t *pData )
 
 			pWeapon = Weapon_OwnsThisID( iWeaponID );
 
-			if ( pWeapon )
+			if (pWeapon)
 			{
-				pWeapon->ChangeTeam( GetTeamNumber() );
-				pWeapon->GiveDefaultAmmo();
+				if (pWeapon->IsWearable()){
+					pWeapon->FollowEntity(this, true);
+					pWeapon->SetOwnerEntity(this);
+					pWeapon->ChangeTeam(this->GetTeamNumber());
+				}
+				else {
+					pWeapon->ChangeTeam(GetTeamNumber());
+					pWeapon->GiveDefaultAmmo();
 
-				if ( m_bRegenerating == false )
-				{
-					pWeapon->WeaponReset();
+					if (m_bRegenerating == false)
+					{
+						pWeapon->WeaponReset();
+					}
 				}
 			}
 			else
@@ -1719,9 +1769,17 @@ void CTFPlayer::ManageRegularWeaponsLegacy( TFPlayerClassData_t *pData )
 
 				if ( pWeapon )
 				{
-					pWeapon->DefaultTouch( this );
+					if (pWeapon->IsWearable()){
+						pWeapon->FollowEntity(this, true);
+						pWeapon->SetOwnerEntity(this);
+						pWeapon->ChangeTeam(this->GetTeamNumber());
+					}
+					else {
+						pWeapon->DefaultTouch(this);
+					}
 				}
 			}
+
 		}
 		else
 		{
@@ -3308,6 +3366,7 @@ void CTFPlayer::TraceAttack( const CTakeDamageInfo &info, const Vector &vecDir, 
 				CTFWeaponBase *pWpn = pAttacker->GetActiveTFWeapon();
 
 				float flDamage = info_modified.GetDamage();
+				flDamage *= 1.1;
 				bool bCritical = true;
 
 				if ( pWpn && !pWpn->CanFireCriticalShot( true ) )
@@ -3610,6 +3669,11 @@ int CTFPlayer::OnTakeDamage( const CTakeDamageInfo &inputInfo )
 	{
 		// Assume that player used his currently active weapon.
 		pWeapon = ToTFPlayer( pAttacker )->GetActiveTFWeapon();
+	}
+
+	// special ability to syringe gun
+	if (pWeapon && pWeapon->GetWeaponID() == TF_WEAPON_SYRINGEGUN_MEDIC){
+		m_Shared.AddCond(TF_COND_STUNNED, 0.5f);
 	}
 
 	int iHealthBefore = GetHealth();
@@ -4704,6 +4768,13 @@ void CTFPlayer::Event_Killed( const CTakeDamageInfo &info )
 	SpeakConceptIfAllowed( MP_CONCEPT_DIED );
 
 	StateTransition( TF_STATE_DYING );	// Transition into the dying state.
+
+	if (GetPlayerClass()->GetClassIndex() == TF_CLASS_MEDIC){
+		m_flMedigunCharge = GetMedigun()->GetChargeLevel() * 0.5f;
+	}
+	else {
+		m_flMedigunCharge = 0.0f;
+	}
 
 	CBaseEntity *pAttacker = info.GetAttacker();
 	CBaseEntity *pInflictor = info.GetInflictor();
@@ -7379,17 +7450,10 @@ void CTFPlayer::Taunt( void )
 
 	m_bInitTaunt = true;
 	char szResponse[AI_Response::MAX_RESPONSE_NAME];
-	if ( SpeakConceptIfAllowed( MP_CONCEPT_PLAYER_TAUNT, NULL, szResponse, AI_Response::MAX_RESPONSE_NAME ) || tf2c_random_weapons.GetBool() )
+	if (SpeakConceptIfAllowed(MP_CONCEPT_PLAYER_TAUNT, NULL, szResponse, AI_Response::MAX_RESPONSE_NAME) || SpeakConceptIfAllowed(MP_CONCEPT_ATE_FOOD, NULL, szResponse, AI_Response::MAX_RESPONSE_NAME))
 	{
 		// Get the duration of the scene.
 		float flDuration = GetSceneDuration( szResponse ) + 0.2f;
-
-		// Crappy default taunt for randomizer
-		if ( tf2c_random_weapons.GetBool() && flDuration == 0.2f )
-		{
-			flDuration += 3.0f;
-			m_Shared.StunPlayer( 3.0f, 0.0f, 0.0f, TF_STUNFLAGS_NORMALBONK, this );
-		}
 
 		// Clear disguising state.
 		if ( m_Shared.InCond( TF_COND_DISGUISING ) )
@@ -7419,7 +7483,7 @@ void CTFPlayer::Taunt( void )
 		{
 			if ( pWeapon->IsWeapon( TF_WEAPON_LUNCHBOX ) )
 			{
-				m_flTauntAttackTime = gpGlobals->curtime + 1.0f;
+				m_flTauntAttackTime = gpGlobals->curtime + 4.0f;
 				m_iTauntAttack = TAUNTATK_HEAVY_EAT;
 			}
 			else if ( pWeapon->IsWeapon( TF_WEAPON_LUNCHBOX_DRINK ) )
@@ -7635,7 +7699,7 @@ void CTFPlayer::DoTauntAttack( void )
 				}
 
 				m_iTauntAttack = TAUNTATK_HEAVY_EAT;
-				m_flTauntAttackTime = gpGlobals->curtime + 1.0f;
+				m_flTauntAttackTime = gpGlobals->curtime + 8.0f;
 			}
 			else if ( pWeapon && pWeapon->IsWeapon( TF_WEAPON_LUNCHBOX_DRINK ) )
 			{

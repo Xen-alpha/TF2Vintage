@@ -1,4 +1,4 @@
-//====== Copyright © 1996-2005, Valve Corporation, All rights reserved. =======//
+//====== Copyright ?1996-2005, Valve Corporation, All rights reserved. =======//
 //
 // Purpose: TF Base Grenade.
 //
@@ -22,7 +22,7 @@
 #include "items.h"
 #endif
 
-#define GRENADE_TIMER	1.5f			// seconds
+#define GRENADE_TIMER	3.0f			// seconds
 
 //=============================================================================
 //
@@ -97,11 +97,14 @@ bool CTFWeaponBaseGrenade::Deploy( void )
 {
 	if ( BaseClass::Deploy() )
 	{
-		Prime();
 		return true;
 	}
 
 	return false;
+}
+
+void CTFWeaponBaseGrenade::PrimaryAttack(void){
+	Throw();
 }
 
 //-----------------------------------------------------------------------------
@@ -130,12 +133,13 @@ void CTFWeaponBaseGrenade::Prime()
 //-----------------------------------------------------------------------------
 void CTFWeaponBaseGrenade::Throw() 
 {
+	/*
 	if ( !m_bPrimed )
 		return;
 
 	m_bPrimed = false;
 	m_bThrow = false;
-
+	*/
 	// Get the owning player.
 	CTFPlayer *pPlayer = ToTFPlayer( GetOwner() );
 	if ( !pPlayer )
@@ -227,6 +231,8 @@ void CTFWeaponBaseGrenade::Throw()
 
 	// Reset the throw time
 	m_flThrowTime = 0.0f;
+
+
 }
 
 //-----------------------------------------------------------------------------

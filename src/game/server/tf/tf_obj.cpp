@@ -1846,12 +1846,7 @@ int CBaseObject::OnTakeDamage( const CTakeDamageInfo &info )
 	if ( IsPlacing() )
 		return 0;
 
-	// Check teams
-	if ( info.GetAttacker() )
-	{
-		if ( InSameTeam(info.GetAttacker()) )
-			return 0;
-	}
+
 
 	IHasBuildPoints *pBPInterface = dynamic_cast<IHasBuildPoints*>(this);
 

@@ -1,0 +1,36 @@
+﻿Build started 2021-05-07(금) 오전 11:30:19.
+     1>Project "C:\Program Files (x86)\Steam\steamapps\common\Source SDK Base 2013 Multiplayer\dev\Ultra-Fortress\src\game\server\server_tf2vintage.vcxproj" on node 2 (Build target(s)).
+     1>PreBuildEvent:
+         if EXIST ..\..\..\game\tf2vintage\bin\.\server.dll for /f "delims=" %%A in ('attrib "..\..\..\game\tf2vintage\bin\.\server.dll"') do set valveTmpIsReadOnly="%%A"
+         set valveTmpIsReadOnlyLetter=%valveTmpIsReadOnly:~6,1%
+         if "%valveTmpIsReadOnlyLetter%"=="R" del /q "C:\Program Files (x86)\Steam\steamapps\common\Source SDK Base 2013 Multiplayer\dev\Ultra-Fortress\src\game\server\Debug_tf2vintage\"server.dll
+         if exist "..\..\devtools\bin\vpc.exe" "..\..\devtools\bin\vpc.exe" -crc2 "server_tf2vintage.vcxproj"
+         if ERRORLEVEL 1 exit /b 1
+         
+         :VCEnd
+       CustomBuild:
+         Compiling pointeroverride.asm
+         Microsoft (R) Macro Assembler Version 12.00.40629.0
+         Copyright (C) Microsoft Corporation.  All rights reserved.
+         
+          Assembling: C:\Program Files (x86)\Steam\steamapps\common\Source SDK Base 2013 Multiplayer\dev\Ultra-Fortress\src\public\tier0\pointeroverride.asm
+         Running VPC CRC Check - server_tf2vintage.vpc
+         액세스가 거부되었습니다.
+       ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I..\..\common /I..\..\public /I..\..\public\tier0 /I..\..\public\tier1 /I..\..\game\server\generated_proto_tf2vintage /I"..\..\thirdparty\protobuf-2.3.0\src" /I.\ /I..\..\game\shared /I..\..\utils\common /I..\..\game\shared\econ /I..\..\game\server\NextBot /I..\..\game\shared\tf /I.\tf /I..\..\game\shared\Multiplayer /I..\..\game\shared\econ /ZI /nologo /W4 /WX /MP /Od /Oy- /D VPC /D RAD_TELEMETRY_DISABLED /D _HAS_ITERATOR_DEBUGGING=0 /D WIN32 /D _WIN32 /D _DEBUG /D DEBUG /D _WINDOWS /D _USRDLL /D _CRT_SECURE_NO_DEPRECATE /D _CRT_NONSTDC_NO_DEPRECATE /D _ALLOW_RUNTIME_LIBRARY_MISMATCH /D _ALLOW_ITERATOR_DEBUG_LEVEL_MISMATCH /D _ALLOW_MSC_VER_MISMATCH /D _USING_V110_SDK71_ /D _WINDLL /D _MBCS /D COMPILER_MSVC32 /D COMPILER_MSVC32 /D COMPILER_MSVC /D _DLL_EXT=.dll /D DLLNAME=server /D BINK_VIDEO /D AVI_VIDEO /D WMV_VIDEO /D DEV_BUILD /D FRAME_POINTER_OMISSION_DISABLED /D GAME_DLL /D VECTOR /D VERSION_SAFE_STEAM_API_INTERFACES /D PROTECTED_THINGS_ENABLE /D sprintf=use_Q_snprintf_instead_of_sprintf /D strncpy=use_Q_strncpy_instead /D _snprintf=use_Q_snprintf_instead /D fopen=dont_use_fopen /D USE_NAV_MESH /D TF_VINTAGE /D GLOWS_ENABLE /D _EXTERNAL_DLL_EXT=.dll /D VPCGAMECAPS=TF2VINTAGE /D "PROJECTDIR=C:\Program Files (x86)\Steam\steamapps\common\Source SDK Base 2013 Multiplayer\dev\Ultra-Fortress\src\game\server" /D _DLL_EXT=.dll /D SOURCE1=1 /D VPCGAME=tf2vintage /GF /Gm- /MTd /GS /arch:SSE /fp:fast /Zc:wchar_t /Zc:forScope /GR /Yc"cbase.h" /Fp".\Debug_tf2vintage\server.pch" /Fo".\Debug_tf2vintage\/" /Fd".\Debug_tf2vintage\/vc120.pdb" /Gd /TP /wd4316 /analyze- /FC /errorReport:prompt /Zm200 /Gw /Zc:inline stdafx.cpp
+         stdafx.cpp
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\steam\steam_gameserver.h : error C2220: warning treated as error - no 'object' file generated
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\steam\steam_gameserver.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\steam\steamtypes.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\steam\steamclientpublic.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\steam\steamuniverse.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\steam\isteamutils.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\steam\matchmakingtypes.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\steam\isteamuserstats.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\steam\isteamremotestorage.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
+     1>c:\program files (x86)\steam\steamapps\common\source sdk base 2013 multiplayer\dev\ultra-fortress\src\public\steam\steamhttpenums.h : warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
+     1>Done Building Project "C:\Program Files (x86)\Steam\steamapps\common\Source SDK Base 2013 Multiplayer\dev\Ultra-Fortress\src\game\server\server_tf2vintage.vcxproj" (Build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:02.64

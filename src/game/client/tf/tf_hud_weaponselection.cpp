@@ -1,4 +1,4 @@
-//========= Copyright © 1996-2006, Valve LLC, All rights reserved. ============
+//========= Copyright ?1996-2006, Valve LLC, All rights reserved. ============
 //
 // Purpose: 
 //
@@ -47,7 +47,7 @@ public:
 	virtual void ApplySchemeSettings(vgui::IScheme *pScheme);
 	virtual void PerformLayout();
 	virtual void SetWeapon(C_BaseCombatWeapon *pWeapon, int iBorderStyle = -1, int ID = -1);
-	virtual void SetWeapon(CEconItemDefinition *pItemDefinition, int iBorderStyle = -1, int ID = -1);
+	//virtual void SetWeapon(CEconItemDefinition *pItemDefinition, int iBorderStyle = -1, int ID = -1);
 private:
 	C_BaseCombatWeapon	*m_pWeapon;
 	vgui::Label			*m_pWeaponName;
@@ -155,28 +155,17 @@ void CItemModelPanel::SetWeapon(C_BaseCombatWeapon *pWeapon, int iBorderStyle, i
 	m_iBorderStyle = iBorderStyle;
 
 	int iItemID = m_pWeapon->GetItemID();
-	CEconItemDefinition *pItemDefinition = GetItemSchema()->GetItemDefinition(iItemID);
+	
 	wchar_t *pText = NULL;
-	if (pItemDefinition)
+	pText = g_pVGuiLocalize->Find(m_pWeapon->GetWpnData().szPrintName);
+	const CHudTexture *pTexture = pWeapon->GetSpriteInactive(); // red team
+	if (pTexture)
 	{
-		pText = g_pVGuiLocalize->Find(pItemDefinition->item_name);
-		char szImage[128];
-		Q_snprintf(szImage, sizeof(szImage), "../%s_large", pItemDefinition->image_inventory);
+		char szImage[64];
+		Q_snprintf(szImage, sizeof(szImage), "../%s", pTexture->szTextureFile);
 		m_pWeaponImage->SetImage(szImage);
-		m_pWeaponImage->SetBounds(XRES(4), -1 * (GetTall() / 5.0) + XRES(4), GetWide() - XRES(8), GetWide() - XRES(8));
 	}
-	else
-	{
-		pText = g_pVGuiLocalize->Find(m_pWeapon->GetWpnData().szPrintName);
-		const CHudTexture *pTexture = pWeapon->GetSpriteInactive(); // red team
-		if (pTexture)
-		{
-			char szImage[64];
-			Q_snprintf(szImage, sizeof(szImage), "../%s", pTexture->szTextureFile);
-			m_pWeaponImage->SetImage(szImage);
-		}
-		m_pWeaponImage->SetBounds(XRES(4), -1 * (GetTall() / 10.0) + XRES(4), (GetWide() * 1.5) - XRES(8), (GetWide() * 0.75) - XRES(8));
-	}
+	m_pWeaponImage->SetBounds(XRES(4), -1 * (GetTall() / 10.0) + XRES(4), (GetWide() * 1.5) - XRES(8), (GetWide() * 0.75) - XRES(8));
 	m_pWeaponName->SetText(pText);
 	if (ID != -1)
 	{
@@ -190,7 +179,7 @@ void CItemModelPanel::SetWeapon(C_BaseCombatWeapon *pWeapon, int iBorderStyle, i
 	}
 	PerformLayout();
 }
-
+/*
 void CItemModelPanel::SetWeapon(CEconItemDefinition *pItemDefinition, int iBorderStyle, int ID)
 {
 	m_pWeapon = NULL;
@@ -220,7 +209,7 @@ void CItemModelPanel::SetWeapon(CEconItemDefinition *pItemDefinition, int iBorde
 	}
 	PerformLayout();
 }
-
+*/
 //-----------------------------------------------------------------------------
 // Purpose: tf weapon selection hud element
 //-----------------------------------------------------------------------------

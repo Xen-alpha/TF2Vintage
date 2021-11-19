@@ -1,4 +1,4 @@
-//====== Copyright © 1996-2005, Valve Corporation, All rights reserved. =======
+//====== Copyright ?1996-2005, Valve Corporation, All rights reserved. =======
 //
 // Purpose: 
 //
@@ -107,6 +107,9 @@ public:
 	char	m_szExplosionWaterEffect[128];
 
 	bool	m_bDontDrop;
+
+	bool	m_bhascustom;
+	char	m_szCustomModel[MAX_WEAPON_STRING];
 };
 
 #endif // TF_WEAPON_PARSE_H

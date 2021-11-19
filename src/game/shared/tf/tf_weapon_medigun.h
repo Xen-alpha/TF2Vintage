@@ -1,4 +1,4 @@
-//====== Copyright © 1996-2005, Valve Corporation, All rights reserved. =======
+//====== Copyright ?1996-2005, Valve Corporation, All rights reserved. =======
 //
 // Purpose: 
 //
@@ -107,6 +107,8 @@ public:
 	CNetworkHandle( C_BaseEntity, m_hHealingTarget );
 #endif
 
+	CNetworkVar(float, m_flChargeLevel);
+
 protected:
 	// Networked data.
 	CNetworkVar( bool,		m_bHealing );
@@ -118,7 +120,6 @@ protected:
 
 	CNetworkVar( bool,		m_bHolstered );
 	CNetworkVar( bool,		m_bChargeRelease );
-	CNetworkVar( float,		m_flChargeLevel );
 
 	float					m_flNextTargetCheckTime;
 	bool					m_bCanChangeTarget; // used to track the PrimaryAttack key being released for AutoHeal mode

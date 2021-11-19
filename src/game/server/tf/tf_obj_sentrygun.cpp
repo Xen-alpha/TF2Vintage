@@ -1849,6 +1849,24 @@ float CObjectSentrygun::GetConstructionMultiplier( void )
 	return BaseClass::GetConstructionMultiplier();
 }
 
+//-----------------------------------------------------------------------------
+// Purpose: 
+//-----------------------------------------------------------------------------
+void CObjectSentrygun::DeterminePlaybackRate(void)
+{
+	if (IsBuilding())
+	{
+		// Default half rate, author build anim as if one player is building
+		SetPlaybackRate(GetConstructionMultiplier() * 0.25);
+	}
+	else
+	{
+		SetPlaybackRate(1.0);
+	}
+
+	StudioFrameAdvance();
+}
+
 void CObjectSentrygun::UpdateSentryAngles( Vector vecDir )
 {
 	QAngle angToTarget;

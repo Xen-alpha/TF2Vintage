@@ -32,6 +32,13 @@ CTFInventory::CTFInventory() : CAutoGameSystemPerFrame( "CTFInventory" )
 			m_Items[iClass][iSlot].AddToTail( NULL );
 		}
 	}
+	for (int iClass = 0; iClass < TF_CLASS_COUNT_ALL; iClass++)
+	{
+		for (int iSlot = 0; iSlot < MAX_WEAPON_SLOTS; iSlot++)
+		{
+			Weapons_Custom[iClass][iSlot].AddToTail(Weapons[iClass][iSlot]);
+		}
+	}
 };
 
 CTFInventory::~CTFInventory()
@@ -43,53 +50,14 @@ CTFInventory::~CTFInventory()
 
 bool CTFInventory::Init( void )
 {
-	GetItemSchema()->Init();
-
-	// Generate item list.
-	FOR_EACH_MAP( GetItemSchema()->m_Items, i )
-	{
-		int iItemID = GetItemSchema()->m_Items.Key( i );
-		CEconItemDefinition *pItemDef = GetItemSchema()->m_Items.Element( i );
-
-		if ( pItemDef->item_slot == -1 )
-			continue;
-
-		// Add it to each class that uses it.
-		for ( int iClass = 0; iClass < TF_CLASS_COUNT_ALL; iClass++ )
-		{
-			if ( pItemDef->used_by_classes & ( 1 << iClass ) )
-			{
-				// Show it if it's either base item or has show_in_armory flag.
-				int iSlot = pItemDef->GetLoadoutSlot( iClass );
-
-				if ( pItemDef->baseitem )
-				{
-					CEconItemView *pBaseItem = m_Items[iClass][iSlot][0];
-					if ( pBaseItem != NULL )
-					{
-						Warning( "Duplicate base item %d for class %s in slot %s!\n", iItemID, g_aPlayerClassNames_NonLocalized[iClass], g_LoadoutSlots[iSlot] );
-						delete pBaseItem;
-					}
-
-					CEconItemView *pNewItem = new CEconItemView( iItemID );
-
-#if defined ( GAME_DLL )
-					pNewItem->SetItemClassNumber( iClass );
-#endif
-					m_Items[iClass][iSlot][0] = pNewItem;
-				}
-				else if ( pItemDef->show_in_armory )
-				{
-					CEconItemView *pNewItem = new CEconItemView( iItemID );
-
-#if defined ( GAME_DLL )
-					pNewItem->SetItemClassNumber( iClass );
-#endif
-					m_Items[iClass][iSlot].AddToTail( pNewItem );
-				}
-			}
-		}
-	}
+	Weapons_Custom[TF_CLASS_SCOUT][1].AddToTail(TF_WEAPON_NAILGUN);
+	Weapons_Custom[TF_CLASS_SCOUT][2].AddToTail(TF_WEAPON_BAT_WOOD);
+	Weapons_Custom[TF_CLASS_SOLDIER][1].AddToTail(TF_WEAPON_BUFF_ITEM);
+	Weapons_Custom[TF_CLASS_SNIPER][0].AddToTail(TF_WEAPON_COMPOUND_BOW);
+	Weapons_Custom[TF_CLASS_SNIPER][1].AddToTail(TF_WEAPON_JAR);
+	Weapons_Custom[TF_CLASS_ENGINEER][1].AddToTail(TF_WEAPON_LASER_POINTER);
+	Weapons_Custom[TF_CLASS_DEMOMAN][2].AddToTail(TF_WEAPON_STICKBOMB);
+	Weapons_Custom[TF_CLASS_SNIPER][0].AddToTail(TF_WEAPON_MILKRIFLE);
 
 
 #if defined( CLIENT_DLL )
@@ -106,12 +74,12 @@ void CTFInventory::LevelInitPreEntity( void )
 
 int CTFInventory::GetNumPresets(int iClass, int iSlot)
 {
-	return m_Items[iClass][iSlot].Count();
+	return Weapons_Custom[iClass][iSlot].Count();
 };
 
-int CTFInventory::GetWeapon(int iClass, int iSlot)
+int CTFInventory::GetWeapon(int iClass, int iSlot, int iNum)
 {
-	return Weapons[iClass][iSlot];
+	return Weapons_Custom[iClass][iSlot][iNum];
 };
 
 CEconItemView *CTFInventory::GetItem( int iClass, int iSlot, int iNum )
@@ -134,7 +102,7 @@ bool CTFInventory::CheckValidSlot(int iClass, int iSlot, bool bHudCheck /*= fals
 		return false;
 
 	// Slot must contain a base item.
-	if ( m_Items[iClass][iSlot][0] == NULL )
+	if (Weapons_Custom[iClass][iSlot][0] == NULL)
 		return false;
 
 	return true;
@@ -145,14 +113,14 @@ bool CTFInventory::CheckValidWeapon(int iClass, int iSlot, int iWeapon, bool bHu
 	if (iClass < TF_CLASS_UNDEFINED || iClass > TF_CLASS_COUNT)
 		return false;
 
-	int iCount = ( bHudCheck ? INVENTORY_COLNUM : m_Items[iClass][iSlot].Count() );
+	int iCount = ( bHudCheck ? INVENTORY_COLNUM : Weapons_Custom[iClass][iSlot].Count() );
 
 	// Array bounds check.
 	if ( iWeapon >= iCount || iWeapon < 0 )
 		return false;
 
 	// Don't allow switching if this class has no weapon at this position.
-	if ( m_Items[iClass][iSlot][iWeapon] == NULL )
+	if (Weapons_Custom[iClass][iSlot][iWeapon] == NULL)
 		return false;
 
 	return true;
@@ -252,22 +220,26 @@ const int CTFInventory::Weapons[TF_CLASS_COUNT_ALL][TF_PLAYER_WEAPON_COUNT] =
 	{
 		TF_WEAPON_SCATTERGUN,
 		TF_WEAPON_PISTOL_SCOUT,
-		TF_WEAPON_BAT
+		TF_WEAPON_BAT,
+		TF_WEAPON_LUNCHBOX_DRINK
 	},
 	{
 		TF_WEAPON_SNIPERRIFLE,
 		TF_WEAPON_SMG,
-		TF_WEAPON_CLUB
+		TF_WEAPON_CLUB,
+		TF_WEAPON_NONE
 	},
 	{
 		TF_WEAPON_ROCKETLAUNCHER,
 		TF_WEAPON_SHOTGUN_SOLDIER,
-		TF_WEAPON_SHOVEL
+		TF_WEAPON_SHOVEL,
+		TF_WEAPON_GRENADE_NORMAL
 	},
 	{
 		TF_WEAPON_GRENADELAUNCHER,
 		TF_WEAPON_PIPEBOMBLAUNCHER,
-		TF_WEAPON_BOTTLE
+		TF_WEAPON_BOTTLE,
+		TF_WEAPON_GRENADE_MIRV
 	},
 	{
 		TF_WEAPON_SYRINGEGUN_MEDIC,
@@ -277,12 +249,14 @@ const int CTFInventory::Weapons[TF_CLASS_COUNT_ALL][TF_PLAYER_WEAPON_COUNT] =
 	{
 		TF_WEAPON_MINIGUN,
 		TF_WEAPON_SHOTGUN_HWG,
-		TF_WEAPON_FISTS
+		TF_WEAPON_FISTS,
+		TF_WEAPON_LUNCHBOX
 	},
 	{
 		TF_WEAPON_FLAMETHROWER,
 		TF_WEAPON_SHOTGUN_PYRO,
-		TF_WEAPON_FIREAXE
+		TF_WEAPON_FIREAXE,
+		TF_WEAPON_FLAREGUN
 	},
 	{
 		TF_WEAPON_REVOLVER,
